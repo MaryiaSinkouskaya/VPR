@@ -7,7 +7,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @SpringBootApplication
 @ServletComponentScan
 public class VPRApp {
-    public static void main(String[] args) {
-        SpringApplication.run(VPRApp.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(VPRApp.class, args);
+  }
 }
