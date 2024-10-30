@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Table(name = "prob_d")
-public class ProbandDeath {
+public class ProbandD {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")

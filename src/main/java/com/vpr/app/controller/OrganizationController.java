@@ -1,8 +1,7 @@
 package com.vpr.app.controller;
 
-import com.vpr.app.entity.Proband;
-import com.vpr.app.enums.Gender;
-import com.vpr.app.service.ProbandService;
+import com.vpr.app.entity.Organization;
+import com.vpr.app.service.OrganizationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,32 +16,32 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/proband")
-public class ProbandController {
-  private final ProbandService probandService;
+@RequestMapping("/api/organization")
+public class OrganizationController {
+  private final OrganizationService organizationService;
 
   @GetMapping()
-  public List<Proband> getProbands() {
-    return probandService.findAll();
+  public List<Organization> getOrganizations() {
+    return organizationService.findAll();
   }
 
   @GetMapping(value = "/{id}")
-  public Proband getProbandById(@PathVariable(name = "id") long id) {
-    return probandService.findById(id);
+  public Organization getOrganizationById(@PathVariable(name = "id") long id) {
+    return organizationService.findById(id);
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Proband createProband(@RequestBody Proband proband) {
-    return probandService.create(proband);
+  public Organization createOrganization(@RequestBody Organization organization) {
+    return organizationService.create(organization);
   }
 
   @PutMapping()
-  public Proband updateProband(@RequestBody Proband proband) {
-    return probandService.update(proband);
+  public Organization updateOrganization(@RequestBody Organization organization) {
+    return organizationService.update(organization);
   }
 
   @DeleteMapping(value = "/{id}")
-  public void deleteProbandById(@PathVariable(name = "id") long id) {
-    probandService.delete(id);
+  public void deleteOrganizationById(@PathVariable(name = "id") long id) {
+    organizationService.delete(id);
   }
 }

@@ -86,6 +86,6 @@ public class Proband {
 
   @OneToMany(mappedBy = "proband", cascade = CascadeType.ALL)
   @JsonBackReference(value = "proband-probD")
-  private List<ProbandDeath> probDS;
+  private List<ProbandD> probDS;
 
 }

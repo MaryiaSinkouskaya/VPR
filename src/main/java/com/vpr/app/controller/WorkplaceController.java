@@ -1,8 +1,7 @@
 package com.vpr.app.controller;
 
-import com.vpr.app.entity.Proband;
-import com.vpr.app.enums.Gender;
-import com.vpr.app.service.ProbandService;
+import com.vpr.app.entity.Workplace;
+import com.vpr.app.service.WorkplaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,32 +16,32 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/proband")
-public class ProbandController {
-  private final ProbandService probandService;
+@RequestMapping("/api/workplace")
+public class WorkplaceController {
+  private final WorkplaceService workplaceService;
 
   @GetMapping()
-  public List<Proband> getProbands() {
-    return probandService.findAll();
+  public List<Workplace> getWorks() {
+    return workplaceService.findAll();
   }
 
   @GetMapping(value = "/{id}")
-  public Proband getProbandById(@PathVariable(name = "id") long id) {
-    return probandService.findById(id);
+  public Workplace getWorkById(@PathVariable(name = "id") long id) {
+    return workplaceService.findById(id);
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Proband createProband(@RequestBody Proband proband) {
-    return probandService.create(proband);
+  public Workplace createWork(@RequestBody Workplace workplace) {
+    return workplaceService.create(workplace);
   }
 
   @PutMapping()
-  public Proband updateProband(@RequestBody Proband proband) {
-    return probandService.update(proband);
+  public Workplace updateWork(@RequestBody Workplace workplace) {
+    return workplaceService.update(workplace);
   }
 
   @DeleteMapping(value = "/{id}")
-  public void deleteProbandById(@PathVariable(name = "id") long id) {
-    probandService.delete(id);
+  public void deleteWorkById(@PathVariable(name = "id") long id) {
+    workplaceService.delete(id);
   }
 }

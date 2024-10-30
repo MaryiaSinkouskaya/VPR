@@ -48,9 +48,9 @@ public class PersonInfo {
   private Address address;
 
   @ManyToOne()
-  @JoinColumn(name = "work_id")
-  @JsonManagedReference(value = "work-personInfo")
-  private Work work;
+  @JoinColumn(name = "workplace_id")
+  @JsonManagedReference(value = "workplace-personInfo")
+  private Workplace workplace;
 
   @OneToMany(mappedBy = "personInfo", cascade = CascadeType.ALL)
   @JsonBackReference(value = "personInfo-mother")

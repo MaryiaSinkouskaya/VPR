@@ -1,8 +1,7 @@
 package com.vpr.app.controller;
 
-import com.vpr.app.entity.Proband;
-import com.vpr.app.enums.Gender;
-import com.vpr.app.service.ProbandService;
+import com.vpr.app.entity.Doctor;
+import com.vpr.app.service.DoctorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,32 +16,32 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/proband")
-public class ProbandController {
-  private final ProbandService probandService;
+@RequestMapping("/api/doctor")
+public class DoctorController {
+  private final DoctorService doctorService;
 
   @GetMapping()
-  public List<Proband> getProbands() {
-    return probandService.findAll();
+  public List<Doctor> getDoctors() {
+    return doctorService.findAll();
   }
 
   @GetMapping(value = "/{id}")
-  public Proband getProbandById(@PathVariable(name = "id") long id) {
-    return probandService.findById(id);
+  public Doctor getDoctorById(@PathVariable(name = "id") long id) {
+    return doctorService.findById(id);
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Proband createProband(@RequestBody Proband proband) {
-    return probandService.create(proband);
+  public Doctor createDoctor(@RequestBody Doctor doctor) {
+    return doctorService.create(doctor);
   }
 
   @PutMapping()
-  public Proband updateProband(@RequestBody Proband proband) {
-    return probandService.update(proband);
+  public Doctor updateDoctor(@RequestBody Doctor doctor) {
+    return doctorService.update(doctor);
   }
 
   @DeleteMapping(value = "/{id}")
-  public void deleteProbandById(@PathVariable(name = "id") long id) {
-    probandService.delete(id);
+  public void deleteDoctorById(@PathVariable(name = "id") long id) {
+    doctorService.delete(id);
   }
 }

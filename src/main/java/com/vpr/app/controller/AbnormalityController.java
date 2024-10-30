@@ -1,8 +1,7 @@
 package com.vpr.app.controller;
 
-import com.vpr.app.entity.Proband;
-import com.vpr.app.enums.Gender;
-import com.vpr.app.service.ProbandService;
+import com.vpr.app.entity.Abnormality;
+import com.vpr.app.service.AbnormalityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,32 +16,32 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/proband")
-public class ProbandController {
-  private final ProbandService probandService;
+@RequestMapping("/api/abnormality")
+public class AbnormalityController {
+  private final AbnormalityService abnormalityService;
 
   @GetMapping()
-  public List<Proband> getProbands() {
-    return probandService.findAll();
+  public List<Abnormality> getAbnormalities() {
+    return abnormalityService.findAll();
   }
 
   @GetMapping(value = "/{id}")
-  public Proband getProbandById(@PathVariable(name = "id") long id) {
-    return probandService.findById(id);
+  public Abnormality getAbnormalityById(@PathVariable(name = "id") long id) {
+    return abnormalityService.findById(id);
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Proband createProband(@RequestBody Proband proband) {
-    return probandService.create(proband);
+  public Abnormality createAbnormality(@RequestBody Abnormality abnormality) {
+    return abnormalityService.create(abnormality);
   }
 
   @PutMapping()
-  public Proband updateProband(@RequestBody Proband proband) {
-    return probandService.update(proband);
+  public Abnormality updateAbnormality(@RequestBody Abnormality abnormality) {
+    return abnormalityService.update(abnormality);
   }
 
   @DeleteMapping(value = "/{id}")
-  public void deleteProbandById(@PathVariable(name = "id") long id) {
-    probandService.delete(id);
+  public void deleteAbnormalityById(@PathVariable(name = "id") long id) {
+    abnormalityService.delete(id);
   }
 }

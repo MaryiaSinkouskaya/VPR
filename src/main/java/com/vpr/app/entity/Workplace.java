@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Table(name = "workplace")
-public class Work {
+public class Workplace {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
@@ -29,7 +29,7 @@ public class Work {
   @Column(name = "company")
   private String company;
 
-  @OneToMany(mappedBy = "work", cascade = CascadeType.ALL)
-  @JsonBackReference(value = "work-personInfo")
+  @OneToMany(mappedBy = "workplace", cascade = CascadeType.ALL)
+  @JsonBackReference(value = "workplace-personInfo")
   private List<PersonInfo> personInfos;
 }
