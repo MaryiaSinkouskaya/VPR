@@ -48,7 +48,7 @@ public class PersonInfo {
   private Address address;
 
   @ManyToOne()
-  @JoinColumn(name = "workplace_id")
+  @JoinColumn(name = "work_id")
   @JsonManagedReference(value = "workplace-personInfo")
   private Workplace workplace;
 
