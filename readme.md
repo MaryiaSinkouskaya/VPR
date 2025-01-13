@@ -18,8 +18,7 @@ Implemented basic API with CRUD operations via REST.
 
 ### Stop & remove image
 
-    docker compose down
-    docker rmi vpr
+    docker compose down --volumes && docker rmi vpr
 
 ### DB schema sructure
 
