@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
-@Tag(name = "Probands", description = "CRUD for probands")
+@Tag(name = "Proband", description = "API for accessing data of probands")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/proband")

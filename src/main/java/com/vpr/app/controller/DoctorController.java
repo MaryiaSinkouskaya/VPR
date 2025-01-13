@@ -2,6 +2,7 @@ package com.vpr.app.controller;
 
 import com.vpr.app.entity.Doctor;
 import com.vpr.app.service.DoctorService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
+@Tag(name = "Doctor", description = "API for accessing the doc data")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/doctor")

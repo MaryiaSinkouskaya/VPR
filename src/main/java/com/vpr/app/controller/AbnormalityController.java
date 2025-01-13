@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
-@Tag(name = "Abnormalities", description = "List of probands abnormalities", externalDocs = @ExternalDocumentation(
+@Tag(name = "Abnormality", description = "List of probands abnormalities", externalDocs = @ExternalDocumentation(
     description = "About: what the abnormality is",
     url = "https://www.ncbi.nlm.nih.gov/books/NBK557691/"))
 @RequiredArgsConstructor
