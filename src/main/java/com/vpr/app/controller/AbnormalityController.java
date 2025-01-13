@@ -2,6 +2,8 @@ package com.vpr.app.controller;
 
 import com.vpr.app.entity.Abnormality;
 import com.vpr.app.service.AbnormalityService;
+import io.swagger.v3.oas.annotations.ExternalDocumentation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
+@Tag(name = "Abnormalities", description = "List of probands abnormalities", externalDocs = @ExternalDocumentation(
+    description = "About: what the abnormality is",
+    url = "https://www.ncbi.nlm.nih.gov/books/NBK557691/"))
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/abnormality")
