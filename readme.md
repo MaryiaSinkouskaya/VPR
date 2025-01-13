@@ -16,6 +16,11 @@ Implemented basic API with CRUD operations via REST.
 
     docker compose up      
 
+### Stop & remove image
+
+    docker compose down
+    docker rmi vpr
+
 ### DB schema sructure
 
 - PROBAND: proband description;
