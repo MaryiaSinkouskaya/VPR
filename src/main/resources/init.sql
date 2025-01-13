@@ -66,7 +66,7 @@ create table abnormality
             primary key
         constraint tpor_id_uindex
             unique,
-    name varchar(16)                                      not null
+    name varchar(64)                                      not null
 );
 
 alter table abnormality
@@ -154,7 +154,7 @@ create table proband
             primary key
         constraint proband_id_uindex
             unique,
-    karyotype                   varchar(16)      not null,
+    karyotype                   varchar(64)      not null,
     pregnancy_duration_in_weeks integer          not null,
     weight                      double precision not null,
     head                        double precision not null,
@@ -224,23 +224,22 @@ INSERT INTO public.organization (id, number, name) VALUES (1, 1, 'first ');
 
 INSERT INTO public.mother (id, last_menstruation_date, diagnose_date, girl_surname, person_info_id) VALUES (1, '2020-12-11', '2020-12-12', 'qqq', 4);
 
-INSERT INTO public.abnormality (id, name) VALUES (1, 'Wilms Tumor	');
-INSERT INTO public.abnormality (id, name) VALUES (2, 'Walker-Warburg	');
+INSERT INTO public.abnormality (id, name) VALUES (1, 'Wilms Tumor');
+INSERT INTO public.abnormality (id, name) VALUES (2, 'Walker-Warburg');
 INSERT INTO public.abnormality (id, name) VALUES (3, 'Rubenstein-Taybi');
 INSERT INTO public.abnormality (id, name) VALUES (4, 'Rhabdomyosarcoma');
-INSERT INTO public.abnormality (id, name) VALUES (5, 'Miller-Dieker	');
+INSERT INTO public.abnormality (id, name) VALUES (5, 'Miller-Dieker');
 INSERT INTO public.abnormality (id, name) VALUES (6, 'Hodgkins Disease');
 INSERT INTO public.abnormality (id, name) VALUES (7, 'Hermaphrodite');
 INSERT INTO public.abnormality (id, name) VALUES (8, 'Hepatoblastoma');
-INSERT INTO public.abnormality (id, name) VALUES (9, 'Brain or CNS	');
+INSERT INTO public.abnormality (id, name) VALUES (9, 'Brain or CNS');
 INSERT INTO public.abnormality (id, name) VALUES (10, 'Cholesterol Low	');
 INSERT INTO public.abnormality (id, name) VALUES (11, 'Polymicrogyria	');
 INSERT INTO public.abnormality (id, name) VALUES (12, 'Polysplenia');
 INSERT INTO public.abnormality (id, name) VALUES (13, 'Osteoporosis');
 INSERT INTO public.abnormality (id, name) VALUES (14, 'Ectodermal Dyspl');
 INSERT INTO public.abnormality (id, name) VALUES (15, 'Myoblastoma');
-INSERT INTO public.abnormality (id, name) VALUES (16, 'Malposition of t');
-INSERT INTO public.abnormality (id, name) VALUES (17, 'Leukodystrophy');
+INSERT INTO public.abnormality (id, name) VALUES (16, 'Leukodystrophy');
 
 INSERT INTO public.doctor (id, speciality, person_info_id) VALUES (1, 'genetics', 6);
 
