@@ -3,17 +3,10 @@ package com.vpr.app.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.List;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 
 @Entity
 @Getter
@@ -21,7 +14,11 @@ import jakarta.persistence.Table;
 @Table(name = "abnormality")
 public class Abnormality {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "abnormality_id_seq")
+  @SequenceGenerator(name = "abnormality_id_seq",
+          sequenceName = "abnormality_id_seq",
+          initialValue = 50,
+          allocationSize = 1)
   @Schema(description = "Abnormality's uniq id", example = "26713", accessMode = Schema.AccessMode.READ_ONLY)
   @Column(name = "id")
   private long id;

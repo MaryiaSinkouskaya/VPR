@@ -1,6 +1,7 @@
 package com.vpr.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,6 +40,7 @@ public class Mother {
   @ManyToOne()
   @JoinColumn(name = "person_info_id")
   @JsonManagedReference(value = "personInfo-mother")
+  @JsonIgnore
   private PersonInfo personInfo;
 
   @OneToMany(mappedBy = "mother", cascade = CascadeType.ALL)

@@ -1,5 +1,6 @@
 package com.vpr.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,5 +30,6 @@ public class ProbandD {
   @ManyToOne()
   @JoinColumn(name = "proband_id")
   @JsonManagedReference(value = "proband-probD")
+  @JsonIgnore
   private Proband proband;
 }

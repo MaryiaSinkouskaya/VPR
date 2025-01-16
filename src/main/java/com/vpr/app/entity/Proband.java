@@ -1,6 +1,7 @@
 package com.vpr.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.vpr.app.enums.LaborOutcome;
 import com.vpr.app.enums.Ploidity;
@@ -66,24 +67,28 @@ public class Proband {
   @ManyToOne()
   @JoinColumn(name = "father_id")
   @JsonManagedReference(value = "personInfo-proband")
+  @JsonIgnore
   private PersonInfo father;
 
   @Schema(description = "Information about proband's clinic")
   @ManyToOne()
   @JoinColumn(name = "organization_id")
   @JsonManagedReference(value = "organization-proband")
+  @JsonIgnore
   private Organization organization;
 
   @Schema(description = "Information about proband's mother")
   @ManyToOne()
   @JoinColumn(name = "mother_id")
   @JsonManagedReference(value = "mother-proband")
+  @JsonIgnore
   private Mother mother;
 
   @Schema(description = "Proband's abnormality")
   @ManyToOne()
   @JoinColumn(name = "tpor_id")
   @JsonManagedReference(value = "abnormality-proband")
+  @JsonIgnore
   private Abnormality abnormality;
 
   @Schema(description = "Ploidy - the number of chromosomes occurring in the nucleus of a cell", example = "DIPLOID")
@@ -102,6 +107,7 @@ public class Proband {
   @ManyToOne()
   @JoinColumn(name = "note_id")
   @JsonManagedReference(value = "note-proband")
+  @JsonIgnore
   private Note note;
 
   @Hidden

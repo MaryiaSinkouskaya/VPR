@@ -1,6 +1,7 @@
 package com.vpr.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,11 +46,13 @@ public class PersonInfo {
   @ManyToOne()
   @JoinColumn(name = "address_id")
   @JsonManagedReference(value = "address-personInfo")
+  @JsonIgnore
   private Address address;
 
   @ManyToOne()
   @JoinColumn(name = "work_id")
   @JsonManagedReference(value = "workplace-personInfo")
+  @JsonIgnore
   private Workplace workplace;
 
   @OneToMany(mappedBy = "personInfo", cascade = CascadeType.ALL)

@@ -3,23 +3,22 @@ create sequence dcn_id_seq
 
 alter sequence dcn_id_seq owner to postgres;
 
-create sequence tpor_id_seq
+create sequence abnormality_id_seq
     as integer;
 
-alter sequence tpor_id_seq owner to postgres;
+alter sequence abnormality_id_seq owner to postgres;
 
 create sequence work_id_seq
     as integer;
 
 alter sequence work_id_seq owner to postgres;
 
+CREATE SEQUENCE address_id_seq START WITH 10 INCREMENT BY 1;
+alter sequence address_id_seq owner to postgres;
+
 create table address
 (
-    id        serial
-        constraint address_pkey
-            primary key
-        constraint address_id_uindex
-            unique,
+    id        BIGINT PRIMARY KEY DEFAULT nextval('address_id_seq'),
     street    varchar(64) not null,
     building  integer     not null,
     apartment integer     not null,
@@ -28,6 +27,9 @@ create table address
 
 alter table address
     owner to postgres;
+alter sequence address_id_seq owned by address.id;
+
+
 
 create table note
 (
@@ -61,10 +63,10 @@ alter table organization
 
 create table abnormality
 (
-    id   integer default nextval('tpor_id_seq'::regclass) not null
-        constraint tpor_pkey
+    id   integer default nextval('abnormality_id_seq'::regclass) not null
+        constraint abnormality_pkey
             primary key
-        constraint tpor_id_uindex
+        constraint abnormality_id_uindex
             unique,
     name varchar(64)                                      not null
 );
@@ -72,7 +74,7 @@ create table abnormality
 alter table abnormality
     owner to postgres;
 
-alter sequence tpor_id_seq owned by abnormality.id;
+alter sequence abnormality_id_seq owned by abnormality.id;
 
 create table workplace
 (
@@ -163,8 +165,8 @@ create table proband
     organization_id             integer
         constraint organization_id
             references organization,
-    tpor_id                     integer
-        constraint tpor_id
+    abnormality_id                     integer
+        constraint abnormality_id
             references abnormality,
     mother_id                   integer
         constraint mother_id
@@ -243,7 +245,7 @@ INSERT INTO public.abnormality (id, name) VALUES (16, 'Leukodystrophy');
 
 INSERT INTO public.doctor (id, speciality, person_info_id) VALUES (1, 'genetics', 6);
 
-INSERT INTO public.proband (id, karyotype, pregnancy_duration_in_weeks, weight, head, pregnancy_number, is_aborted, organization_id, tpor_id, mother_id, father_id, doctor_id, note_id, birth_date, gender, ploidity, labor_outcome) VALUES (2, 'undefined', 40, 2.5, 30, 2, false, 1, 1, 1, 5, 1, null, '2021-12-07', 'FEMALE', null, null);
-INSERT INTO public.proband (id, karyotype, pregnancy_duration_in_weeks, weight, head, pregnancy_number, is_aborted, organization_id, tpor_id, mother_id, father_id, doctor_id, note_id, birth_date, gender, ploidity, labor_outcome) VALUES (3, 'undefined', 39, 2.2, 32, 1, false, 1, 1, 1, 6, 1, null, '2024-07-10', 'MALE', null, null);
+INSERT INTO public.proband (id, karyotype, pregnancy_duration_in_weeks, weight, head, pregnancy_number, is_aborted, organization_id, abnormality_id, mother_id, father_id, doctor_id, note_id, birth_date, gender, ploidity, labor_outcome) VALUES (2, 'undefined', 40, 2.5, 30, 2, false, 1, 1, 1, 5, 1, null, '2021-12-07', 'FEMALE', null, null);
+INSERT INTO public.proband (id, karyotype, pregnancy_duration_in_weeks, weight, head, pregnancy_number, is_aborted, organization_id, abnormality_id, mother_id, father_id, doctor_id, note_id, birth_date, gender, ploidity, labor_outcome) VALUES (3, 'undefined', 39, 2.2, 32, 1, false, 1, 1, 1, 6, 1, null, '2024-07-10', 'MALE', null, null);
 
 INSERT INTO public.prob_d (id, death_date, proband_id) VALUES (1, '2021-12-16', 2);
