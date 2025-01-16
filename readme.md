@@ -35,4 +35,5 @@ Implemented basic API with CRUD operations via REST.
 
 ![schema](schema.png)
 
-
+### OpenApi doc
+`${vpr.openapi.dev-url}/swagger-ui/index.html#/`
