@@ -7,7 +7,6 @@ import java.util.List;
 
 @Service
 public interface ProbandService {
-  int countByGender(Gender gender);
 
   Proband findById(long id);
 
