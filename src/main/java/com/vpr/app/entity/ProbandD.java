@@ -1,11 +1,6 @@
 package com.vpr.app.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.SequenceGenerator;
-import lombok.Getter;
-import lombok.Setter;
-import java.util.Date;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +8,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -34,6 +33,5 @@ public class ProbandD {
   @ManyToOne()
   @JoinColumn(name = "proband_id")
   @JsonManagedReference(value = "proband-probD")
-  @JsonIgnore
   private Proband proband;
 }

@@ -1,11 +1,6 @@
 package com.vpr.app.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import jakarta.persistence.SequenceGenerator;
-import lombok.Getter;
-import lombok.Setter;
-import java.util.Date;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,7 +8,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -34,7 +34,7 @@ public class Note {
   @Column(name = "note")
   private String note;
 
-  @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
-  @JsonBackReference(value = "note-proband")
+  @OneToMany(mappedBy = "note", cascade = CascadeType.PERSIST)
+  @JsonIgnore
   private List<Proband> probands;
 }

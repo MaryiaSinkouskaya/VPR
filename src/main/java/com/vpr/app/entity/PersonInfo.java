@@ -1,13 +1,7 @@
 package com.vpr.app.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.SequenceGenerator;
-import lombok.Getter;
-import lombok.Setter;
-import java.util.Date;
-import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +11,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -50,24 +49,22 @@ public class PersonInfo {
   @ManyToOne()
   @JoinColumn(name = "address_id")
   @JsonManagedReference(value = "address-personInfo")
-  @JsonIgnore
   private Address address;
 
   @ManyToOne()
   @JoinColumn(name = "work_id")
   @JsonManagedReference(value = "workplace-personInfo")
-  @JsonIgnore
   private Workplace workplace;
 
-  @OneToMany(mappedBy = "personInfo", cascade = CascadeType.ALL)
-  @JsonBackReference(value = "personInfo-mother")
+  @OneToMany(mappedBy = "personInfo", cascade = CascadeType.PERSIST)
+  @JsonIgnore()
   private List<Mother> mothers;
 
-  @OneToMany(mappedBy = "personInfo", cascade = CascadeType.ALL)
-  @JsonBackReference(value = "personInfo-doctor")
+  @OneToMany(mappedBy = "personInfo", cascade = CascadeType.PERSIST)
+  @JsonIgnore()
   private List<Doctor> doctors;
 
-  @OneToMany(mappedBy = "father", cascade = CascadeType.ALL)
-  @JsonBackReference(value = "personInfo-proband")
+  @OneToMany(mappedBy = "father", cascade = CascadeType.PERSIST)
+  @JsonIgnore()
   private List<Proband> probands;
 }
