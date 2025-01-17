@@ -1,10 +1,6 @@
 package com.vpr.app.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Getter;
-import lombok.Setter;
-import java.util.Date;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +8,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,7 +21,10 @@ import jakarta.persistence.Table;
 @Table(name = "note")
 public class Note {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "note_seq_gen")
+  @SequenceGenerator(name = "note_seq_gen",
+      sequenceName = "note_id_seq",
+      allocationSize = 1)
   @Column(name = "id")
   private long id;
 
@@ -30,7 +34,7 @@ public class Note {
   @Column(name = "note")
   private String note;
 
-  @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
-  @JsonBackReference(value = "note-proband")
+  @OneToMany(mappedBy = "note", cascade = CascadeType.PERSIST)
+  @JsonIgnore
   private List<Proband> probands;
 }

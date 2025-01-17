@@ -1,11 +1,7 @@
 package com.vpr.app.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Getter;
-import lombok.Setter;
-import java.util.Date;
-import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +11,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,7 +24,10 @@ import jakarta.persistence.Table;
 @Table(name = "mother")
 public class Mother {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mother_seq_gen")
+  @SequenceGenerator(name = "mother_seq_gen",
+      sequenceName = "mother_id_seq",
+      allocationSize = 1)
   @Column(name = "id")
   private long id;
 
@@ -41,7 +45,7 @@ public class Mother {
   @JsonManagedReference(value = "personInfo-mother")
   private PersonInfo personInfo;
 
-  @OneToMany(mappedBy = "mother", cascade = CascadeType.ALL)
-  @JsonBackReference(value = "mother-proband")
+  @OneToMany(mappedBy = "mother", cascade = CascadeType.PERSIST)
+  @JsonIgnore
   private List<Proband> probands;
 }

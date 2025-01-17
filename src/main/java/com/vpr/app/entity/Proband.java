@@ -1,15 +1,11 @@
 package com.vpr.app.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.vpr.app.enums.LaborOutcome;
 import com.vpr.app.enums.Ploidity;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
-import lombok.Setter;
-import java.util.Date;
-import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +15,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import java.util.Date;
+import java.util.List;
 
 @Schema(description = "Proband entity")
 @Entity
@@ -30,7 +31,10 @@ public class Proband {
 
   @Schema(description = "Proband's uniq id", example = "26713", accessMode = Schema.AccessMode.READ_ONLY)
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "proband_seq_gen")
+  @SequenceGenerator(name = "proband_seq_gen",
+      sequenceName = "proband_id_seq",
+      allocationSize = 1)
   @Column(name = "id")
   private long id;
 
@@ -82,7 +86,7 @@ public class Proband {
 
   @Schema(description = "Proband's abnormality")
   @ManyToOne()
-  @JoinColumn(name = "tpor_id")
+  @JoinColumn(name = "abnormality_id")
   @JsonManagedReference(value = "abnormality-proband")
   private Abnormality abnormality;
 
@@ -105,8 +109,8 @@ public class Proband {
   private Note note;
 
   @Hidden
-  @OneToMany(mappedBy = "proband", cascade = CascadeType.ALL)
-  @JsonBackReference(value = "proband-probD")
+  @OneToMany(mappedBy = "proband", cascade = CascadeType.PERSIST)
+  @JsonIgnore
   private List<ProbandD> probDS;
 
 }

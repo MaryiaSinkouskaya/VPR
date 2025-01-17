@@ -1,8 +1,6 @@
 package com.vpr.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Getter;
-import lombok.Setter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,7 +8,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Getter
@@ -18,7 +19,10 @@ import jakarta.persistence.Table;
 @Table(name = "doctor")
 public class Doctor {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "doctor_seq_gen")
+  @SequenceGenerator(name = "doctor_seq_gen",
+      sequenceName = "doctor_id_seq",
+      allocationSize = 1)
   @Column(name = "id")
   private long id;
 
