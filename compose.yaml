@@ -3,7 +3,13 @@ services:
     container_name: vpr
     image: vpr
     build: .
-    ports: [8081:8081]
+    ports:
+      - '8081:8081'
+      - '5005:5005'
+    environment:
+      JAVA_OPTS: >-
+        -Xdebug
+        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
     hostname: vpr
     depends_on:
       - db
