@@ -14,10 +14,9 @@ import java.util.List;
 @Table(name = "abnormality")
 public class Abnormality {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "abnormality_id_seq")
-  @SequenceGenerator(name = "abnormality_id_seq",
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "abnormality_seq_gen")
+  @SequenceGenerator(name = "abnormality_seq_gen",
           sequenceName = "abnormality_id_seq",
-          initialValue = 50,
           allocationSize = 1)
   @Schema(description = "Abnormality's uniq id", example = "26713", accessMode = Schema.AccessMode.READ_ONLY)
   @Column(name = "id")

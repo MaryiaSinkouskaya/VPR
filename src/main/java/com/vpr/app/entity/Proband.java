@@ -7,6 +7,7 @@ import com.vpr.app.enums.LaborOutcome;
 import com.vpr.app.enums.Ploidity;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
@@ -31,7 +32,10 @@ public class Proband {
 
   @Schema(description = "Proband's uniq id", example = "26713", accessMode = Schema.AccessMode.READ_ONLY)
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "proband_seq_gen")
+  @SequenceGenerator(name = "proband_seq_gen",
+      sequenceName = "proband_id_seq",
+      allocationSize = 1)
   @Column(name = "id")
   private long id;
 
@@ -86,7 +90,7 @@ public class Proband {
 
   @Schema(description = "Proband's abnormality")
   @ManyToOne()
-  @JoinColumn(name = "tpor_id")
+  @JoinColumn(name = "abnormality_id")
   @JsonManagedReference(value = "abnormality-proband")
   @JsonIgnore
   private Abnormality abnormality;

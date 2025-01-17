@@ -2,6 +2,7 @@ package com.vpr.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.Setter;
 import jakarta.persistence.Column;
@@ -19,7 +20,10 @@ import jakarta.persistence.Table;
 @Table(name = "doctor")
 public class Doctor {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "doctor_seq_gen")
+  @SequenceGenerator(name = "doctor_seq_gen",
+      sequenceName = "doctor_id_seq",
+      allocationSize = 1)
   @Column(name = "id")
   private long id;
 

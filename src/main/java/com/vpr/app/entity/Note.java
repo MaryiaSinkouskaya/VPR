@@ -1,6 +1,7 @@
 package com.vpr.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.Date;
@@ -20,7 +21,10 @@ import jakarta.persistence.Table;
 @Table(name = "note")
 public class Note {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "note_seq_gen")
+  @SequenceGenerator(name = "note_seq_gen",
+      sequenceName = "note_id_seq",
+      allocationSize = 1)
   @Column(name = "id")
   private long id;
 
