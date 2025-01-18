@@ -1,0 +1,8 @@
+services:
+  application:
+    environment:
+      JAVA_OPTS: >-
+        -Xdebug
+        -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+    ports:
+      - '5005:5005'
