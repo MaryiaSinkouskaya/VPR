@@ -36,4 +36,4 @@ public class Workplace {
   @OneToMany(mappedBy = "workplace", cascade = CascadeType.PERSIST)
   @JsonIgnore
   private List<PersonInfo> personInfos;
-}//todo DTO, exception handling for delete action
+}//todo DTO, exception handling for delete action, response entities
