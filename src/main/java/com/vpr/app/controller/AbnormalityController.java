@@ -1,16 +1,18 @@
 package com.vpr.app.controller;
 
+import com.vpr.app.controller.dto.request.AbnormalityRequestDto;
 import com.vpr.app.entity.Abnormality;
 import com.vpr.app.service.AbnormalityService;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -40,7 +42,7 @@ public class AbnormalityController {
     return abnormalityService.create(abnormality);
   }
 
-  @PutMapping()
+  @PatchMapping()
   public Abnormality updateAbnormality(@RequestBody Abnormality abnormality) {
     return abnormalityService.update(abnormality);
   }
