@@ -1,5 +1,6 @@
 package com.vpr.app.controller;
 
+import com.vpr.app.controller.dto.request.WorkplaceRequestDto;
 import com.vpr.app.entity.Workplace;
 import com.vpr.app.service.WorkplaceService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,7 +34,11 @@ public class WorkplaceController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Workplace createWork(@RequestBody Workplace workplace) {
+  public Workplace createWork(@RequestBody WorkplaceRequestDto workplaceDto) {
+    Workplace workplace = Workplace.builder()
+            .jobType(workplaceDto.getJobType())
+            .company(workplaceDto.getCompany())
+            .build();
     return workplaceService.create(workplace);
   }
 

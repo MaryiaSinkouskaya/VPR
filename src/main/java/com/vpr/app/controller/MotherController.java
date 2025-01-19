@@ -1,6 +1,7 @@
 package com.vpr.app.controller;
 
-import com.vpr.app.entity.Mother;
+import com.vpr.app.controller.dto.request.MotherRequestDto;
+import com.vpr.app.entity.*;
 import com.vpr.app.service.MotherService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +34,29 @@ public class MotherController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Mother createMother(@RequestBody Mother mother) {
+  public Mother createMother(@RequestBody MotherRequestDto motherDto) {
+    Mother mother = Mother.builder()
+            .lastMenstruationDate(motherDto.getLastMenstruationDate())
+            .diagnoseDate(motherDto.getDiagnoseDate())
+            .girlSurname(motherDto.getGirlSurname())
+            .personInfo(PersonInfo.builder()
+                    .name(motherDto.getPersonInfo().getName())
+                    .surname(motherDto.getPersonInfo().getSurname())
+                    .patronymic(motherDto.getPersonInfo().getPatronymic())
+                    .phone(motherDto.getPersonInfo().getPhone())
+                    .birthDate(motherDto.getPersonInfo().getBirthDate())
+                    .address(Address.builder()
+                            .town(motherDto.getPersonInfo().getAddress().getTown())
+                            .street(motherDto.getPersonInfo().getAddress().getStreet())
+                            .building(motherDto.getPersonInfo().getAddress().getBuilding())
+                            .apartment(motherDto.getPersonInfo().getAddress().getApartment())
+                            .build())
+                    .workplace(Workplace.builder()
+                            .jobType(motherDto.getPersonInfo().getWorkplace().getJobType())
+                            .company(motherDto.getPersonInfo().getWorkplace().getCompany())
+                            .build())
+                    .build())
+            .build();
     return motherService.create(mother);
   }
 

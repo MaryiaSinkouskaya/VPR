@@ -1,5 +1,6 @@
 package com.vpr.app.controller;
 
+import com.vpr.app.controller.dto.request.NoteRequestDto;
 import com.vpr.app.entity.Note;
 import com.vpr.app.service.NoteService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -33,7 +34,8 @@ public class NoteController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Note createNote(@RequestBody Note note) {
+  public Note createNote(@RequestBody NoteRequestDto noteDto) {
+    Note note = Note.builder().date(noteDto.getDate()).note(noteDto.getNote()).build();
     return noteService.create(note);
   }
 

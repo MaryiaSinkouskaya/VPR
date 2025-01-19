@@ -38,7 +38,8 @@ public class AbnormalityController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Abnormality createAbnormality(@RequestBody Abnormality abnormality) {
+  public Abnormality createAbnormality(@Valid @RequestBody AbnormalityRequestDto abnormalityDto) {
+    Abnormality abnormality = Abnormality.builder().name(abnormalityDto.getName()).build();
     return abnormalityService.create(abnormality);
   }
 

@@ -1,5 +1,6 @@
 package com.vpr.app.controller;
 
+import com.vpr.app.controller.dto.request.OrganizationRequestDto;
 import com.vpr.app.entity.Organization;
 import com.vpr.app.service.OrganizationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -32,10 +33,11 @@ public class OrganizationController {
     return organizationService.findById(id);
   }
 
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Organization createOrganization(@RequestBody Organization organization) {
-    return organizationService.create(organization);
-  }
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Organization createOrganization(@RequestBody OrganizationRequestDto organizationDto) {
+        Organization organization = Organization.builder().number(organizationDto.getNumber()).name(organizationDto.getName()).build();
+        return organizationService.create(organization);
+    }
 
   @PatchMapping()
   public Organization updateOrganization(@RequestBody Organization organization) {

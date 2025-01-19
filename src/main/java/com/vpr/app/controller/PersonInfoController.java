@@ -1,6 +1,9 @@
 package com.vpr.app.controller;
 
+import com.vpr.app.controller.dto.request.PersonInfoRequestDto;
+import com.vpr.app.entity.Address;
 import com.vpr.app.entity.PersonInfo;
+import com.vpr.app.entity.Workplace;
 import com.vpr.app.service.PersonInfoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +36,24 @@ public class PersonInfoController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public PersonInfo createPersonInfo(@RequestBody PersonInfo personInfo) {
+  public PersonInfo createPersonInfo(@RequestBody PersonInfoRequestDto personInfoDto) {
+    PersonInfo personInfo = PersonInfo.builder()
+            .name(personInfoDto.getName())
+            .surname(personInfoDto.getSurname())
+            .patronymic(personInfoDto.getPatronymic())
+            .phone(personInfoDto.getPhone())
+            .birthDate(personInfoDto.getBirthDate())
+            .address(Address.builder()
+                    .town(personInfoDto.getAddress().getTown())
+                    .street(personInfoDto.getAddress().getStreet())
+                    .building(personInfoDto.getAddress().getBuilding())
+                    .apartment(personInfoDto.getAddress().getApartment())
+                    .build())
+            .workplace(Workplace.builder()
+                    .jobType(personInfoDto.getWorkplace().getJobType())
+                    .company(personInfoDto.getWorkplace().getCompany())
+                    .build())
+            .build();
     return personInfoService.create(personInfo);
   }
 
