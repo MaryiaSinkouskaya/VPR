@@ -13,14 +13,17 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Builder
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "person_info")
 public class PersonInfo {
   @Id
@@ -46,12 +49,18 @@ public class PersonInfo {
   @Column(name = "phone")
   private String phone;
 
-  @ManyToOne()
+  @ManyToOne(cascade = {
+          CascadeType.PERSIST,
+          CascadeType.MERGE
+  })
   @JoinColumn(name = "address_id")
   @JsonManagedReference(value = "address-personInfo")
   private Address address;
 
-  @ManyToOne()
+  @ManyToOne(cascade = {
+          CascadeType.PERSIST,
+          CascadeType.MERGE
+  })
   @JoinColumn(name = "work_id")
   @JsonManagedReference(value = "workplace-personInfo")
   private Workplace workplace;

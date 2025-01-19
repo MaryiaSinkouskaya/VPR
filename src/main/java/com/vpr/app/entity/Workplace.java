@@ -10,13 +10,16 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
 import java.util.List;
 
 @Entity
+@Builder
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "workplace")
 public class Workplace {
   @Id
@@ -36,4 +39,4 @@ public class Workplace {
   @OneToMany(mappedBy = "workplace", cascade = CascadeType.PERSIST)
   @JsonIgnore
   private List<PersonInfo> personInfos;
-}//todo DTO, exception handling for delete action, response entities
+}//todo response entities, mappers, test API for creation, add validation
