@@ -1,6 +1,6 @@
 package com.vpr.app.controller;
 
-import com.vpr.app.controller.dto.request.WorkplaceRequestDto;
+import com.vpr.app.dto.request.WorkplaceRequestDto;
 import com.vpr.app.entity.Workplace;
 import com.vpr.app.service.WorkplaceService;
 import io.swagger.v3.oas.annotations.tags.Tag;

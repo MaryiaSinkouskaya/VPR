@@ -1,4 +1,4 @@
-package com.vpr.app.controller.dto.request;
+package com.vpr.app.dto.request;
 
 import lombok.Data;
 

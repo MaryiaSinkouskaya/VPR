@@ -1,6 +1,6 @@
 package com.vpr.app.controller;
 
-import com.vpr.app.controller.dto.request.NoteRequestDto;
+import com.vpr.app.dto.request.NoteRequestDto;
 import com.vpr.app.entity.Note;
 import com.vpr.app.service.NoteService;
 import io.swagger.v3.oas.annotations.tags.Tag;

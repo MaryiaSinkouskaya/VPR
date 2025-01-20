@@ -1,6 +1,6 @@
 package com.vpr.app.controller;
 
-import com.vpr.app.controller.dto.request.DoctorRequestDto;
+import com.vpr.app.dto.request.DoctorRequestDto;
 import com.vpr.app.entity.Address;
 import com.vpr.app.entity.Doctor;
 import com.vpr.app.entity.PersonInfo;

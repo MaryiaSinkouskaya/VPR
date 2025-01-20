@@ -1,6 +1,6 @@
 package com.vpr.app.controller;
 
-import com.vpr.app.controller.dto.request.AddressRequestDto;
+import com.vpr.app.dto.request.AddressRequestDto;
 import com.vpr.app.entity.Address;
 import com.vpr.app.service.AddressService;
 import io.swagger.v3.oas.annotations.tags.Tag;

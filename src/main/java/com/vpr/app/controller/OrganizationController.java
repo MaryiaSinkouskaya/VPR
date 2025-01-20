@@ -1,6 +1,6 @@
 package com.vpr.app.controller;
 
-import com.vpr.app.controller.dto.request.OrganizationRequestDto;
+import com.vpr.app.dto.request.OrganizationRequestDto;
 import com.vpr.app.entity.Organization;
 import com.vpr.app.service.OrganizationService;
 import io.swagger.v3.oas.annotations.tags.Tag;

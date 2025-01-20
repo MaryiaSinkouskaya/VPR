@@ -1,6 +1,6 @@
 package com.vpr.app.controller;
 
-import com.vpr.app.controller.dto.request.ProbandRequestDto;
+import com.vpr.app.dto.request.ProbandRequestDto;
 import com.vpr.app.entity.*;
 import com.vpr.app.service.ProbandService;
 import io.swagger.v3.oas.annotations.tags.Tag;

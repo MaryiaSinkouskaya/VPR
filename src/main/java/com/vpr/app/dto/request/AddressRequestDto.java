@@ -1,4 +1,4 @@
-package com.vpr.app.controller.dto.request;
+package com.vpr.app.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

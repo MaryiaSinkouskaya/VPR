@@ -1,7 +1,5 @@
-package com.vpr.app.controller.dto.request;
+package com.vpr.app.dto.request;
 
-import com.vpr.app.entity.Address;
-import com.vpr.app.entity.Workplace;
 import lombok.Data;
 
 import java.util.Date;
