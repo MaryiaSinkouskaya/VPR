@@ -6,6 +6,7 @@ import com.vpr.app.entity.PersonInfo;
 import com.vpr.app.entity.Workplace;
 import com.vpr.app.service.PersonInfoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -36,7 +37,7 @@ public class PersonInfoController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public PersonInfo createPersonInfo(@RequestBody PersonInfoRequestDto personInfoDto) {
+  public PersonInfo createPersonInfo(@Valid @RequestBody PersonInfoRequestDto personInfoDto) {
     PersonInfo personInfo = PersonInfo.builder()
             .name(personInfoDto.getName())
             .surname(personInfoDto.getSurname())

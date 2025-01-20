@@ -1,6 +1,7 @@
 package com.vpr.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -33,7 +34,10 @@ public class ProbandD {
   @Column(name = "death_date")
   private Date deathDate;
 
-  @ManyToOne()
+  @ManyToOne(cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
   @JoinColumn(name = "proband_id")
   @JsonManagedReference(value = "proband-probD")
   private Proband proband;

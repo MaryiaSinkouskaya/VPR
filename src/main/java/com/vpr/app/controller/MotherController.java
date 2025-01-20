@@ -4,6 +4,7 @@ import com.vpr.app.dto.request.MotherRequestDto;
 import com.vpr.app.entity.*;
 import com.vpr.app.service.MotherService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class MotherController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Mother createMother(@RequestBody MotherRequestDto motherDto) {
+  public Mother createMother(@Valid @RequestBody MotherRequestDto motherDto) {
     Mother mother = Mother.builder()
             .lastMenstruationDate(motherDto.getLastMenstruationDate())
             .diagnoseDate(motherDto.getDiagnoseDate())

@@ -39,4 +39,4 @@ public class Workplace {
   @OneToMany(mappedBy = "workplace", cascade = CascadeType.PERSIST)
   @JsonIgnore
   private List<PersonInfo> personInfos;
-}//todo response entities, mappers, test API for creation, add validation
+}//todo response entities, mappers, test API for creation, add validation, Date, add API for update

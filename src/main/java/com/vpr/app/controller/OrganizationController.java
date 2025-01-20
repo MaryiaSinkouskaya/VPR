@@ -4,6 +4,7 @@ import com.vpr.app.dto.request.OrganizationRequestDto;
 import com.vpr.app.entity.Organization;
 import com.vpr.app.service.OrganizationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class OrganizationController {
   }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Organization createOrganization(@RequestBody OrganizationRequestDto organizationDto) {
+    public Organization createOrganization(@Valid @RequestBody OrganizationRequestDto organizationDto) {
         Organization organization = Organization.builder().number(organizationDto.getNumber()).name(organizationDto.getName()).build();
         return organizationService.create(organization);
     }

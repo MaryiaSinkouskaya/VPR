@@ -4,6 +4,7 @@ import com.vpr.app.dto.request.ProbandRequestDto;
 import com.vpr.app.entity.*;
 import com.vpr.app.service.ProbandService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class ProbandController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Proband createProband(@RequestBody ProbandRequestDto probandDto) {
+  public Proband createProband(@Valid @RequestBody ProbandRequestDto probandDto) {
     Proband proband = Proband.builder()
             .birthDate(probandDto.getBirthDate())
             .karyotype(probandDto.getKaryotype())

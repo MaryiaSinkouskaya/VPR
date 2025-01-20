@@ -4,6 +4,7 @@ import com.vpr.app.dto.request.NoteRequestDto;
 import com.vpr.app.entity.Note;
 import com.vpr.app.service.NoteService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class NoteController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Note createNote(@RequestBody NoteRequestDto noteDto) {
+  public Note createNote(@Valid @RequestBody NoteRequestDto noteDto) {
     Note note = Note.builder().date(noteDto.getDate()).note(noteDto.getNote()).build();
     return noteService.create(note);
   }

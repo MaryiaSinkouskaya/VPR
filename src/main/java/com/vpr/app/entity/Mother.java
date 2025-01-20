@@ -43,7 +43,10 @@ public class Mother {
   @Column(name = "girl_surname")
   private String girlSurname;
 
-  @ManyToOne()
+  @ManyToOne(cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
   @JoinColumn(name = "person_info_id")
   @JsonManagedReference(value = "personInfo-mother")
   private PersonInfo personInfo;

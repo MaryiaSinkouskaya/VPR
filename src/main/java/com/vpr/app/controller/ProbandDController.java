@@ -4,6 +4,7 @@ import com.vpr.app.dto.request.ProbandDRequestDto;
 import com.vpr.app.entity.*;
 import com.vpr.app.service.ProbandDService;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,7 +35,7 @@ public class ProbandDController {
   }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ProbandD createProbandD(@RequestBody ProbandDRequestDto probandDDto) {
+  public ProbandD createProbandD(@Valid @RequestBody ProbandDRequestDto probandDDto) {
     ProbandD probandD = ProbandD.builder()
             .deathDate(probandDDto.getDeathDate())
             .proband(Proband.builder()
