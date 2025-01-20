@@ -40,7 +40,13 @@ public class AddressController {
     }
 
     @PatchMapping()
-    public Address updateAddress(@RequestBody Address address) {
+    public Address updateAddress(@Valid @RequestBody AddressRequestDto addressDto) {
+        Address address = Address.builder()
+                .town(addressDto.getTown())
+                .street(addressDto.getStreet())
+                .building(addressDto.getBuilding())
+                .apartment(addressDto.getApartment())
+                .build();
         return addressService.update(address);
     }
 
