@@ -39,7 +39,7 @@ public class AbnormalityController {
 
     @PatchMapping()
     public Abnormality updateAbnormality(@Valid @RequestBody AbnormalityRequestDto abnormalityDto) {
-        Abnormality abnormality = Abnormality.builder().name(abnormalityDto.getName()).build();
+        Abnormality abnormality = Abnormality.builder().id(abnormalityDto.getId()).name(abnormalityDto.getName()).build();
         return abnormalityService.update(abnormality);
     }
 
