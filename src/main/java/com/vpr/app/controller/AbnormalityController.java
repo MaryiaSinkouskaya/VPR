@@ -1,6 +1,9 @@
 package com.vpr.app.controller;
 
 import com.vpr.app.dto.request.AbnormalityRequestDto;
+import com.vpr.app.dto.request.mappers.AbnormalityConverter;
+import com.vpr.app.dto.request.validation.markers.OnCreate;
+import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import com.vpr.app.entity.Abnormality;
 import com.vpr.app.service.AbnormalityService;
 import io.swagger.v3.oas.annotations.ExternalDocumentation;
@@ -8,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +24,7 @@ import java.util.List;
 @RequestMapping("/api/abnormality")
 public class AbnormalityController {
     private final AbnormalityService abnormalityService;
+    private final AbnormalityConverter abnormalityConverter;
 
     @GetMapping()
     public List<Abnormality> getAbnormalities() {
@@ -32,14 +37,14 @@ public class AbnormalityController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Abnormality createAbnormality(@Valid @RequestBody AbnormalityRequestDto abnormalityDto) {
-        Abnormality abnormality = Abnormality.builder().name(abnormalityDto.getName()).build();
+    public Abnormality createAbnormality(@Validated(OnCreate.class) @RequestBody AbnormalityRequestDto abnormalityDto) {
+        Abnormality abnormality = abnormalityConverter.toEntity(abnormalityDto);
         return abnormalityService.create(abnormality);
     }
 
     @PatchMapping()
-    public Abnormality updateAbnormality(@Valid @RequestBody AbnormalityRequestDto abnormalityDto) {
-        Abnormality abnormality = Abnormality.builder().id(abnormalityDto.getId()).name(abnormalityDto.getName()).build();
+    public Abnormality updateAbnormality(@Validated(OnUpdate.class) @RequestBody AbnormalityRequestDto abnormalityDto) {
+        Abnormality abnormality = abnormalityConverter.toEntity(abnormalityDto);
         return abnormalityService.update(abnormality);
     }
 
