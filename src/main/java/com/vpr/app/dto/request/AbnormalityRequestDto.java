@@ -1,10 +1,8 @@
 package com.vpr.app.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -13,9 +11,8 @@ import lombok.Data;
 @Schema(description = "Data transfer object for creating or updating an abnormality")
 public class AbnormalityRequestDto {
 
-  @NotNull(message = "Id number must be provided")
-  @Positive(message = "Id number must be a positive integer")
-  @Schema(description = "Id", example = "45")
+  @Positive(message = "ID must be a positive integer")
+  @Schema(description = "Unique identifier of the abnormality (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
   private Integer id;
 
   @NotBlank(message = "Name must not be blank")

@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import java.util.Date;
@@ -12,6 +13,10 @@ import java.util.Date;
 @Data
 @Schema(description = "Data transfer object for personal information")
 public class PersonInfoRequestDto {
+
+  @Positive(message = "ID must be a positive integer")
+  @Schema(description = "Unique identifier of the personal information (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
+  private Integer id;
 
   @NotBlank(message = "Name must not be blank")
   @Size(max = 64, message = "Name must not exceed 64 characters")

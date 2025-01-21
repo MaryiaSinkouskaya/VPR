@@ -12,6 +12,10 @@ import lombok.Data;
 @Schema(description = "Data transfer object for creating or updating an address")
 public class AddressRequestDto {
 
+  @Positive(message = "ID must be a positive integer")
+  @Schema(description = "Unique identifier of the address (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
+  private Integer id;
+
   @NotBlank(message = "Street must not be blank")
   @Size(max = 64, message = "Street must not exceed 64 characters")
   @Schema(description = "Name of the street", example = "Main Street", requiredMode = RequiredMode.REQUIRED)

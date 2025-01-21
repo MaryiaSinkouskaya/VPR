@@ -36,7 +36,7 @@ public class OrganizationController {
 
     @PatchMapping()
     public Organization updateOrganization(@Valid @RequestBody OrganizationRequestDto organizationDto) {
-        Organization organization = Organization.builder().number(organizationDto.getNumber()).name(organizationDto.getName()).build();
+        Organization organization = Organization.builder().id(organizationDto.getId()).number(organizationDto.getNumber()).name(organizationDto.getName()).build();
         return organizationService.update(organization);
     }
 

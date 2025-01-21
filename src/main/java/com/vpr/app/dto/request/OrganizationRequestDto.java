@@ -11,6 +11,10 @@ import lombok.Data;
 @Schema(description = "Data transfer object for creating or updating an organization")
 public class OrganizationRequestDto {
 
+  @Positive(message = "ID must be a positive integer")
+  @Schema(description = "Unique identifier of the organization (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
+  private Integer id;
+
   @Positive(message = "Organization number must be a positive integer")
   @Schema(description = "Unique number of the organization", example = "101", requiredMode = RequiredMode.REQUIRED)
   private int number;

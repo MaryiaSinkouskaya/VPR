@@ -16,6 +16,10 @@ import java.util.Date;
 @Schema(description = "Data transfer object for proband details")
 public class ProbandRequestDto {
 
+  @Positive(message = "ID must be a positive integer")
+  @Schema(description = "Unique identifier of proband details (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
+  private Integer id;
+
   @NotNull(message = "Birth date must not be null")
   @Past(message = "Birth date must be in the past")
   @Schema(description = "Date of birth of the proband", example = "2025-01-01", requiredMode = RequiredMode.REQUIRED)

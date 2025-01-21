@@ -36,7 +36,7 @@ public class NoteController {
 
     @PatchMapping()
     public Note updateNote(@Valid @RequestBody NoteRequestDto noteDto) {
-        Note note = Note.builder().date(noteDto.getDate()).note(noteDto.getNote()).build();
+        Note note = Note.builder().id(noteDto.getId()).date(noteDto.getDate()).note(noteDto.getNote()).build();
         return noteService.update(note);
     }
 

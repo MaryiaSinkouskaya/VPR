@@ -42,6 +42,7 @@ public class AddressController {
     @PatchMapping()
     public Address updateAddress(@Valid @RequestBody AddressRequestDto addressDto) {
         Address address = Address.builder()
+                .id(addressDto.getId())
                 .town(addressDto.getTown())
                 .street(addressDto.getStreet())
                 .building(addressDto.getBuilding())

@@ -40,6 +40,7 @@ public class WorkplaceController {
     @PatchMapping()
     public Workplace updateWork(@Valid @RequestBody WorkplaceRequestDto workplaceDto) {
         Workplace workplace = Workplace.builder()
+                .id(workplaceDto.getId())
                 .jobType(workplaceDto.getJobType())
                 .company(workplaceDto.getCompany())
                 .build();
