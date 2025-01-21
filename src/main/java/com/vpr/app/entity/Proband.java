@@ -42,7 +42,7 @@ public class Proband {
       sequenceName = "proband_id_seq",
       allocationSize = 1)
   @Column(name = "id")
-  private long id;
+  private Integer id;
 
   @Schema(description = "Proband's birth date", example = "2017-07-08")
   @Column(name = "birth_date")

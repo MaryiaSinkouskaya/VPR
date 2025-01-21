@@ -1,13 +1,12 @@
 package com.vpr.app.dto.request;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+
+import com.vpr.app.dto.request.validation.markers.OnCreate;
 import com.vpr.app.dto.request.validation.markers.OnUpdate;
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Data;
 import java.time.LocalDate;
 
@@ -15,9 +14,10 @@ import java.time.LocalDate;
 @Schema(description = "Data transfer object for personal information")
 public class PersonInfoRequestDto {
 
+  @Null(groups = OnCreate.class, message = "ID must not be provided when creating a new entity")
   @NotNull(groups = OnUpdate.class, message = "ID must be provided for update")
   @Positive(groups = OnUpdate.class, message = "ID must be a positive integer")
-  @Schema(description = "Unique identifier of the personal information (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
+  @Schema(description = "ID of the person information", example = "123", accessMode = Schema.AccessMode.READ_ONLY)
   private Integer id;
 
   @NotBlank(message = "Name must not be blank")

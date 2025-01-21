@@ -35,7 +35,7 @@ public class PersonInfo {
       sequenceName = "person_info_id_seq",
       allocationSize = 1)
   @Column(name = "id")
-  private long id;
+  private Integer id;
 
   @Column(name = "name")
   private String name;

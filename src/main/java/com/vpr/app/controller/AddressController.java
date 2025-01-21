@@ -1,12 +1,15 @@
 package com.vpr.app.controller;
 
 import com.vpr.app.dto.request.AddressRequestDto;
+import com.vpr.app.dto.request.mappers.AddressConverter;
+import com.vpr.app.dto.request.validation.markers.OnCreate;
+import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import com.vpr.app.entity.Address;
 import com.vpr.app.service.AddressService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,7 @@ import java.util.List;
 @RequestMapping("/api/address")
 public class AddressController {
     private final AddressService addressService;
+    private final AddressConverter addressConverter;
 
     @GetMapping(value = "/{id}")
     public Address getAddressById(@PathVariable(name = "id") long id) {
@@ -29,25 +33,14 @@ public class AddressController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Address createAddress(@Valid @RequestBody AddressRequestDto addressDto) {
-        Address address = Address.builder()
-                .town(addressDto.getTown())
-                .street(addressDto.getStreet())
-                .building(addressDto.getBuilding())
-                .apartment(addressDto.getApartment())
-                .build();
+    public Address createAddress(@Validated(OnCreate.class) @RequestBody AddressRequestDto addressDto) {
+        Address address = addressConverter.toEntity(addressDto);
         return addressService.create(address);
     }
 
     @PatchMapping()
-    public Address updateAddress(@Valid @RequestBody AddressRequestDto addressDto) {
-        Address address = Address.builder()
-                .id(addressDto.getId())
-                .town(addressDto.getTown())
-                .street(addressDto.getStreet())
-                .building(addressDto.getBuilding())
-                .apartment(addressDto.getApartment())
-                .build();
+    public Address updateAddress(@Validated(OnUpdate.class) @RequestBody AddressRequestDto addressDto) {
+        Address address = addressConverter.toEntity(addressDto);
         return addressService.update(address);
     }
 

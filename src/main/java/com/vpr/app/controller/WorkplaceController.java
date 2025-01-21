@@ -1,12 +1,15 @@
 package com.vpr.app.controller;
 
 import com.vpr.app.dto.request.WorkplaceRequestDto;
+import com.vpr.app.dto.request.mappers.WorkplaceConverter;
+import com.vpr.app.dto.request.validation.markers.OnCreate;
+import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import com.vpr.app.entity.Workplace;
 import com.vpr.app.service.WorkplaceService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,7 @@ import java.util.List;
 @RequestMapping("/api/workplace")
 public class WorkplaceController {
     private final WorkplaceService workplaceService;
+    private final WorkplaceConverter workplaceConverter;
 
     @GetMapping()
     public List<Workplace> getWorks() {
@@ -29,21 +33,14 @@ public class WorkplaceController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Workplace createWork(@Valid @RequestBody WorkplaceRequestDto workplaceDto) {
-        Workplace workplace = Workplace.builder()
-                .jobType(workplaceDto.getJobType())
-                .company(workplaceDto.getCompany())
-                .build();
+    public Workplace createWork(@Validated(OnCreate.class) @RequestBody WorkplaceRequestDto workplaceDto) {
+        Workplace workplace = workplaceConverter.toEntity(workplaceDto);
         return workplaceService.create(workplace);
     }
 
     @PatchMapping()
-    public Workplace updateWork(@Valid @RequestBody WorkplaceRequestDto workplaceDto) {
-        Workplace workplace = Workplace.builder()
-                .id(workplaceDto.getId())
-                .jobType(workplaceDto.getJobType())
-                .company(workplaceDto.getCompany())
-                .build();
+    public Workplace updateWork(@Validated(OnUpdate.class) @RequestBody WorkplaceRequestDto workplaceDto) {
+        Workplace workplace = workplaceConverter.toEntity(workplaceDto);
         return workplaceService.update(workplace);
     }
 

@@ -31,7 +31,7 @@ public class Organization {
       sequenceName = "org_id_seq",
       allocationSize = 1)
   @Column(name = "id")
-  private long id;
+  private Integer id;
 
   @Column(name = "number")
   private int number;
