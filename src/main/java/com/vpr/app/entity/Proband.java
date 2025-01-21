@@ -17,9 +17,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.*;
-
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.time.LocalDate;
 import java.util.List;
 
 @Schema(description = "Proband entity")
@@ -43,7 +46,7 @@ public class Proband {
 
   @Schema(description = "Proband's birth date", example = "2017-07-08")
   @Column(name = "birth_date")
-  private Date birthDate;
+  private LocalDate birthDate;
 
   @Schema(description = "Proband's karyotype", example = "47,ХХ, 21+; 47,ХY, 21++")
   @Column(name = "karyotype")

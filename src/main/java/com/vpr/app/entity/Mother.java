@@ -13,9 +13,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.*;
-
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -35,10 +38,10 @@ public class Mother {
   private long id;
 
   @Column(name = "last_menstruation_date")
-  private Date lastMenstruationDate;
+  private LocalDate lastMenstruationDate;
 
   @Column(name = "diagnose_date")
-  private Date diagnoseDate;
+  private LocalDate diagnoseDate;
 
   @Column(name = "girl_surname")
   private String girlSurname;

@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Schema(description = "Data transfer object for creating or updating a note")
@@ -18,7 +18,7 @@ public class NoteRequestDto {
 
   @NotNull(message = "Date must not be null")
   @Schema(description = "The date when the note was created", example = "2025-01-01", requiredMode = RequiredMode.REQUIRED)
-  private Date date;
+  private LocalDate date;
 
   @NotBlank(message = "Note content must not be blank")
   @Schema(description = "The content of the note", example = "This is an important note.", requiredMode = RequiredMode.REQUIRED)

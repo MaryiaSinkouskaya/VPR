@@ -10,9 +10,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.*;
-
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -32,7 +35,7 @@ public class Note {
   private long id;
 
   @Column(name = "date")
-  private Date date;
+  private LocalDate date;
 
   @Column(name = "note")
   private String note;

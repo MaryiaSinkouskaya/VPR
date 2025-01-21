@@ -11,9 +11,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.*;
-
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.time.LocalDate;
 
 @Entity
 @Builder
@@ -32,7 +35,7 @@ public class ProbandD {
   private long id;
 
   @Column(name = "death_date")
-  private Date deathDate;
+  private LocalDate deathDate;
 
   @ManyToOne(cascade = {
       CascadeType.PERSIST,

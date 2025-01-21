@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Schema(description = "Data transfer object for proband details")
@@ -23,7 +23,7 @@ public class ProbandRequestDto {
   @NotNull(message = "Birth date must not be null")
   @Past(message = "Birth date must be in the past")
   @Schema(description = "Date of birth of the proband", example = "2025-01-01", requiredMode = RequiredMode.REQUIRED)
-  private Date birthDate;
+  private LocalDate birthDate;
 
   @Size(max = 64, message = "Karyotype must not exceed 64 characters")
   @Schema(description = "Karyotype of the proband", example = "46,XY", requiredMode = RequiredMode.NOT_REQUIRED)

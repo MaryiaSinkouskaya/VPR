@@ -1,8 +1,21 @@
 package com.vpr.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
-import lombok.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Builder
@@ -24,8 +37,8 @@ public class Doctor {
   private String speciality;
 
   @ManyToOne(cascade = {
-          CascadeType.PERSIST,
-          CascadeType.MERGE
+      CascadeType.PERSIST,
+      CascadeType.MERGE
   })
   @JoinColumn(name = "person_info_id")
   @JsonManagedReference(value = "personInfo-doctor")

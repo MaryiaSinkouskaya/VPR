@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Schema(description = "Data transfer object for creating or updating a mother entity")
@@ -19,11 +19,11 @@ public class MotherRequestDto {
 
   @NotNull(message = "Last menstruation date must not be null")
   @Schema(description = "The date of the last menstruation", example = "2025-01-01", requiredMode = RequiredMode.REQUIRED)
-  private Date lastMenstruationDate;
+  private LocalDate lastMenstruationDate;
 
   @NotNull(message = "Diagnose date must not be null")
   @Schema(description = "The date when the diagnose was made", example = "2025-01-10", requiredMode = RequiredMode.REQUIRED)
-  private Date diagnoseDate;
+  private LocalDate diagnoseDate;
 
   @NotBlank(message = "Girl's surname must not be blank")
   @Size(max = 64, message = "Girl's surname must not exceed 64 characters")

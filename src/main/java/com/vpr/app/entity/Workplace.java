@@ -10,8 +10,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.*;
-
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.util.List;
 
 @Entity
@@ -39,4 +42,4 @@ public class Workplace {
   @OneToMany(mappedBy = "workplace", cascade = CascadeType.PERSIST)
   @JsonIgnore
   private List<PersonInfo> personInfos;
-}//todo response entities ID, mappers, test API for creation, add validation, Date
+}//todo response entities, mappers, Date

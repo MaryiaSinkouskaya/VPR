@@ -13,9 +13,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.*;
-
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -44,22 +47,22 @@ public class PersonInfo {
   private String patronymic;
 
   @Column(name = "birth_date")
-  private Date birthDate;
+  private LocalDate birthDate;
 
   @Column(name = "phone")
   private String phone;
 
   @ManyToOne(cascade = {
-          CascadeType.PERSIST,
-          CascadeType.MERGE
+      CascadeType.PERSIST,
+      CascadeType.MERGE
   })
   @JoinColumn(name = "address_id")
   @JsonManagedReference(value = "address-personInfo")
   private Address address;
 
   @ManyToOne(cascade = {
-          CascadeType.PERSIST,
-          CascadeType.MERGE
+      CascadeType.PERSIST,
+      CascadeType.MERGE
   })
   @JoinColumn(name = "work_id")
   @JsonManagedReference(value = "workplace-personInfo")
