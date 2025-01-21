@@ -42,4 +42,4 @@ public class Workplace {
   @OneToMany(mappedBy = "workplace", cascade = CascadeType.PERSIST)
   @JsonIgnore
   private List<PersonInfo> personInfos;
-}//todo response entities, mappers, Date
+}//todo response entities, mappers

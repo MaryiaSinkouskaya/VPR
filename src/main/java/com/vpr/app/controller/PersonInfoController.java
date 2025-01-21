@@ -1,6 +1,8 @@
 package com.vpr.app.controller;
 
 import com.vpr.app.dto.request.PersonInfoRequestDto;
+import com.vpr.app.dto.request.validation.markers.OnCreate;
+import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import com.vpr.app.entity.Address;
 import com.vpr.app.entity.PersonInfo;
 import com.vpr.app.entity.Workplace;
@@ -9,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,7 +34,7 @@ public class PersonInfoController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public PersonInfo createPersonInfo(@Valid @RequestBody PersonInfoRequestDto personInfoDto) {
+    public PersonInfo createPersonInfo(@Validated(OnCreate.class) @RequestBody PersonInfoRequestDto personInfoDto) {
         PersonInfo personInfo = PersonInfo.builder()
                 .name(personInfoDto.getName())
                 .surname(personInfoDto.getSurname())
@@ -53,7 +56,7 @@ public class PersonInfoController {
     }
 
     @PatchMapping()
-    public PersonInfo updatePersonInfo(@Valid @RequestBody PersonInfoRequestDto personInfoDto) {
+    public PersonInfo updatePersonInfo(@Validated(OnUpdate.class) @RequestBody PersonInfoRequestDto personInfoDto) {
         PersonInfo personInfo = PersonInfo.builder()
                 .id(personInfoDto.getId())
                 .name(personInfoDto.getName())

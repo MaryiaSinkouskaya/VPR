@@ -1,6 +1,7 @@
 package com.vpr.app.dto.request;
 
 import static io.swagger.v3.oas.annotations.media.Schema.RequiredMode;
+import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,7 +15,8 @@ import java.time.LocalDate;
 @Schema(description = "Data transfer object for personal information")
 public class PersonInfoRequestDto {
 
-  @Positive(message = "ID must be a positive integer")
+  @NotNull(groups = OnUpdate.class, message = "ID must be provided for update")
+  @Positive(groups = OnUpdate.class, message = "ID must be a positive integer")
   @Schema(description = "Unique identifier of the personal information (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
   private Integer id;
 
