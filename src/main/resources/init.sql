@@ -221,7 +221,10 @@ INSERT INTO public.abnormality (id, name) VALUES (16, 'Leukodystrophy');
 
 INSERT INTO public.doctor (id, speciality, person_info_id) VALUES (1, 'genetics', 6);
 
-INSERT INTO public.proband (id, karyotype, pregnancy_duration_in_weeks, weight, head, pregnancy_number, is_aborted, organization_id, abnormality_id, mother_id, father_id, doctor_id, note_id, birth_date, gender, ploidity, labor_outcome) VALUES (2, 'undefined', 40, 2.5, 30, 2, false, 1, 1, 1, 5, 1, null, '2021-12-07', 'FEMALE', null, null);
-INSERT INTO public.proband (id, karyotype, pregnancy_duration_in_weeks, weight, head, pregnancy_number, is_aborted, organization_id, abnormality_id, mother_id, father_id, doctor_id, note_id, birth_date, gender, ploidity, labor_outcome) VALUES (3, 'undefined', 39, 2.2, 32, 1, false, 1, 1, 1, 6, 1, null, '2024-07-10', 'MALE', null, null);
+insert into public.note (id, date, note) values (1, '2021-12-16', 'some note info');
+insert into public.note (id, date, note) values (2, '2022-12-16', 'some note info');
+
+INSERT INTO public.proband (id, karyotype, pregnancy_duration_in_weeks, weight, head, pregnancy_number, is_aborted, organization_id, abnormality_id, mother_id, father_id, doctor_id, note_id, birth_date, gender, ploidity, labor_outcome) VALUES (2, 'undefined', 40, 2.5, 30, 2, false, 1, 1, 1, 5, 1, 1, '2021-12-07', 'FEMALE', null, null);
+INSERT INTO public.proband (id, karyotype, pregnancy_duration_in_weeks, weight, head, pregnancy_number, is_aborted, organization_id, abnormality_id, mother_id, father_id, doctor_id, note_id, birth_date, gender, ploidity, labor_outcome) VALUES (3, 'undefined', 39, 2.2, 32, 1, false, 1, 1, 1, 6, 1, 2, '2024-07-10', 'MALE', null, null);
 
 INSERT INTO public.prob_d (id, death_date, proband_id) VALUES (1, '2021-12-16', 2);
