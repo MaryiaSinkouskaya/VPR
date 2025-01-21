@@ -1,12 +1,15 @@
 package com.vpr.app.controller;
 
 import com.vpr.app.dto.request.NoteRequestDto;
+import com.vpr.app.dto.request.validation.markers.OnCreate;
+import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import com.vpr.app.entity.Note;
 import com.vpr.app.service.NoteService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,13 +32,13 @@ public class NoteController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Note createNote(@Valid @RequestBody NoteRequestDto noteDto) {
+    public Note createNote(@Validated(OnCreate.class) @RequestBody NoteRequestDto noteDto) {
         Note note = Note.builder().date(noteDto.getDate()).note(noteDto.getNote()).build();
         return noteService.create(note);
     }
 
     @PatchMapping()
-    public Note updateNote(@Valid @RequestBody NoteRequestDto noteDto) {
+    public Note updateNote(@Validated(OnUpdate.class) @RequestBody NoteRequestDto noteDto) {
         Note note = Note.builder().id(noteDto.getId()).date(noteDto.getDate()).note(noteDto.getNote()).build();
         return noteService.update(note);
     }

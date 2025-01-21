@@ -1,12 +1,15 @@
 package com.vpr.app.controller;
 
 import com.vpr.app.dto.request.ProbandDRequestDto;
+import com.vpr.app.dto.request.validation.markers.OnCreate;
+import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import com.vpr.app.entity.*;
 import com.vpr.app.service.ProbandDService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +32,7 @@ public class ProbandDController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ProbandD createProbandD(@Valid @RequestBody ProbandDRequestDto probandDDto) {
+    public ProbandD createProbandD(@Validated(OnCreate.class) @RequestBody ProbandDRequestDto probandDDto) {
         ProbandD probandD = ProbandD.builder()
                 .deathDate(probandDDto.getDeathDate())
                 .proband(Proband.builder()
@@ -97,7 +100,7 @@ public class ProbandDController {
     }
 
     @PatchMapping()
-    public ProbandD updateProbandD(@Valid @RequestBody ProbandDRequestDto probandDDto) {
+    public ProbandD updateProbandD(@Validated(OnUpdate.class) @RequestBody ProbandDRequestDto probandDDto) {
         ProbandD probandD = ProbandD.builder()
             .id(probandDDto.getId())
             .deathDate(probandDDto.getDeathDate())

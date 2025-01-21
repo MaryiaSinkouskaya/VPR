@@ -1,6 +1,8 @@
 package com.vpr.app.controller;
 
 import com.vpr.app.dto.request.DoctorRequestDto;
+import com.vpr.app.dto.request.validation.markers.OnCreate;
+import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import com.vpr.app.entity.Address;
 import com.vpr.app.entity.Doctor;
 import com.vpr.app.entity.PersonInfo;
@@ -10,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +35,7 @@ public class DoctorController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Doctor createDoctor(@Valid @RequestBody DoctorRequestDto doctorDto) {
+    public Doctor createDoctor(@Validated(OnCreate.class) @RequestBody DoctorRequestDto doctorDto) {
         Doctor doctor = Doctor.builder()
                 .speciality(doctorDto.getSpeciality())
                 .personInfo(PersonInfo.builder()
@@ -57,7 +60,7 @@ public class DoctorController {
     }
 
     @PatchMapping()
-    public Doctor updateDoctor(@Valid @RequestBody DoctorRequestDto doctorDto) {
+    public Doctor updateDoctor(@Validated(OnUpdate.class)@RequestBody DoctorRequestDto doctorDto) {
         Doctor doctor = Doctor.builder()
             .id(doctorDto.getId())
             .speciality(doctorDto.getSpeciality())

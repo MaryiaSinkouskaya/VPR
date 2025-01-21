@@ -1,12 +1,15 @@
 package com.vpr.app.controller;
 
 import com.vpr.app.dto.request.ProbandRequestDto;
+import com.vpr.app.dto.request.validation.markers.OnCreate;
+import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import com.vpr.app.entity.*;
 import com.vpr.app.service.ProbandService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +32,7 @@ public class ProbandController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Proband createProband(@Valid @RequestBody ProbandRequestDto probandDto) {
+    public Proband createProband(@Validated(OnCreate.class) @RequestBody ProbandRequestDto probandDto) {
         Proband proband = Proband.builder()
                 .birthDate(probandDto.getBirthDate())
                 .karyotype(probandDto.getKaryotype())
@@ -94,7 +97,7 @@ public class ProbandController {
     }
 
     @PatchMapping()
-    public Proband updateProband(@Valid @RequestBody ProbandRequestDto probandDto) {
+    public Proband updateProband(@Validated(OnUpdate.class) @RequestBody ProbandRequestDto probandDto) {
         Proband proband = Proband.builder()
                 .id(probandDto.getId())
                 .birthDate(probandDto.getBirthDate())

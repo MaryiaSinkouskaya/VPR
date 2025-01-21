@@ -1,6 +1,8 @@
 package com.vpr.app.controller;
 
 import com.vpr.app.dto.request.MotherRequestDto;
+import com.vpr.app.dto.request.validation.markers.OnCreate;
+import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import com.vpr.app.entity.Address;
 import com.vpr.app.entity.Mother;
 import com.vpr.app.entity.PersonInfo;
@@ -10,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,7 +35,7 @@ public class MotherController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Mother createMother(@Valid @RequestBody MotherRequestDto motherDto) {
+    public Mother createMother(@Validated(OnCreate.class) @RequestBody MotherRequestDto motherDto) {
         Mother mother = Mother.builder()
                 .lastMenstruationDate(motherDto.getLastMenstruationDate())
                 .diagnoseDate(motherDto.getDiagnoseDate())
@@ -59,7 +62,7 @@ public class MotherController {
     }
 
     @PatchMapping()
-    public Mother updateMother(@Valid @RequestBody MotherRequestDto motherDto) {
+    public Mother updateMother(@Validated(OnUpdate.class) @RequestBody MotherRequestDto motherDto) {
         Mother mother = Mother.builder()
                 .id(motherDto.getId())
                 .lastMenstruationDate(motherDto.getLastMenstruationDate())
