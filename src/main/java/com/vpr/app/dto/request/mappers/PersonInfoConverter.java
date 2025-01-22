@@ -30,13 +30,12 @@ public class PersonInfoConverter {
         personInfo.setPhone(dto.getPhone());
         personInfo.setBirthDate(dto.getBirthDate());
 
-        if (dto.getAddress() != null) {
-            personInfo.setAddress(addressConverter.toEntity(dto.getAddress()));
-        }
 
-        if (dto.getWorkplace() != null) {
-            personInfo.setWorkplace(workplaceConverter.toEntity(dto.getWorkplace()));
-        }
+        personInfo.setAddress(addressConverter.toEntity(dto.getAddress()));
+
+
+        personInfo.setWorkplace(workplaceConverter.toEntity(dto.getWorkplace()));
+
 
         if (dto.getId() != null) {
             personInfo.setId(dto.getId());

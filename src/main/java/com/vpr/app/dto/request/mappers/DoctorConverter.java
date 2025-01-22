@@ -2,16 +2,14 @@ package com.vpr.app.dto.request.mappers;
 
 import com.vpr.app.dto.request.DoctorRequestDto;
 import com.vpr.app.entity.Doctor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class DoctorConverter {
 
     private final PersonInfoConverter personInfoConverter;
-
-    public DoctorConverter(PersonInfoConverter personInfoConverter) {
-        this.personInfoConverter = personInfoConverter;
-    }
 
     /**
      * Converts DoctorRequestDto to Doctor entity.

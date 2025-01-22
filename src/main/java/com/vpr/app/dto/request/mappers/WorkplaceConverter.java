@@ -2,11 +2,9 @@ package com.vpr.app.dto.request.mappers;
 
 import com.vpr.app.dto.request.WorkplaceRequestDto;
 import com.vpr.app.entity.Workplace;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class WorkplaceConverter {
 
     public Workplace toEntity(WorkplaceRequestDto dto) {

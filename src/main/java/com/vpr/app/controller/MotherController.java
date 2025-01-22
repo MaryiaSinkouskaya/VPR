@@ -1,15 +1,12 @@
 package com.vpr.app.controller;
 
 import com.vpr.app.dto.request.MotherRequestDto;
+import com.vpr.app.dto.request.mappers.MotherConverter;
 import com.vpr.app.dto.request.validation.markers.OnCreate;
 import com.vpr.app.dto.request.validation.markers.OnUpdate;
-import com.vpr.app.entity.Address;
 import com.vpr.app.entity.Mother;
-import com.vpr.app.entity.PersonInfo;
-import com.vpr.app.entity.Workplace;
 import com.vpr.app.service.MotherService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -23,6 +20,7 @@ import java.util.List;
 @RequestMapping("/api/mother")
 public class MotherController {
     private final MotherService motherService;
+    private final MotherConverter motherConverter;
 
     @GetMapping()
     public List<Mother> getMothers() {
@@ -36,59 +34,13 @@ public class MotherController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public Mother createMother(@Validated(OnCreate.class) @RequestBody MotherRequestDto motherDto) {
-        Mother mother = Mother.builder()
-                .lastMenstruationDate(motherDto.getLastMenstruationDate())
-                .diagnoseDate(motherDto.getDiagnoseDate())
-                .girlSurname(motherDto.getGirlSurname())
-                .personInfo(PersonInfo.builder()
-                        .name(motherDto.getPersonInfo().getName())
-                        .surname(motherDto.getPersonInfo().getSurname())
-                        .patronymic(motherDto.getPersonInfo().getPatronymic())
-                        .phone(motherDto.getPersonInfo().getPhone())
-                        .birthDate(motherDto.getPersonInfo().getBirthDate())
-                        .address(Address.builder()
-                                .town(motherDto.getPersonInfo().getAddress().getTown())
-                                .street(motherDto.getPersonInfo().getAddress().getStreet())
-                                .building(motherDto.getPersonInfo().getAddress().getBuilding())
-                                .apartment(motherDto.getPersonInfo().getAddress().getApartment())
-                                .build())
-                        .workplace(Workplace.builder()
-                                .jobType(motherDto.getPersonInfo().getWorkplace().getJobType())
-                                .company(motherDto.getPersonInfo().getWorkplace().getCompany())
-                                .build())
-                        .build())
-                .build();
+        Mother mother = motherConverter.toEntity(motherDto);
         return motherService.create(mother);
     }
 
     @PatchMapping()
     public Mother updateMother(@Validated(OnUpdate.class) @RequestBody MotherRequestDto motherDto) {
-        Mother mother = Mother.builder()
-                .id(motherDto.getId())
-                .lastMenstruationDate(motherDto.getLastMenstruationDate())
-                .diagnoseDate(motherDto.getDiagnoseDate())
-                .girlSurname(motherDto.getGirlSurname())
-                .personInfo(PersonInfo.builder()
-                        .id(motherDto.getPersonInfo().getId())
-                        .name(motherDto.getPersonInfo().getName())
-                        .surname(motherDto.getPersonInfo().getSurname())
-                        .patronymic(motherDto.getPersonInfo().getPatronymic())
-                        .phone(motherDto.getPersonInfo().getPhone())
-                        .birthDate(motherDto.getPersonInfo().getBirthDate())
-                        .address(Address.builder()
-                                .id(motherDto.getPersonInfo().getAddress().getId())
-                                .town(motherDto.getPersonInfo().getAddress().getTown())
-                                .street(motherDto.getPersonInfo().getAddress().getStreet())
-                                .building(motherDto.getPersonInfo().getAddress().getBuilding())
-                                .apartment(motherDto.getPersonInfo().getAddress().getApartment())
-                                .build())
-                        .workplace(Workplace.builder()
-                                .id(motherDto.getPersonInfo().getWorkplace().getId())
-                                .jobType(motherDto.getPersonInfo().getWorkplace().getJobType())
-                                .company(motherDto.getPersonInfo().getWorkplace().getCompany())
-                                .build())
-                        .build())
-                .build();
+        Mother mother = motherConverter.toEntity(motherDto);
         return motherService.update(mother);
     }
 

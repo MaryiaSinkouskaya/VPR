@@ -1,12 +1,12 @@
 package com.vpr.app.controller;
 
 import com.vpr.app.dto.request.ProbandDRequestDto;
+import com.vpr.app.dto.request.mappers.ProbandDConverter;
 import com.vpr.app.dto.request.validation.markers.OnCreate;
 import com.vpr.app.dto.request.validation.markers.OnUpdate;
-import com.vpr.app.entity.*;
+import com.vpr.app.entity.ProbandD;
 import com.vpr.app.service.ProbandDService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +20,7 @@ import java.util.List;
 @RequestMapping("/api/probandD")
 public class ProbandDController {
     private final ProbandDService probandDService;
+    private final ProbandDConverter probandDConverter;
 
     @GetMapping()
     public List<ProbandD> getProbandDs() {
@@ -33,150 +34,13 @@ public class ProbandDController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ProbandD createProbandD(@Validated(OnCreate.class) @RequestBody ProbandDRequestDto probandDDto) {
-        ProbandD probandD = ProbandD.builder()
-                .deathDate(probandDDto.getDeathDate())
-                .proband(Proband.builder()
-                        .birthDate(probandDDto.getProband().getBirthDate())
-                        .karyotype(probandDDto.getProband().getKaryotype())
-                        .pregnancyDurationInWeeks(probandDDto.getProband().getPregnancyDurationInWeeks())
-                        .weight(probandDDto.getProband().getWeight())
-                        .head(probandDDto.getProband().getHead())
-                        .pregnancyNumber(probandDDto.getProband().getPregnancyNumber())
-                        .isAborted(probandDDto.getProband().isAborted())
-                        .laborOutcome(probandDDto.getProband().getLaborOutcome())
-                        .gender(probandDDto.getProband().getGender())
-                        .ploid(probandDDto.getProband().getPloid())
-                        .note(Note.builder()
-                                .date(probandDDto.getProband().getNote().getDate())
-                                .note(probandDDto.getProband().getNote().getNote())
-                                .build())
-                        .father(PersonInfo.builder()
-                                .name(probandDDto.getProband().getFather().getName())
-                                .surname(probandDDto.getProband().getFather().getSurname())
-                                .patronymic(probandDDto.getProband().getFather().getPatronymic())
-                                .phone(probandDDto.getProband().getFather().getPhone())
-                                .birthDate(probandDDto.getProband().getFather().getBirthDate())
-                                .address(Address.builder()
-                                        .town(probandDDto.getProband().getFather().getAddress().getTown())
-                                        .street(probandDDto.getProband().getFather().getAddress().getStreet())
-                                        .building(probandDDto.getProband().getFather().getAddress().getBuilding())
-                                        .apartment(probandDDto.getProband().getFather().getAddress().getApartment())
-                                        .build())
-                                .workplace(Workplace.builder()
-                                        .jobType(probandDDto.getProband().getFather().getWorkplace().getJobType())
-                                        .company(probandDDto.getProband().getFather().getWorkplace().getCompany())
-                                        .build())
-                                .build())
-                        .mother(Mother.builder()
-                                .lastMenstruationDate(probandDDto.getProband().getMother().getLastMenstruationDate())
-                                .diagnoseDate(probandDDto.getProband().getMother().getDiagnoseDate())
-                                .girlSurname(probandDDto.getProband().getMother().getGirlSurname())
-                                .personInfo(PersonInfo.builder()
-                                        .name(probandDDto.getProband().getMother().getPersonInfo().getName())
-                                        .surname(probandDDto.getProband().getMother().getPersonInfo().getSurname())
-                                        .patronymic(probandDDto.getProband().getMother().getPersonInfo().getPatronymic())
-                                        .phone(probandDDto.getProband().getMother().getPersonInfo().getPhone())
-                                        .birthDate(probandDDto.getProband().getMother().getPersonInfo().getBirthDate())
-                                        .address(Address.builder()
-                                                .town(probandDDto.getProband().getMother().getPersonInfo().getAddress().getTown())
-                                                .street(probandDDto.getProband().getMother().getPersonInfo().getAddress().getStreet())
-                                                .building(probandDDto.getProband().getMother().getPersonInfo().getAddress().getBuilding())
-                                                .apartment(probandDDto.getProband().getMother().getPersonInfo().getAddress().getApartment())
-                                                .build())
-                                        .workplace(Workplace.builder()
-                                                .jobType(probandDDto.getProband().getMother().getPersonInfo().getWorkplace().getJobType())
-                                                .company(probandDDto.getProband().getMother().getPersonInfo().getWorkplace().getCompany())
-                                                .build())
-                                        .build())
-                                .build())
-                        .organization(Organization.builder()
-                                .number(probandDDto.getProband().getOrganization().getNumber())
-                                .name(probandDDto.getProband().getOrganization().getName())
-                                .build())
-                        .abnormality(Abnormality.builder().name(probandDDto.getProband().getAbnormality().getName()).build())
-                        .build())
-                .build();
+        ProbandD probandD = probandDConverter.toEntity(probandDDto);
         return probandDService.create(probandD);
     }
 
     @PatchMapping()
     public ProbandD updateProbandD(@Validated(OnUpdate.class) @RequestBody ProbandDRequestDto probandDDto) {
-        ProbandD probandD = ProbandD.builder()
-            .id(probandDDto.getId())
-            .deathDate(probandDDto.getDeathDate())
-            .proband(Proband.builder()
-                .id(probandDDto.getProband().getId())
-                .birthDate(probandDDto.getProband().getBirthDate())
-                .karyotype(probandDDto.getProband().getKaryotype())
-                .pregnancyDurationInWeeks(probandDDto.getProband().getPregnancyDurationInWeeks())
-                .weight(probandDDto.getProband().getWeight())
-                .head(probandDDto.getProband().getHead())
-                .pregnancyNumber(probandDDto.getProband().getPregnancyNumber())
-                .isAborted(probandDDto.getProband().isAborted())
-                .laborOutcome(probandDDto.getProband().getLaborOutcome())
-                .gender(probandDDto.getProband().getGender())
-                .ploid(probandDDto.getProband().getPloid())
-                .note(Note.builder()
-                    .id(probandDDto.getProband().getNote().getId())
-                    .date(probandDDto.getProband().getNote().getDate())
-                    .note(probandDDto.getProband().getNote().getNote())
-                    .build())
-                .father(PersonInfo.builder()
-                    .id(probandDDto.getProband().getFather().getId())
-                    .name(probandDDto.getProband().getFather().getName())
-                    .surname(probandDDto.getProband().getFather().getSurname())
-                    .patronymic(probandDDto.getProband().getFather().getPatronymic())
-                    .phone(probandDDto.getProband().getFather().getPhone())
-                    .birthDate(probandDDto.getProband().getFather().getBirthDate())
-                    .address(Address.builder()
-                        .id(probandDDto.getProband().getFather().getAddress().getId())
-                        .town(probandDDto.getProband().getFather().getAddress().getTown())
-                        .street(probandDDto.getProband().getFather().getAddress().getStreet())
-                        .building(probandDDto.getProband().getFather().getAddress().getBuilding())
-                        .apartment(probandDDto.getProband().getFather().getAddress().getApartment())
-                        .build())
-                    .workplace(Workplace.builder()
-                        .id(probandDDto.getProband().getFather().getWorkplace().getId())
-                        .jobType(probandDDto.getProband().getFather().getWorkplace().getJobType())
-                        .company(probandDDto.getProband().getFather().getWorkplace().getCompany())
-                        .build())
-                    .build())
-                .mother(Mother.builder()
-                    .id(probandDDto.getProband().getMother().getId())
-                    .lastMenstruationDate(probandDDto.getProband().getMother().getLastMenstruationDate())
-                    .diagnoseDate(probandDDto.getProband().getMother().getDiagnoseDate())
-                    .girlSurname(probandDDto.getProband().getMother().getGirlSurname())
-                    .personInfo(PersonInfo.builder()
-                        .id(probandDDto.getProband().getMother().getPersonInfo().getId())
-                        .name(probandDDto.getProband().getMother().getPersonInfo().getName())
-                        .surname(probandDDto.getProband().getMother().getPersonInfo().getSurname())
-                        .patronymic(probandDDto.getProband().getMother().getPersonInfo().getPatronymic())
-                        .phone(probandDDto.getProband().getMother().getPersonInfo().getPhone())
-                        .birthDate(probandDDto.getProband().getMother().getPersonInfo().getBirthDate())
-                        .address(Address.builder()
-                            .id(probandDDto.getProband().getMother().getPersonInfo().getAddress().getId())
-                            .town(probandDDto.getProband().getMother().getPersonInfo().getAddress().getTown())
-                            .street(probandDDto.getProband().getMother().getPersonInfo().getAddress().getStreet())
-                            .building(probandDDto.getProband().getMother().getPersonInfo().getAddress().getBuilding())
-                            .apartment(probandDDto.getProband().getMother().getPersonInfo().getAddress().getApartment())
-                            .build())
-                        .workplace(Workplace.builder()
-                            .id(probandDDto.getProband().getMother().getPersonInfo().getWorkplace().getId())
-                            .jobType(probandDDto.getProband().getMother().getPersonInfo().getWorkplace().getJobType())
-                            .company(probandDDto.getProband().getMother().getPersonInfo().getWorkplace().getCompany())
-                            .build())
-                        .build())
-                    .build())
-                .organization(Organization.builder()
-                    .id(probandDDto.getProband().getOrganization().getId())
-                    .number(probandDDto.getProband().getOrganization().getNumber())
-                    .name(probandDDto.getProband().getOrganization().getName())
-                    .build())
-                .abnormality(Abnormality.builder()
-                    .id(probandDDto.getProband().getAbnormality().getId())
-                    .name(probandDDto.getProband().getAbnormality().getName()).build())
-                .build())
-            .build();
+        ProbandD probandD = probandDConverter.toEntity(probandDDto);
         return probandDService.update(probandD);
     }
 

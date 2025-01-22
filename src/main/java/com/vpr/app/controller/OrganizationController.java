@@ -1,12 +1,12 @@
 package com.vpr.app.controller;
 
 import com.vpr.app.dto.request.OrganizationRequestDto;
+import com.vpr.app.dto.request.mappers.OrganizationConverter;
 import com.vpr.app.dto.request.validation.markers.OnCreate;
 import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import com.vpr.app.entity.Organization;
 import com.vpr.app.service.OrganizationService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +20,7 @@ import java.util.List;
 @RequestMapping("/api/organization")
 public class OrganizationController {
     private final OrganizationService organizationService;
+    private final OrganizationConverter organizationConverter;
 
     @GetMapping()
     public List<Organization> getOrganizations() {
@@ -33,13 +34,13 @@ public class OrganizationController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public Organization createOrganization(@Validated(OnCreate.class) @RequestBody OrganizationRequestDto organizationDto) {
-        Organization organization = Organization.builder().number(organizationDto.getNumber()).name(organizationDto.getName()).build();
+        Organization organization = organizationConverter.toEntity(organizationDto);
         return organizationService.create(organization);
     }
 
     @PatchMapping()
     public Organization updateOrganization(@Validated(OnUpdate.class) @RequestBody OrganizationRequestDto organizationDto) {
-        Organization organization = Organization.builder().id(organizationDto.getId()).number(organizationDto.getNumber()).name(organizationDto.getName()).build();
+        Organization organization = organizationConverter.toEntity(organizationDto);
         return organizationService.update(organization);
     }
 

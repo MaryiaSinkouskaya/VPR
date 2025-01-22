@@ -3,10 +3,8 @@ package com.vpr.app.dto.request.mappers;
 import com.vpr.app.dto.request.AddressRequestDto;
 import com.vpr.app.entity.Address;
 import org.springframework.stereotype.Component;
-import lombok.RequiredArgsConstructor;
 
 @Component
-@RequiredArgsConstructor
 public class AddressConverter {
 
     public Address toEntity(AddressRequestDto dto) {

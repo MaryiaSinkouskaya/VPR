@@ -1,12 +1,12 @@
 package com.vpr.app.controller;
 
 import com.vpr.app.dto.request.NoteRequestDto;
+import com.vpr.app.dto.request.mappers.NoteConverter;
 import com.vpr.app.dto.request.validation.markers.OnCreate;
 import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import com.vpr.app.entity.Note;
 import com.vpr.app.service.NoteService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -20,6 +20,7 @@ import java.util.List;
 @RequestMapping("/api/note")
 public class NoteController {
     private final NoteService noteService;
+    private final NoteConverter noteConverter;
 
     @GetMapping()
     public List<Note> getNotes() {
@@ -33,13 +34,13 @@ public class NoteController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public Note createNote(@Validated(OnCreate.class) @RequestBody NoteRequestDto noteDto) {
-        Note note = Note.builder().date(noteDto.getDate()).note(noteDto.getNote()).build();
+        Note note = noteConverter.toEntity(noteDto);
         return noteService.create(note);
     }
 
     @PatchMapping()
     public Note updateNote(@Validated(OnUpdate.class) @RequestBody NoteRequestDto noteDto) {
-        Note note = Note.builder().id(noteDto.getId()).date(noteDto.getDate()).note(noteDto.getNote()).build();
+        Note note = noteConverter.toEntity(noteDto);
         return noteService.update(note);
     }
 

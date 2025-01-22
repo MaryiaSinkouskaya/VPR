@@ -2,16 +2,14 @@ package com.vpr.app.dto.request.mappers;
 
 import com.vpr.app.dto.request.MotherRequestDto;
 import com.vpr.app.entity.Mother;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 public class MotherConverter {
 
     private final PersonInfoConverter personInfoConverter;
-
-    public MotherConverter(PersonInfoConverter personInfoConverter) {
-        this.personInfoConverter = personInfoConverter;
-    }
 
     /**
      * Converts MotherRequestDto to Mother entity.
