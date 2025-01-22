@@ -1,18 +1,17 @@
 package com.vpr.app.controller;
 
+import com.vpr.app.dto.request.MotherRequestDto;
+import com.vpr.app.dto.request.mappers.MotherConverter;
+import com.vpr.app.dto.request.validation.markers.OnCreate;
+import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import com.vpr.app.entity.Mother;
 import com.vpr.app.service.MotherService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @Tag(name = "Mother", description = "API for accessing probands mother info")
@@ -20,30 +19,33 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/mother")
 public class MotherController {
-  private final MotherService motherService;
+    private final MotherService motherService;
+    private final MotherConverter motherConverter;
 
-  @GetMapping()
-  public List<Mother> getMothers() {
-    return motherService.findAll();
-  }
+    @GetMapping()
+    public List<Mother> getMothers() {
+        return motherService.findAll();
+    }
 
-  @GetMapping(value = "/{id}")
-  public Mother getMotherById(@PathVariable(name = "id") long id) {
-    return motherService.findById(id);
-  }
+    @GetMapping(value = "/{id}")
+    public Mother getMotherById(@PathVariable(name = "id") long id) {
+        return motherService.findById(id);
+    }
 
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Mother createMother(@RequestBody Mother mother) {
-    return motherService.create(mother);
-  }
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Mother createMother(@Validated(OnCreate.class) @RequestBody MotherRequestDto motherDto) {
+        Mother mother = motherConverter.toEntity(motherDto);
+        return motherService.create(mother);
+    }
 
-  @PutMapping()
-  public Mother updateMother(@RequestBody Mother mother) {
-    return motherService.update(mother);
-  }
+    @PatchMapping()
+    public Mother updateMother(@Validated(OnUpdate.class) @RequestBody MotherRequestDto motherDto) {
+        Mother mother = motherConverter.toEntity(motherDto);
+        return motherService.update(mother);
+    }
 
-  @DeleteMapping(value = "/{id}")
-  public void deleteMotherById(@PathVariable(name = "id") long id) {
-    motherService.delete(id);
-  }
+    @DeleteMapping(value = "/{id}")
+    public void deleteMotherById(@PathVariable(name = "id") long id) {
+        motherService.delete(id);
+    }
 }

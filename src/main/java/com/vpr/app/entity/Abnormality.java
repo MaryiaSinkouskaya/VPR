@@ -12,13 +12,19 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.List;
 
 @Entity
+@Builder
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "abnormality")
 public class Abnormality {
   @Id
@@ -28,7 +34,7 @@ public class Abnormality {
       allocationSize = 1)
   @Schema(description = "Abnormality's uniq id", example = "26713", accessMode = Schema.AccessMode.READ_ONLY)
   @Column(name = "id")
-  private long id;
+  private Integer id;
 
   @Schema(description = "Abnormality", example = "Hepatoblastoma")
   @Column(name = "name")

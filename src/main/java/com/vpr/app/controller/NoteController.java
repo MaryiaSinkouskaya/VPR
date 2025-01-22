@@ -1,18 +1,17 @@
 package com.vpr.app.controller;
 
+import com.vpr.app.dto.request.NoteRequestDto;
+import com.vpr.app.dto.request.mappers.NoteConverter;
+import com.vpr.app.dto.request.validation.markers.OnCreate;
+import com.vpr.app.dto.request.validation.markers.OnUpdate;
 import com.vpr.app.entity.Note;
 import com.vpr.app.service.NoteService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @Tag(name = "Notes", description = "API for accessing probands notes")
@@ -20,30 +19,33 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/note")
 public class NoteController {
-  private final NoteService noteService;
+    private final NoteService noteService;
+    private final NoteConverter noteConverter;
 
-  @GetMapping()
-  public List<Note> getNotes() {
-    return noteService.findAll();
-  }
+    @GetMapping()
+    public List<Note> getNotes() {
+        return noteService.findAll();
+    }
 
-  @GetMapping(value = "/{id}")
-  public Note getNoteById(@PathVariable(name = "id") long id) {
-    return noteService.findById(id);
-  }
+    @GetMapping(value = "/{id}")
+    public Note getNoteById(@PathVariable(name = "id") long id) {
+        return noteService.findById(id);
+    }
 
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  public Note createNote(@RequestBody Note note) {
-    return noteService.create(note);
-  }
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Note createNote(@Validated(OnCreate.class) @RequestBody NoteRequestDto noteDto) {
+        Note note = noteConverter.toEntity(noteDto);
+        return noteService.create(note);
+    }
 
-  @PutMapping()
-  public Note updateNote(@RequestBody Note note) {
-    return noteService.update(note);
-  }
+    @PatchMapping()
+    public Note updateNote(@Validated(OnUpdate.class) @RequestBody NoteRequestDto noteDto) {
+        Note note = noteConverter.toEntity(noteDto);
+        return noteService.update(note);
+    }
 
-  @DeleteMapping(value = "/{id}")
-  public void deleteNoteById(@PathVariable(name = "id") long id) {
-    noteService.delete(id);
-  }
+    @DeleteMapping(value = "/{id}")
+    public void deleteNoteById(@PathVariable(name = "id") long id) {
+        noteService.delete(id);
+    }
 }

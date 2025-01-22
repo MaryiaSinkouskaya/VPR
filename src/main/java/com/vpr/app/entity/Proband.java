@@ -17,15 +17,21 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Schema(description = "Proband entity")
 @Entity
+@Builder
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "proband")
 public class Proband {
 
@@ -36,11 +42,11 @@ public class Proband {
       sequenceName = "proband_id_seq",
       allocationSize = 1)
   @Column(name = "id")
-  private long id;
+  private Integer id;
 
   @Schema(description = "Proband's birth date", example = "2017-07-08")
   @Column(name = "birth_date")
-  private Date birthDate;
+  private LocalDate birthDate;
 
   @Schema(description = "Proband's karyotype", example = "47,ХХ, 21+; 47,ХY, 21++")
   @Column(name = "karyotype")
@@ -67,25 +73,37 @@ public class Proband {
   private boolean isAborted;
 
   @Schema(description = "Information about proband's father")
-  @ManyToOne()
+  @ManyToOne(cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
   @JoinColumn(name = "father_id")
   @JsonManagedReference(value = "personInfo-proband")
   private PersonInfo father;
 
   @Schema(description = "Information about proband's clinic")
-  @ManyToOne()
+  @ManyToOne(cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
   @JoinColumn(name = "organization_id")
   @JsonManagedReference(value = "organization-proband")
   private Organization organization;
 
   @Schema(description = "Information about proband's mother")
-  @ManyToOne()
+  @ManyToOne(cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
   @JoinColumn(name = "mother_id")
   @JsonManagedReference(value = "mother-proband")
   private Mother mother;
 
   @Schema(description = "Proband's abnormality")
-  @ManyToOne()
+  @ManyToOne(cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
   @JoinColumn(name = "abnormality_id")
   @JsonManagedReference(value = "abnormality-proband")
   private Abnormality abnormality;
@@ -103,7 +121,10 @@ public class Proband {
   private String gender;
 
   @Schema(description = "Additional note about proband")
-  @ManyToOne()
+  @ManyToOne(cascade = {
+      CascadeType.PERSIST,
+      CascadeType.MERGE
+  })
   @JoinColumn(name = "note_id")
   @JsonManagedReference(value = "note-proband")
   private Note note;

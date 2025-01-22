@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -14,7 +15,22 @@ import static org.springframework.http.HttpStatus.*;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    public static final String CANNOT_DELETE_THE_ENTITY = "Cannot delete the entity because it is associated with other entities. Please resolve the dependencies and try again.";
+    public static final String CANNOT_MODIFY_THE_ENTITY = "Cannot modify the entity because it is associated with other entities. Please resolve the dependencies and try again.";
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ProblemDetail> handleMethodArgumentNotValidException(
+            MethodArgumentNotValidException ex) {
+        log.error(ex.getMessage());
+        ProblemDetail problemDetail = ProblemDetail.forStatus(BAD_REQUEST);
+        problemDetail.setTitle(BAD_REQUEST.getReasonPhrase());
+
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String errorMessage = error.getDefaultMessage();
+            problemDetail.setDetail(errorMessage);
+        });
+
+        return ResponseEntity.status(BAD_REQUEST).body(problemDetail);
+    }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ProblemDetail> handleConstraintViolationException(
@@ -22,7 +38,7 @@ public class GlobalExceptionHandler {
         log.error(ex.getMessage());
         ProblemDetail problemDetail = ProblemDetail.forStatus(CONFLICT);
         problemDetail.setTitle(CONFLICT.getReasonPhrase());
-        problemDetail.setDetail(CANNOT_DELETE_THE_ENTITY);
+        problemDetail.setDetail(CANNOT_MODIFY_THE_ENTITY);
         return ResponseEntity.status(CONFLICT).body(problemDetail);
     }
 
