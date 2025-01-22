@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface ProbandRepository extends JpaRepository<Proband, Long> {
-  @Query(value = "select count(*) from proband where gender = :gender",
-      nativeQuery = true)
-  int countByGender(@Param("gender") String gender);
+    @Query(value = "select count(*) from proband where gender = :gender",
+            nativeQuery = true)
+    int countByGender(@Param("gender") String gender);
 
 }
