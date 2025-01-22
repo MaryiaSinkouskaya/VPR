@@ -1,21 +1,21 @@
 package com.vpr.app.service;
 
 import com.vpr.app.entity.Proband;
-import com.vpr.app.enums.Gender;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
 public interface ProbandService {
 
-  Proband findById(long id);
+    Proband findById(long id);
 
-  List<Proband> findAll();
+    List<Proband> findAll();
 
-  Proband create(Proband proband);
+    Proband create(Proband proband);
 
-  Proband update(Proband proband);
+    Proband update(Proband proband);
 
-  void delete(long id);
+    void delete(long id);
 
 }

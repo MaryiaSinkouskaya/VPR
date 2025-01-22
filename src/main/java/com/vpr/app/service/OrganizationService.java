@@ -2,17 +2,18 @@ package com.vpr.app.service;
 
 import com.vpr.app.entity.Organization;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 @Service
 public interface OrganizationService {
-  Organization findById(long id);
+    Organization findById(long id);
 
-  List<Organization> findAll();
+    List<Organization> findAll();
 
-  Organization create(Organization organization);
+    Organization create(Organization organization);
 
-  Organization update(Organization organization);
+    Organization update(Organization organization);
 
-  void delete(long id);
+    void delete(long id);
 }
