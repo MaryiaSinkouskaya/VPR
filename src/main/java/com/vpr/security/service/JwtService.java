@@ -1,4 +1,4 @@
-package com.vpr.app.security.service;
+package com.vpr.security.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -14,7 +14,7 @@ import javax.crypto.SecretKey;
 @Service
 public class JwtService {
 
-  private final SecretKey secretKey =
+  private final SecretKey secretKey =//todo update key storage
       Keys.hmacShaKeyFor("your-super-secure-256-bit-secret-key-which-is-long-enough".getBytes());
 
   private static final long EXPIRATION_TIME_MS = 1000 * 60 * 15; // 15 minutes
@@ -29,13 +29,13 @@ public class JwtService {
         .compact();
   }
 
-  public String extractUsername(String token) {
+  public String extractUserEmail(String token) {
     return getClaims(token).getSubject();
   }
 
   public boolean isValid(String token, UserDetails userDetails) {
-    final String username = extractUsername(token);
-    return username.equals(userDetails.getUsername()) && !isExpired(token);
+    final String userEmail = extractUserEmail(token);
+    return userEmail.equals(userDetails.getUsername()) && !isExpired(token);
   }
 
   private boolean isExpired(String token) {
