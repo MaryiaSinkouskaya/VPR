@@ -263,7 +263,7 @@ INSERT INTO public.proband (id, karyotype, pregnancy_duration_in_weeks, weight, 
 
 INSERT INTO public.prob_d (id, death_date, proband_id) VALUES (1, '2021-12-16', 2);
 
-INSERT INTO public._user (id, email, password, role) VALUES (1, 'bjksdkjvsd@mail.com', 'sdbj983247hc783b', 'ADMIN');
-INSERT INTO public._user (id, email, password, role) VALUES (2, 'bnkjljek83sd@mail.com', ',m65jkl46jk', 'DOCTOR');
+INSERT INTO public._user (id, email, password, role) VALUES (1, 'bjksdkjvsd@mail.com', '$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO', 'ADMIN');
+INSERT INTO public._user (id, email, password, role) VALUES (2, 'bnkjljek83sd@mail.com', '$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO', 'DOCTOR');
 
 INSERT INTO public.token (id, token, revoked, expired, user_id) VALUES (1, 'ksdjnc8db87dc79320d', false, false, 1);
