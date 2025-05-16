@@ -2,7 +2,7 @@ package com.vpr.security.service;
 
 import com.vpr.security.dto.AuthenticationRequest;
 import com.vpr.security.dto.AuthenticationResponse;
-import com.vpr.security.dto.RegisterRequest;
+import com.vpr.security.dto.RegistrationRequest;
 import com.vpr.security.dto.Token;
 import com.vpr.security.dto.User;
 import com.vpr.security.repository.TokenRepository;
@@ -23,7 +23,7 @@ public class AuthenticationService {
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
 
-  public AuthenticationResponse register(RegisterRequest request) {
+  public AuthenticationResponse register(RegistrationRequest request) {
     User user = convertRegisterRequestToUser(request);
     User savedUser = userRepository.save(user);
     String jwtToken = assignNewTokenToUser(savedUser);
@@ -36,7 +36,7 @@ public class AuthenticationService {
         .build();
   }
 
-  private User convertRegisterRequestToUser(RegisterRequest request) {
+  private User convertRegisterRequestToUser(RegistrationRequest request) {
     return User.builder()
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
