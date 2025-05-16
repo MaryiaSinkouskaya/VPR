@@ -1,12 +1,12 @@
-package com.vpr.security.service;
+package com.vpr.app.security.service;
 
-import com.vpr.security.dto.AuthenticationRequest;
-import com.vpr.security.dto.AuthenticationResponse;
-import com.vpr.security.dto.RegistrationRequest;
-import com.vpr.security.dto.Token;
-import com.vpr.security.dto.User;
-import com.vpr.security.repository.TokenRepository;
-import com.vpr.security.repository.UserRepository;
+import com.vpr.app.security.dto.AuthenticationRequest;
+import com.vpr.app.security.dto.AuthenticationResponse;
+import com.vpr.app.security.dto.RegistrationRequest;
+import com.vpr.app.security.dto.Token;
+import com.vpr.app.security.dto.User;
+import com.vpr.app.security.repository.TokenRepository;
+import com.vpr.app.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

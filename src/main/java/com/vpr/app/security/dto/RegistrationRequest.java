@@ -1,6 +1,5 @@
-package com.vpr.security.dto;
+package com.vpr.app.security.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,9 +11,9 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthenticationResponse {
+public class RegistrationRequest {
 
-  @JsonProperty("access_token")
-  private String accessToken;
-
+  private String email;
+  private String password;
+  //  private Role role;//todo make admin able assign/unassign  roles
 }

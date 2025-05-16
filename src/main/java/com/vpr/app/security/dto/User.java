@@ -1,6 +1,6 @@
-package com.vpr.security.dto;
+package com.vpr.app.security.dto;
 
-import com.vpr.security.enums.Role;
+import com.vpr.app.security.enums.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

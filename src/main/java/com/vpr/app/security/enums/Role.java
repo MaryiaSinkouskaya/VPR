@@ -1,9 +1,9 @@
-package com.vpr.security.enums;
+package com.vpr.app.security.enums;
 
-import static com.vpr.security.enums.Authority.CREATE;
-import static com.vpr.security.enums.Authority.DELETE;
-import static com.vpr.security.enums.Authority.READ;
-import static com.vpr.security.enums.Authority.UPDATE;
+import static com.vpr.app.security.enums.Authority.CREATE;
+import static com.vpr.app.security.enums.Authority.DELETE;
+import static com.vpr.app.security.enums.Authority.READ;
+import static com.vpr.app.security.enums.Authority.UPDATE;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

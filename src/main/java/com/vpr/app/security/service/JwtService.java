@@ -1,4 +1,4 @@
-package com.vpr.security.service;
+package com.vpr.app.security.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

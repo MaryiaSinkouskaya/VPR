@@ -1,9 +1,9 @@
-package com.vpr.security.controller;
+package com.vpr.app.security.controller;
 
-import com.vpr.security.dto.AuthenticationRequest;
-import com.vpr.security.dto.AuthenticationResponse;
-import com.vpr.security.dto.RegistrationRequest;
-import com.vpr.security.service.AuthenticationService;
+import com.vpr.app.security.dto.AuthenticationRequest;
+import com.vpr.app.security.dto.AuthenticationResponse;
+import com.vpr.app.security.dto.RegistrationRequest;
+import com.vpr.app.security.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

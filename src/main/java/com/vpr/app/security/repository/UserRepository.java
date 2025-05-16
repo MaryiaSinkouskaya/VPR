@@ -1,6 +1,6 @@
-package com.vpr.security.repository;
+package com.vpr.app.security.repository;
 
-import com.vpr.security.dto.User;
+import com.vpr.app.security.dto.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

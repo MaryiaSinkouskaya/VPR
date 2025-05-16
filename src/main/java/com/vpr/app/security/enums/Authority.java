@@ -1,4 +1,4 @@
-package com.vpr.security.enums;
+package com.vpr.app.security.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
