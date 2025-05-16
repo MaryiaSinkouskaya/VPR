@@ -1,5 +1,6 @@
 package com.vpr.app.security.dto;
 
+import com.vpr.app.security.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,5 +16,5 @@ public class RegistrationRequest {
 
   private String email;
   private String password;
-  //  private Role role;//todo make admin able assign/unassign  roles
+  private Role role;//todo make admin able assign/unassign  roles
 }

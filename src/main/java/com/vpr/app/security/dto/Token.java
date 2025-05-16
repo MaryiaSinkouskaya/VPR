@@ -40,6 +40,6 @@ public class Token {
 
   @ManyToOne()
   @JoinColumn(name = "user_id")
-  @JsonManagedReference(value = "token-user")
+  @JsonManagedReference(value = "token-_user")
   private User user;
 }

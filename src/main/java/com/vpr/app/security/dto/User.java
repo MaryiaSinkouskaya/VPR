@@ -1,6 +1,8 @@
 package com.vpr.app.security.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vpr.app.security.enums.Role;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +27,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
+@Table(name = "_user")
 public class User implements UserDetails {
 
   @Id

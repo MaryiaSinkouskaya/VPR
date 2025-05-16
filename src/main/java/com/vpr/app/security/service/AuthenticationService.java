@@ -5,6 +5,7 @@ import com.vpr.app.security.dto.AuthenticationResponse;
 import com.vpr.app.security.dto.RegistrationRequest;
 import com.vpr.app.security.dto.Token;
 import com.vpr.app.security.dto.User;
+import com.vpr.app.security.enums.Role;
 import com.vpr.app.security.repository.TokenRepository;
 import com.vpr.app.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -40,6 +41,8 @@ public class AuthenticationService {
     return User.builder()
         .email(request.getEmail())
         .password(passwordEncoder.encode(request.getPassword()))
+//        .role(request.getRole())
+        .role(Role.VIEWER)//todo make only admin able to create other admin
         .build();
   }
 
