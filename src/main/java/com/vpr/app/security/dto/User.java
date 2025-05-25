@@ -3,14 +3,7 @@ package com.vpr.app.security.dto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vpr.app.security.enums.Role;
 import io.swagger.v3.oas.annotations.Hidden;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -45,6 +38,7 @@ public class User implements UserDetails {
   private String password;
 
   @Column(name = "role")
+  @Enumerated(EnumType.STRING)
   private Role role;
 
   @OneToMany(mappedBy = "user")
