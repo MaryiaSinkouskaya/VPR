@@ -188,8 +188,8 @@ alter sequence user_id_seq owner to postgres;
 create table _user
 (
     id   BIGINT PRIMARY KEY DEFAULT nextval('user_id_seq'),
-    email text,
-    password text,
+    email text unique not null ,
+    password text not null ,
     role text
 );
 
@@ -203,10 +203,10 @@ alter sequence token_id_seq owner to postgres;
 create table token
 (
     id   BIGINT PRIMARY KEY DEFAULT nextval('token_id_seq'),
-    token text,
+    token text not null,
     revoked bool,
     expired bool,
-    user_id integer
+    user_id integer not null
         constraint user_id
             references _user
 );
