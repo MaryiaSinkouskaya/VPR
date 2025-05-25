@@ -12,5 +12,4 @@ public class RegistrationRequest {
 
     private String email;
     private String password;
-    private Role role;//todo make admin able assign/unassign  roles
 }

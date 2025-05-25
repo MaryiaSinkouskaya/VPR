@@ -15,8 +15,7 @@ public class UserConverter {
         return User.builder()
                 .email(registrationRequest.getEmail())
                 .password(passwordEncoder.encode(registrationRequest.getPassword()))
-//              .role(request.getRole())
-                .role(Role.VIEWER)//todo make only admin able to create other admin
+                .role(Role.VIEWER)
                 .build();
     }
 }
