@@ -1,6 +1,7 @@
 package com.vpr.app.security.service;
 
 import com.vpr.app.security.dto.*;
+import com.vpr.app.security.enums.Role;
 import com.vpr.app.security.repository.TokenRepository;
 import com.vpr.app.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

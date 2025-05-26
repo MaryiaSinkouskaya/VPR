@@ -29,7 +29,7 @@ public class User implements UserDetails {
       sequenceName = "user_id_seq",
       allocationSize = 1)
   @Column(name = "id")
-  private Integer id;
+  private Long id;
 
   @Column(name = "email")
   private String email;
