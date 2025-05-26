@@ -34,7 +34,7 @@ public class AuthenticationService {
       throw new UserAlreadyExistsException(ALREADY_REGISTERED + request.getEmail());
     }
 
-    User savedUser = userService.createUser(request);
+    User savedUser = userService.createViewerUser(request);
     String jwtToken = generateTokenForUser(savedUser);
     return buildAuthResponse(jwtToken);
   }

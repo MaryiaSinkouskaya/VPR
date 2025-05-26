@@ -4,6 +4,7 @@ import com.vpr.app.exceptions.VprEntityNotFoundException;
 import com.vpr.app.security.dto.converter.UserConverter;
 import com.vpr.app.security.dto.request.RegistrationRequest;
 import com.vpr.app.security.entity.User;
+import com.vpr.app.security.enums.Role;
 import com.vpr.app.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,8 +55,18 @@ public class UserService {
   /**
    * Creates a new user based on RegistrationRequest.
    */
+  @PreAuthorize("hasRole('ADMIN')")
   public User createUser(RegistrationRequest registrationRequest) {
     User user = userConverter.convertRegisterRequestToUser(registrationRequest);
+    return saveUser(user);
+  }
+
+  /**
+   * Creates a new user with Viewer role based on RegistrationRequest.
+   */
+  public User createViewerUser(RegistrationRequest registrationRequest) {
+    User user = userConverter.convertRegisterRequestToUser(registrationRequest);
+    user.setRole(Role.VIEWER);
     return saveUser(user);
   }
 
