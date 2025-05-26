@@ -1,5 +1,6 @@
 package com.vpr.app.security.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vpr.app.security.enums.Role;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,6 +50,7 @@ public class User implements UserDetails {
   private Role role;
 
   @OneToMany(mappedBy = "user")
+  @JsonIgnore
   private List<Token> tokens;
 
   @Override
