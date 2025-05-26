@@ -1,5 +1,6 @@
 package com.vpr.app.security.service;
 
+import com.vpr.app.exceptions.UserAlreadyExistsException;
 import com.vpr.app.exceptions.VprEntityNotFoundException;
 import com.vpr.app.security.dto.converter.UserConverter;
 import com.vpr.app.security.dto.request.RegistrationRequest;
@@ -12,6 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -21,6 +23,7 @@ public class UserService {
   private static final String INSTANCE_DOES_NOT_EXIST = "%s instance with id %d does not exist";
   private static final String INSTANCE_WITH_EMAIL_DOES_NOT_EXIST =
       "%s instance with email %s does not exist";
+  private static final String INSTANCE_ALREADY_EXIST = "%s instance with email %s already exist: ";
 
   private final UserRepository userRepository;
   private final UserConverter userConverter;
@@ -74,6 +77,9 @@ public class UserService {
    * Saves a new user.
    */
   public User saveUser(User user) {
+    if (userRepository.existsByEmail(user.getEmail())) {
+      throw new UserAlreadyExistsException(String.format(INSTANCE_ALREADY_EXIST, ENTITY_NAME, user.getEmail()));
+    }
     User saved = userRepository.save(user);
     log.info("Created new {} with id {}", ENTITY_NAME, saved.getId());
     return saved;
