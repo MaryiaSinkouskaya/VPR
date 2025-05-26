@@ -1,4 +1,4 @@
-package com.vpr.app.security.dto;
+package com.vpr.app.security.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

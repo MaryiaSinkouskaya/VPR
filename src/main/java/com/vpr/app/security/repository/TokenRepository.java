@@ -1,6 +1,6 @@
 package com.vpr.app.security.repository;
 
-import com.vpr.app.security.dto.Token;
+import com.vpr.app.security.entity.Token;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 

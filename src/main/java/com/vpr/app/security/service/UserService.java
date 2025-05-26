@@ -1,9 +1,9 @@
 package com.vpr.app.security.service;
 
 import com.vpr.app.exceptions.VprEntityNotFoundException;
-import com.vpr.app.security.dto.RegistrationRequest;
-import com.vpr.app.security.dto.User;
-import com.vpr.app.security.dto.UserConverter;
+import com.vpr.app.security.dto.converter.UserConverter;
+import com.vpr.app.security.dto.request.RegistrationRequest;
+import com.vpr.app.security.entity.User;
 import com.vpr.app.security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

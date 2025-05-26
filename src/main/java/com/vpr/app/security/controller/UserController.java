@@ -1,8 +1,8 @@
 package com.vpr.app.security.controller;
 
 import static org.springframework.http.HttpStatus.CREATED;
-import com.vpr.app.security.dto.RegistrationRequest;
-import com.vpr.app.security.dto.User;
+import com.vpr.app.security.dto.request.RegistrationRequest;
+import com.vpr.app.security.entity.User;
 import com.vpr.app.security.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,9 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -84,7 +84,7 @@ public class UserController {
    *
    * @return the updated user
    */
-  @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+  @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @PreAuthorize("hasRole('ADMIN')")
   @Operation(summary = "Update a user", description = "Updates an existing user. Only accessible to admins.")
   @ApiResponse(responseCode = "200", description = "User successfully updated")

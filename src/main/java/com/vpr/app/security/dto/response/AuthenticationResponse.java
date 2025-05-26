@@ -1,4 +1,4 @@
-package com.vpr.app.security.dto;
+package com.vpr.app.security.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

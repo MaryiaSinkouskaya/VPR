@@ -1,4 +1,4 @@
-package com.vpr.app.security.dto;
+package com.vpr.app.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
