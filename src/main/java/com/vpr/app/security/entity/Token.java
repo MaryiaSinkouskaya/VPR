@@ -1,14 +1,7 @@
 package com.vpr.app.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,7 +31,10 @@ public class Token {
 
   private boolean expired;
 
-  @ManyToOne()
+  @ManyToOne(cascade = {
+          CascadeType.PERSIST,
+          CascadeType.MERGE
+  })
   @JoinColumn(name = "user_id")
   @JsonManagedReference(value = "token-_user")
   private User user;
