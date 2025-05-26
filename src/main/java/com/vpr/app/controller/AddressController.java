@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,7 @@ public class AddressController {
   @Operation(summary = "Get an address by ID", description = "Retrieves the address with the specified ID.")
   @ApiResponse(responseCode = "200", description = "Successfully retrieved the address")
   @ApiResponse(responseCode = "404", description = "Address not found")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
   public Address getAddressById(@PathVariable(name = "id") long id) {
     return addressService.findById(id);
   }
@@ -53,6 +55,7 @@ public class AddressController {
   @GetMapping
   @Operation(summary = "Get all addresses", description = "Retrieves a list of all addresses.")
   @ApiResponse(responseCode = "200", description = "Successfully retrieved the list of addresses")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
   public List<Address> getAddresses() {
     return addressService.findAll();
   }
@@ -68,8 +71,8 @@ public class AddressController {
   @Operation(summary = "Create a new address", description = "Creates a new address with the provided details.")
   @ApiResponse(responseCode = "201", description = "Address successfully created")
   @ApiResponse(responseCode = "400", description = "Invalid input provided")
-  public Address createAddress(
-      @Validated(OnCreate.class) @RequestBody AddressRequestDto addressDto) {
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
+  public Address createAddress(@Validated(OnCreate.class) @RequestBody AddressRequestDto addressDto) {
     Address address = addressConverter.toEntity(addressDto);
     return addressService.create(address);
   }
@@ -86,8 +89,8 @@ public class AddressController {
   @ApiResponse(responseCode = "200", description = "Address successfully updated")
   @ApiResponse(responseCode = "400", description = "Invalid input provided")
   @ApiResponse(responseCode = "404", description = "Address not found")
-  public Address updateAddress(
-      @Validated(OnUpdate.class) @RequestBody AddressRequestDto addressDto) {
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
+  public Address updateAddress(@Validated(OnUpdate.class) @RequestBody AddressRequestDto addressDto) {
     Address address = addressConverter.toEntity(addressDto);
     return addressService.update(address);
   }
@@ -101,6 +104,7 @@ public class AddressController {
   @Operation(summary = "Delete an address", description = "Deletes the address with the specified ID.")
   @ApiResponse(responseCode = "204", description = "Address successfully deleted")
   @ApiResponse(responseCode = "404", description = "Address not found")
+  @PreAuthorize("hasRole('ADMIN')")
   public void deleteAddressById(@PathVariable(name = "id") long id) {
     addressService.delete(id);
   }

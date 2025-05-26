@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,6 +41,7 @@ public class PersonInfoController {
   @GetMapping
   @Operation(summary = "Get all person info records", description = "Retrieves a list of all person info details for proband's doctor, mother, or father.")
   @ApiResponse(responseCode = "200", description = "Successfully retrieved the list of person info records")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
   public ResponseEntity<List<PersonInfo>> getPersonInfos() {
     List<PersonInfo> personInfos = personInfoService.findAll();
     return ResponseEntity.ok(personInfos);
@@ -56,6 +58,7 @@ public class PersonInfoController {
   @Operation(summary = "Get a person info record by ID", description = "Retrieves the person info record with the specified ID.")
   @ApiResponse(responseCode = "200", description = "Successfully retrieved the person info record")
   @ApiResponse(responseCode = "404", description = "Person info record not found")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
   public ResponseEntity<PersonInfo> getPersonInfoById(@PathVariable(name = "id") long id) {
     PersonInfo personInfo = personInfoService.findById(id);
     return ResponseEntity.ok(personInfo);
@@ -72,6 +75,7 @@ public class PersonInfoController {
   @Operation(summary = "Create a new person info record", description = "Creates a new person info record with the provided details.")
   @ApiResponse(responseCode = "201", description = "Person info record successfully created")
   @ApiResponse(responseCode = "400", description = "Invalid input provided")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
   public ResponseEntity<PersonInfo> createPersonInfo(
       @Validated(OnCreate.class) @RequestBody PersonInfoRequestDto personInfoDto) {
     PersonInfo personInfo = personInfoConverter.toEntity(personInfoDto);
@@ -91,6 +95,7 @@ public class PersonInfoController {
   @ApiResponse(responseCode = "200", description = "Person info record successfully updated")
   @ApiResponse(responseCode = "400", description = "Invalid input provided")
   @ApiResponse(responseCode = "404", description = "Person info record not found")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
   public ResponseEntity<PersonInfo> updatePersonInfo(
       @Validated(OnUpdate.class) @RequestBody PersonInfoRequestDto personInfoDto) {
     PersonInfo personInfo = personInfoConverter.toEntity(personInfoDto);
@@ -107,6 +112,7 @@ public class PersonInfoController {
   @Operation(summary = "Delete a person info record", description = "Deletes the person info record with the specified ID.")
   @ApiResponse(responseCode = "204", description = "Person info record successfully deleted")
   @ApiResponse(responseCode = "404", description = "Person info record not found")
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Void> deletePersonInfoById(@PathVariable(name = "id") long id) {
     personInfoService.delete(id);
     return ResponseEntity.noContent().build();
