@@ -23,6 +23,7 @@ import java.util.List;
 
 @Tag(name = "Users", description = "Admin-only API for managing users")
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ADMIN')")
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -35,7 +36,6 @@ public class UserController {
    * @return list of users
    */
   @GetMapping
-  @PreAuthorize("hasRole('ADMIN')")
   @Operation(summary = "Get all users", description = "Retrieves a list of all registered users.")
   @ApiResponse(responseCode = "200", description = "Successfully retrieved the list of users")
   public ResponseEntity<List<User>> getAllUsers() {
@@ -51,7 +51,6 @@ public class UserController {
    * @return the user with the specified ID
    */
   @GetMapping("/{id}")
-  @PreAuthorize("hasRole('ADMIN')")
   @Operation(summary = "Get user by ID", description = "Retrieves a user by their unique ID.")
   @ApiResponse(responseCode = "200", description = "Successfully retrieved the user")
   @ApiResponse(responseCode = "404", description = "User not found")
@@ -68,7 +67,6 @@ public class UserController {
    * @return the created user
    */
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  @PreAuthorize("hasRole('ADMIN')")
   @Operation(summary = "Create a new user", description = "Creates a new user with the specified role. Only accessible to admins.")
   @ApiResponse(responseCode = "201", description = "User successfully created")
   @ApiResponse(responseCode = "400", description = "Invalid input provided")
@@ -85,7 +83,6 @@ public class UserController {
    * @return the updated user
    */
   @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-  @PreAuthorize("hasRole('ADMIN')")
   @Operation(summary = "Update a user", description = "Updates an existing user. Only accessible to admins.")
   @ApiResponse(responseCode = "200", description = "User successfully updated")
   @ApiResponse(responseCode = "400", description = "Invalid input provided")
@@ -101,7 +98,6 @@ public class UserController {
    * @param id the ID of the user to delete
    */
   @DeleteMapping("/{id}")
-  @PreAuthorize("hasRole('ADMIN')")
   @Operation(summary = "Delete a user", description = "Deletes a user by their unique ID. Only accessible to admins.")
   @ApiResponse(responseCode = "204", description = "User successfully deleted")
   @ApiResponse(responseCode = "404", description = "User not found")

@@ -14,6 +14,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ADMIN')")
 public class UserService {
 
   public static final String ENTITY_NAME = User.class.getSimpleName();
@@ -25,7 +26,6 @@ public class UserService {
   /**
    * Retrieves all users.
    */
-  @PreAuthorize("hasRole('ADMIN')")
   public List<User> findAll() {
     return userRepository.findAll();
   }
@@ -33,7 +33,6 @@ public class UserService {
   /**
    * Retrieves a user by ID.
    */
-  @PreAuthorize("hasRole('ADMIN')")
   public User findById(long id) {
     return userRepository.findById(id)
         .orElseThrow(() -> new VprEntityNotFoundException(
@@ -43,7 +42,6 @@ public class UserService {
   /**
    * Creates a new user.
    */
-  @PreAuthorize("hasRole('ADMIN')")
   public User createUser(RegistrationRequest registrationRequest) {
     User user = userConverter.convertRegisterRequestToUser(registrationRequest);
     User saved = userRepository.save(user);
@@ -54,7 +52,6 @@ public class UserService {
   /**
    * Updates an existing user.
    */
-  @PreAuthorize("hasRole('ADMIN')")
   public User updateUser(User user) {
     validateExistence(user.getId());
     User updated = userRepository.save(user);
@@ -65,7 +62,6 @@ public class UserService {
   /**
    * Deletes a user by ID.
    */
-  @PreAuthorize("hasRole('ADMIN')")
   public void deleteUser(long id) {
     validateExistence(id);
     userRepository.deleteById(id);
