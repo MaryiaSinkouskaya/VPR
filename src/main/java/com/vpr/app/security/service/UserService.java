@@ -17,8 +17,10 @@ import java.util.List;
 @PreAuthorize("hasRole('ADMIN')")
 public class UserService {
 
-  public static final String ENTITY_NAME = User.class.getSimpleName();
-  public static final String INSTANCE_DOES_NOT_EXIST = "%s instance with id %d does not exist";
+  private static final String ENTITY_NAME = User.class.getSimpleName();
+  private static final String INSTANCE_DOES_NOT_EXIST = "%s instance with id %d does not exist";
+  private static final String INSTANCE_WITH_EMAIL_DOES_NOT_EXIST =
+      "%s instance with email %s does not exist";
 
   private final UserRepository userRepository;
   private final UserConverter userConverter;
@@ -40,10 +42,26 @@ public class UserService {
   }
 
   /**
-   * Creates a new user.
+   * Retrieves a user by ID.
+   */
+  public User findByEmail(String email) {
+    return userRepository.findByEmail(email)
+        .orElseThrow(() -> new VprEntityNotFoundException(
+            String.format(INSTANCE_WITH_EMAIL_DOES_NOT_EXIST, ENTITY_NAME, email)));
+  }
+
+  /**
+   * Creates a new user based on RegistrationRequest.
    */
   public User createUser(RegistrationRequest registrationRequest) {
     User user = userConverter.convertRegisterRequestToUser(registrationRequest);
+    return saveUser(user);
+  }
+
+  /**
+   * Saves a new user.
+   */
+  public User saveUser(User user) {
     User saved = userRepository.save(user);
     log.info("Created new {} with id {}", ENTITY_NAME, saved.getId());
     return saved;
@@ -68,11 +86,15 @@ public class UserService {
     log.info("Successfully deleted {} with id {}", ENTITY_NAME, id);
   }
 
-  private void validateExistence(long id) {
+  public void validateExistence(long id) {
     if (!userRepository.existsById(id)) {
       log.warn("Attempted to access non-existent {} with id {}", ENTITY_NAME, id);
       throw new VprEntityNotFoundException(
           String.format(INSTANCE_DOES_NOT_EXIST, ENTITY_NAME, id));
     }
+  }
+
+  public boolean isUserExistsByEmail(String email) {
+    return userRepository.existsByEmail(email);
   }
 }
