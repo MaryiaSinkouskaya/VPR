@@ -6,12 +6,14 @@ import com.vpr.app.repository.OrganizationRepository;
 import com.vpr.app.service.OrganizationService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
 @Service
 public class OrganizationServiceImpl implements OrganizationService {
 

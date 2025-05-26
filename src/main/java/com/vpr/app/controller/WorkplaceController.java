@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,7 @@ public class WorkplaceController {
   @GetMapping
   @Operation(summary = "Get all workplaces", description = "Retrieves a list of all workplaces.")
   @ApiResponse(responseCode = "200", description = "Successfully retrieved the list of workplaces")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
   public ResponseEntity<List<Workplace>> getWorks() {
     List<Workplace> workplaces = workplaceService.findAll();
     return ResponseEntity.ok(workplaces);
@@ -44,6 +46,7 @@ public class WorkplaceController {
   @Operation(summary = "Get a workplace by ID", description = "Retrieves the workplace with the specified ID.")
   @ApiResponse(responseCode = "200", description = "Successfully retrieved the workplace")
   @ApiResponse(responseCode = "404", description = "Workplace not found")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
   public ResponseEntity<Workplace> getWorkById(@PathVariable(name = "id") long id) {
     Workplace workplace = workplaceService.findById(id);
     return ResponseEntity.ok(workplace);
@@ -53,6 +56,7 @@ public class WorkplaceController {
   @Operation(summary = "Create a new workplace", description = "Creates a new workplace with the provided details.")
   @ApiResponse(responseCode = "201", description = "Workplace successfully created")
   @ApiResponse(responseCode = "400", description = "Invalid input provided")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
   public ResponseEntity<Workplace> createWork(
       @Validated(OnCreate.class) @RequestBody WorkplaceRequestDto workplaceDto) {
     Workplace workplace = workplaceConverter.toEntity(workplaceDto);
@@ -65,6 +69,7 @@ public class WorkplaceController {
   @ApiResponse(responseCode = "200", description = "Workplace successfully updated")
   @ApiResponse(responseCode = "404", description = "Workplace not found")
   @ApiResponse(responseCode = "400", description = "Invalid input provided")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
   public ResponseEntity<Workplace> updateWork(
       @Validated(OnUpdate.class) @RequestBody WorkplaceRequestDto workplaceDto) {
     Workplace workplace = workplaceConverter.toEntity(workplaceDto);
@@ -76,6 +81,7 @@ public class WorkplaceController {
   @Operation(summary = "Delete a workplace", description = "Deletes the workplace with the specified ID.")
   @ApiResponse(responseCode = "204", description = "Workplace successfully deleted")
   @ApiResponse(responseCode = "404", description = "Workplace not found")
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Void> deleteWorkById(@PathVariable(name = "id") long id) {
     workplaceService.delete(id);
     return ResponseEntity.noContent().build();

@@ -181,6 +181,40 @@ create table prob_d
 alter table prob_d owner to postgres;
 alter sequence prob_d_id_seq owned by prob_d.id;
 
+
+create sequence user_id_seq START WITH 10 INCREMENT BY 1;
+alter sequence user_id_seq owner to postgres;
+
+create table _user
+(
+    id   BIGINT PRIMARY KEY DEFAULT nextval('user_id_seq'),
+    email text unique not null ,
+    password text not null ,
+    role text
+);
+
+alter table _user owner to postgres;
+alter sequence user_id_seq owned by _user.id;
+
+
+create sequence token_id_seq START WITH 10 INCREMENT BY 1;
+alter sequence token_id_seq owner to postgres;
+
+create table token
+(
+    id   BIGINT PRIMARY KEY DEFAULT nextval('token_id_seq'),
+    token text not null,
+    revoked bool,
+    expired bool,
+    user_id integer not null
+        constraint user_id
+            references _user
+);
+
+alter table token owner to postgres;
+alter sequence token_id_seq owned by token.id;
+
+
 INSERT INTO public.address (id, street, building, apartment, town) VALUES (2, 'Tsentralnaya', 11, 48, 'Brest');
 INSERT INTO public.address (id, street, building, apartment, town) VALUES (1, 'Inrernatsionalnaya', 33, 10, 'Brest');
 INSERT INTO public.address (id, street, building, apartment, town) VALUES (4, 'Volhohratskaya', 1, 12, 'Minsk');
@@ -228,3 +262,9 @@ INSERT INTO public.proband (id, karyotype, pregnancy_duration_in_weeks, weight, 
 INSERT INTO public.proband (id, karyotype, pregnancy_duration_in_weeks, weight, head, pregnancy_number, is_aborted, organization_id, abnormality_id, mother_id, father_id, doctor_id, note_id, birth_date, gender, ploidity, labor_outcome) VALUES (3, 'undefined', 39, 2.2, 32, 1, false, 1, 1, 1, 6, 1, 2, '2024-07-10', 'MALE', null, null);
 
 INSERT INTO public.prob_d (id, death_date, proband_id) VALUES (1, '2021-12-16', 2);
+
+INSERT INTO public._user (id, email, password, role) VALUES (1, 'bjksdkjvsd@mail.com', '$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO', 'ADMIN');
+INSERT INTO public._user (id, email, password, role) VALUES (2, 'bjksdkjvsd2@mail.com', '$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO', 'VIEWER');
+INSERT INTO public._user (id, email, password, role) VALUES (3, 'bnkjljek83sd@mail.com', '$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO', 'DOCTOR');
+
+INSERT INTO public.token (id, token, revoked, expired, user_id) VALUES (1, 'ksdjnc8db87dc79320d', false, false, 1);

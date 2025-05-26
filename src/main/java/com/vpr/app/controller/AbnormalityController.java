@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +44,7 @@ public class AbnormalityController {
   @GetMapping
   @Operation(summary = "Get all abnormalities", description = "Retrieves a list of all abnormalities.")
   @ApiResponse(responseCode = "200", description = "Successfully retrieved the list of abnormalities")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
   public ResponseEntity<List<Abnormality>> getAbnormalities() {
     List<Abnormality> abnormalities = abnormalityService.findAll();
     return ResponseEntity.ok(abnormalities);
@@ -59,6 +61,7 @@ public class AbnormalityController {
   @Operation(summary = "Get an abnormality by ID", description = "Retrieves the abnormality with the specified ID.")
   @ApiResponse(responseCode = "200", description = "Successfully retrieved the abnormality")
   @ApiResponse(responseCode = "404", description = "Abnormality not found")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
   public ResponseEntity<Abnormality> getAbnormalityById(
       @PathVariable(name = "id") long id) {
     Abnormality abnormality = abnormalityService.findById(id);
@@ -76,6 +79,7 @@ public class AbnormalityController {
   @Operation(summary = "Create a new abnormality", description = "Creates a new abnormality with the provided details.")
   @ApiResponse(responseCode = "201", description = "Successfully created the abnormality")
   @ApiResponse(responseCode = "400", description = "Invalid input data")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
   public ResponseEntity<Abnormality> createAbnormality(
       @Validated(OnCreate.class) @RequestBody AbnormalityRequestDto abnormalityDto) {
     Abnormality abnormality = abnormalityConverter.toEntity(abnormalityDto);
@@ -95,6 +99,7 @@ public class AbnormalityController {
   @ApiResponse(responseCode = "200", description = "Successfully updated the abnormality")
   @ApiResponse(responseCode = "400", description = "Invalid input data")
   @ApiResponse(responseCode = "404", description = "Abnormality not found")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
   public ResponseEntity<Abnormality> updateAbnormality(
       @Validated(OnUpdate.class) @RequestBody AbnormalityRequestDto abnormalityDto) {
     Abnormality abnormality = abnormalityConverter.toEntity(abnormalityDto);
@@ -114,6 +119,7 @@ public class AbnormalityController {
 
   @ApiResponse(responseCode = "204", description = "Successfully deleted the abnormality")
   @ApiResponse(responseCode = "404", description = "Abnormality not found")
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Void> deleteAbnormalityById(
       @PathVariable(name = "id") long id) {
     abnormalityService.delete(id);

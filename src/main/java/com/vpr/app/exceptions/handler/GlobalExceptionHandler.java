@@ -1,10 +1,14 @@
 package com.vpr.app.exceptions.handler;
 
+import com.vpr.app.exceptions.InvalidCredentialsException;
+import com.vpr.app.exceptions.UserAlreadyExistsException;
 import com.vpr.app.exceptions.VprEntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -50,6 +54,33 @@ public class GlobalExceptionHandler {
         problemDetail.setTitle(NOT_FOUND.getReasonPhrase());
         problemDetail.setDetail(ex.getMessage());
         return ResponseEntity.status(NOT_FOUND).body(problemDetail);
+    }
+
+    @ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<ProblemDetail> handleUserExists(UserAlreadyExistsException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(CONFLICT);
+        problemDetail.setTitle(CONFLICT.getReasonPhrase());
+        problemDetail.setDetail(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(problemDetail);
+    }
+
+    @ExceptionHandler(InvalidCredentialsException.class)
+    public ResponseEntity<ProblemDetail> handleInvalidCredentials(InvalidCredentialsException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(UNAUTHORIZED);
+        problemDetail.setTitle(UNAUTHORIZED.getReasonPhrase());
+        problemDetail.setDetail(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(problemDetail);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<ProblemDetail> handleUserNotFound(UsernameNotFoundException ex) {
+        ProblemDetail problemDetail = ProblemDetail.forStatus(NOT_FOUND);
+        problemDetail.setTitle(NOT_FOUND.getReasonPhrase());
+        problemDetail.setDetail(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(problemDetail);
     }
 
     @ExceptionHandler(Exception.class)

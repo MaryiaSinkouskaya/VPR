@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,7 @@ public class ProbandController {
   @GetMapping
   @Operation(summary = "Get all probands", description = "Retrieves a list of all probands.")
   @ApiResponse(responseCode = "200", description = "Successfully retrieved the list of probands")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
   public ResponseEntity<List<Proband>> getProbands() {
     List<Proband> probands = probandService.findAll();
     return ResponseEntity.ok(probands);
@@ -44,6 +46,7 @@ public class ProbandController {
   @Operation(summary = "Get a proband by ID", description = "Retrieves the proband with the specified ID.")
   @ApiResponse(responseCode = "200", description = "Successfully retrieved the proband")
   @ApiResponse(responseCode = "404", description = "Proband not found")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
   public ResponseEntity<Proband> getProbandById(@PathVariable(name = "id") long id) {
     Proband proband = probandService.findById(id);
     return ResponseEntity.ok(proband);
@@ -53,6 +56,7 @@ public class ProbandController {
   @Operation(summary = "Create a new proband", description = "Creates a new proband with the provided details.")
   @ApiResponse(responseCode = "201", description = "Proband successfully created")
   @ApiResponse(responseCode = "400", description = "Invalid input provided")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
   public ResponseEntity<Proband> createProband(
       @Validated(OnCreate.class) @RequestBody ProbandRequestDto probandDto) {
     Proband proband = probandConverter.toEntity(probandDto);
@@ -65,6 +69,7 @@ public class ProbandController {
   @ApiResponse(responseCode = "200", description = "Proband successfully updated")
   @ApiResponse(responseCode = "404", description = "Proband not found")
   @ApiResponse(responseCode = "400", description = "Invalid input provided")
+  @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
   public ResponseEntity<Proband> updateProband(
       @Validated(OnUpdate.class) @RequestBody ProbandRequestDto probandDto) {
     Proband proband = probandConverter.toEntity(probandDto);
@@ -76,6 +81,7 @@ public class ProbandController {
   @Operation(summary = "Delete a proband", description = "Deletes the proband with the specified ID.")
   @ApiResponse(responseCode = "204", description = "Proband successfully deleted")
   @ApiResponse(responseCode = "404", description = "Proband not found")
+  @PreAuthorize("hasRole('ADMIN')")
   public ResponseEntity<Void> deleteProbandById(@PathVariable(name = "id") long id) {
     probandService.delete(id);
     return ResponseEntity.noContent().build();
