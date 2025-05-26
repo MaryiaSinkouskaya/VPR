@@ -5,27 +5,27 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.Jwts.SIG;
 import io.jsonwebtoken.impl.DefaultJwtParserBuilder;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.Map;
-import javax.crypto.SecretKey;
 
 @Service
 public class JwtService {
 
-  private final SecretKey secretKey =//todo update key storage
-      Keys.hmacShaKeyFor("your-super-secure-256-bit-secret-key-which-is-long-enough".getBytes());
-
+  @Value("${JWT_SECRET}")
+  private String secretKey;
   private static final long EXPIRATION_TIME_MS = 1000 * 60 * 15; // 15 minutes
+  private static final String ROLES = "roles";
 
   public String generateToken(UserDetails userDetails) {
     return Jwts.builder()
         .subject(userDetails.getUsername())
         .issuedAt(new Date())
         .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME_MS))
-        .claims(Map.of("roles", userDetails.getAuthorities()))
-        .signWith(secretKey, SIG.HS256)
+        .claims(Map.of(ROLES, userDetails.getAuthorities()))
+        .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()), SIG.HS256)
         .compact();
   }
 
@@ -44,7 +44,7 @@ public class JwtService {
 
   private Claims getClaims(String token) {
     return new DefaultJwtParserBuilder()
-        .setSigningKey(secretKey)
+        .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes()))
         .build()
         .parseSignedClaims(token)
         .getPayload();

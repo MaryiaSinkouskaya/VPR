@@ -8,6 +8,8 @@ services:
     hostname: vpr
     depends_on:
       - db
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
   db:
     container_name: postgresDB
     image: postgres:13.3
