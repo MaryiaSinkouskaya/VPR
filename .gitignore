@@ -1,0 +1,47 @@
+# Java build output
+/target/
+/build/
+
+# Maven and Gradle
+.mvn/
+!**/src/main/**/mvn-wrapper.properties
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+build.log
+**/build/
+
+# Eclipse / IntelliJ IDEA
+*.iml
+.idea/
+.classpath
+.project
+.settings/
+*.ipr
+*.iws
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+spring.log
+
+# Environment files
+.env
+.env.*
+
+# Docker-related
+docker-compose.override.yml
+**/docker-compose.override.yml
+
+# Application properties/secrets (optional)
+application-local.yml
+application-dev.yml
+*.key
+*.pem
