@@ -1,12 +1,14 @@
 ## Application for distributed access to the updated Republican database of congenital malformations
 
-Implemented basic API with CRUD operations via REST.
+Implemented basic API with CRUD operations via REST. JWT authentication applied. Key roles: ADMIN, DOCTOR, VIEWER.
+Only admin can manage other users and create user with any role. After registration the only role assigned is VIEWER.
 
 ### Prerequisites:
 
 - Maven 3
 - JDK 17
 - Docker
+- add .env file with JWT_SECRET=your_secret_key inside
 
 ### How to build:
 
@@ -36,4 +38,5 @@ Implemented basic API with CRUD operations via REST.
 ![schema](schema.png)
 
 ### OpenApi doc
+
 `${vpr.openapi.dev-url}/swagger-ui/index.html#/`
