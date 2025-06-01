@@ -22,7 +22,7 @@ public class Address {
             sequenceName = "address_id_seq",
             allocationSize = 1)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "street")
     private String street;

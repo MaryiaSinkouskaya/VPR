@@ -23,7 +23,7 @@ public class Note {
             sequenceName = "note_id_seq",
             allocationSize = 1)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "date")
     private LocalDate date;

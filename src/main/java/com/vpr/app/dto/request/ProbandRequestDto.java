@@ -20,7 +20,7 @@ public class ProbandRequestDto {
     @NotNull(groups = OnUpdate.class, message = "ID must be provided for update")
     @Positive(groups = OnUpdate.class, message = "ID must be a positive integer")
     @Schema(description = "Unique identifier of proband details (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
-    private Integer id;
+    private Long id;
 
     @NotNull(message = "Birth date must not be null")
     @Past(message = "Birth date must be in the past")

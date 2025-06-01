@@ -22,7 +22,7 @@ public class Workplace {
             sequenceName = "work_id_seq",
             allocationSize = 1)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "job_type")
     private String jobType;

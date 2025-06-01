@@ -16,7 +16,7 @@ public class DoctorRequestDto {
     @NotNull(groups = OnUpdate.class, message = "ID must be provided for update")
     @Positive(groups = OnUpdate.class, message = "ID must be a positive integer")
     @Schema(description = "Unique identifier of the doctor (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
-    private Integer id;
+    private Long id;
 
     @NotBlank(message = "Speciality must not be blank")
     @Size(max = 64, message = "Speciality must not exceed 64 characters")

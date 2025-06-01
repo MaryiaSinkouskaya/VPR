@@ -24,7 +24,7 @@ public class Mother {
             sequenceName = "mother_id_seq",
             allocationSize = 1)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "last_menstruation_date")
     private LocalDate lastMenstruationDate;

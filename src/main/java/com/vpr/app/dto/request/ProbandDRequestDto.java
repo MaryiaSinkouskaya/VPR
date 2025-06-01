@@ -21,7 +21,7 @@ public class ProbandDRequestDto {
     @NotNull(groups = OnUpdate.class, message = "ID must be provided for update")
     @Positive(groups = OnUpdate.class, message = "ID must be a positive integer")
     @Schema(description = "Unique identifier of proband death details (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
-    private Integer id;
+    private Long id;
 
     @PastOrPresent(message = "Death date must not be in the future")
     @Schema(description = "Date of death of the proband", example = "2025-01-01", requiredMode = RequiredMode.NOT_REQUIRED)

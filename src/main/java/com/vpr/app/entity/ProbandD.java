@@ -22,7 +22,7 @@ public class ProbandD {
             sequenceName = "prob_d_id_seq",
             allocationSize = 1)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Column(name = "death_date")
     private LocalDate deathDate;

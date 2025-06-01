@@ -16,7 +16,7 @@ public class OrganizationRequestDto {
     @NotNull(groups = OnUpdate.class, message = "ID must be provided for update")
     @Positive(groups = OnUpdate.class, message = "ID must be a positive integer")
     @Schema(description = "Unique identifier of the organization (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
-    private Integer id;
+    private Long id;
 
     @Positive(message = "Organization number must be a positive integer")
     @Schema(description = "Unique number of the organization", example = "101", requiredMode = RequiredMode.REQUIRED)
