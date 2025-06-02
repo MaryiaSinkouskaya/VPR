@@ -21,7 +21,7 @@ public class NoteRequestDto {
     @NotNull(groups = OnUpdate.class, message = "ID must be provided for update")
     @Positive(groups = OnUpdate.class, message = "ID must be a positive integer")
     @Schema(description = "Unique identifier of the note (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
-    private Integer id;
+    private Long id;
 
     @NotNull(message = "Date must not be null")
     @Schema(description = "The date when the note was created", example = "2025-01-01", requiredMode = RequiredMode.REQUIRED)

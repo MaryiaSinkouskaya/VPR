@@ -18,7 +18,7 @@ public class PersonInfoRequestDto {
     @NotNull(groups = OnUpdate.class, message = "ID must be provided for update")
     @Positive(groups = OnUpdate.class, message = "ID must be a positive integer")
     @Schema(description = "ID of the person information", example = "123", accessMode = Schema.AccessMode.READ_ONLY)
-    private Integer id;
+    private Long id;
 
     @NotBlank(message = "Name must not be blank")
     @Size(max = 64, message = "Name must not exceed 64 characters")

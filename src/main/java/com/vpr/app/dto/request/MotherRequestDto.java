@@ -18,7 +18,7 @@ public class MotherRequestDto {
     @NotNull(groups = OnUpdate.class, message = "ID must be provided for update")
     @Positive(groups = OnUpdate.class, message = "ID must be a positive integer")
     @Schema(description = "Unique identifier of the mother (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
-    private Integer id;
+    private Long id;
 
     @NotNull(message = "Last menstruation date must not be null")
     @Schema(description = "The date of the last menstruation", example = "2025-01-01", requiredMode = RequiredMode.REQUIRED)

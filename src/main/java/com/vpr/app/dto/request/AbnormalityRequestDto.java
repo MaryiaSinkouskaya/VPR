@@ -15,7 +15,7 @@ public class AbnormalityRequestDto {
     @NotNull(groups = OnUpdate.class, message = "ID must be provided for update")
     @Positive(groups = OnUpdate.class, message = "ID must be a positive integer")
     @Schema(description = "Unique identifier of the abnormality (used for updates)", example = "10", requiredMode = RequiredMode.NOT_REQUIRED)
-    private Integer id;
+    private Long id;
 
     @NotBlank(message = "Name must not be blank")
     @Size(max = 64, message = "Name must not exceed 64 characters")

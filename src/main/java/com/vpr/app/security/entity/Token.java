@@ -22,7 +22,7 @@ public class Token {
       sequenceName = "token_id_seq",
       allocationSize = 1)
   @Column(name = "id")
-  private Integer id;
+  private Long id;
 
   @Column(unique = true)
   private String token;

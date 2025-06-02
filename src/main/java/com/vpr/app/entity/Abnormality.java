@@ -25,7 +25,7 @@ public class Abnormality {
             allocationSize = 1)
     @Schema(description = "Abnormality's uniq id", example = "26713", accessMode = Schema.AccessMode.READ_ONLY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @Schema(description = "Abnormality", example = "Hepatoblastoma")
     @Column(name = "name")
