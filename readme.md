@@ -22,6 +22,10 @@ Only admin can manage other users and create user with any role. After registrat
 
     docker compose down --volumes && docker rmi vpr
 
+### Run Stress test
+
+`mvn test -Dload.test=true`
+
 ### DB schema sructure
 
 - PROBAND: proband description;

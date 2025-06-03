@@ -1,8 +1,8 @@
 package jmeter;
 
 import org.apache.http.entity.ContentType;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.junit.jupiter.EnabledIf;
 import us.abstracta.jmeter.javadsl.JmeterDsl;
 import us.abstracta.jmeter.javadsl.core.TestPlanStats;
 
@@ -15,7 +15,10 @@ import static us.abstracta.jmeter.javadsl.JmeterDsl.jsonExtractor;
 public class AbnormalityLoadTest {
 
     @Test
-    @Disabled("Run manually only")
+    @EnabledIf(
+        expression = "#{systemProperties['loadTest.test'] == 'true'}",
+        reason = "Runs only if -DloadTest.test=true"
+    )
     void testGetAbnormalitiesWithJwtAuth() throws Exception {
         TestPlanStats stats = JmeterDsl.testPlan(
                 JmeterDsl.threadGroup(5, 10,
