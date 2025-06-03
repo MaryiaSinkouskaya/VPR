@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 public class JwtService {
@@ -24,6 +25,7 @@ public class JwtService {
         .subject(userDetails.getUsername())
         .issuedAt(new Date())
         .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME_MS))
+        .id(UUID.randomUUID().toString())
         .claims(Map.of(ROLES, userDetails.getAuthorities()))
         .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()), SIG.HS256)
         .compact();
