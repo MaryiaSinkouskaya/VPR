@@ -2,7 +2,9 @@ services:
   application:
     container_name: vpr
     image: vpr
-    build: .
+    build:
+      context: ./vpr-service
+      dockerfile: Dockerfile
     ports:
       - '8081:8081'
     hostname: vpr
@@ -19,6 +21,51 @@ services:
       POSTGRES_PASSWORD: "1111"
     volumes:
       - db-data:/var/lib/postgresql/data
-      - ./src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./vpr-service/src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+  zookeeper:
+    image: bitnami/zookeeper:latest
+    environment:
+      ALLOW_ANONYMOUS_LOGIN: yes
+  kafka:
+    image: bitnami/kafka:latest
+    ports:
+      - "9093:9093"
+    environment:
+      KAFKA_KRAFT_MODE_ENABLED: "yes"
+      KAFKA_CFG_PROCESS_ROLES: "broker,controller"
+      KAFKA_CFG_NODE_ID: 1
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9093,CONTROLLER://:9094
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9093
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
+    depends_on:
+      - zookeeper
+  audit-db:
+    image: postgres:15
+    container_name: audit-db
+    environment:
+      POSTGRES_DB: auditdb
+      POSTGRES_USER: auditor
+      POSTGRES_PASSWORD: auditorpass
+    ports:
+      - "5433:5432"
+  audit-service:
+    container_name: audit-service
+    image: audit-service
+    build:
+      context: ./audit-service
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9093
+      SPRING_DATASOURCE_URL: jdbc:postgresql://audit-db:5432/auditdb
+      SPRING_DATASOURCE_USERNAME: auditor
+      SPRING_DATASOURCE_PASSWORD: auditorpass
+    depends_on:
+      - kafka
+      - audit-db
 volumes:
   db-data:

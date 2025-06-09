@@ -1,0 +1,15 @@
+package com.vpr.app.audit.log.kafka;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class KafkaAuditProducer {
+  private final KafkaTemplate<String, AuditEvent> kafkaTemplate;
+
+  public void send(AuditEvent event) {
+    kafkaTemplate.send("audit-log", event);
+  }
+}
