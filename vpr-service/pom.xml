@@ -110,27 +110,6 @@
         </dependency>
     </dependencies>
 
-    <profiles>
-        <!-- Docker Database Profile -->
-        <profile>
-            <id>DOCKER_DB</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <database.profile>db</database.profile>
-            </properties>
-        </profile>
-
-        <!-- Local Database Profile -->
-        <profile>
-            <id>LOCAL_DB</id>
-            <properties>
-                <database.profile>localhost</database.profile>
-            </properties>
-        </profile>
-    </profiles>
-
     <build>
         <resources>
             <resource>

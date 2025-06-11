@@ -1,0 +1,9 @@
+JWT_SECRET=your_token_here
+
+POSTGRES_DB_VPR=schema_vpr
+POSTGRES_USER_VPR=postgres
+POSTGRES_PASSWORD_VPR=postgres_pass
+
+POSTGRES_DB_AUDIT=audit_db
+POSTGRES_USER_AUDIT=auditor
+POSTGRES_PASSWORD_AUDIT=auditor_pass
