@@ -12,6 +12,7 @@ import com.vpr.app.security.entity.User;
 import com.vpr.app.security.repository.TokenRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,6 +21,7 @@ import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationService {
 
   private static final String CHECK_CREDENTIALS =
@@ -64,6 +66,7 @@ public class AuthenticationService {
         Instant.now(),
         null
     ));
+    log.info("sent message USER_AUTHENTICATED");
     return buildAuthResponse(jwtToken);
   }
 
