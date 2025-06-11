@@ -13,6 +13,7 @@ release.properties
 dependency-reduced-pom.xml
 build.log
 **/build/
+**/target/
 
 # Eclipse / IntelliJ IDEA
 *.iml

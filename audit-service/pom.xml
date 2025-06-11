@@ -5,13 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.4.0</version>
-        <relativePath/> <!-- Use the parent POM defined by Spring Boot -->
+        <groupId>org.example</groupId>
+        <artifactId>VPR</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>org.example</groupId>
     <artifactId>audit-service</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -27,9 +25,15 @@
         <jmeter.java.dsl>1.24</jmeter.java.dsl>
         <spring.kafka>3.3.6</spring.kafka>
         <spring-boot-maven-plugin.version>3.5.0</spring-boot-maven-plugin.version>
+        <shared.version>1.0-SNAPSHOT</shared.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.example</groupId>
+            <artifactId>shared-module</artifactId>
+            <version>${shared.version}</version>
+        </dependency>
         <!-- Spring Boot Dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -81,20 +85,21 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
+            <!-- Spring Boot Maven Plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot-maven-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <configuration>
+                    <mainClass>com.audit.app.MainApp.java</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
-
 </project>

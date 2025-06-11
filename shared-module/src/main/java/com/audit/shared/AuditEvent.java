@@ -1,4 +1,4 @@
-package com.audit.app.consumer;
+package com.audit.shared;
 
 import java.time.Instant;
 
@@ -9,4 +9,5 @@ public record AuditEvent(
     String performedBy,
     Instant timestamp,
     String metadata
-) {}
+) {
+}

@@ -1,5 +1,6 @@
 package com.audit.app.consumer;
 
+import com.audit.shared.AuditEvent;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 

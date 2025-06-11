@@ -1,6 +1,6 @@
 package com.vpr.app.security.service;
 
-import com.vpr.app.audit.log.kafka.AuditEvent;
+import com.audit.shared.AuditEvent;
 import com.vpr.app.audit.log.kafka.KafkaAuditProducer;
 import com.vpr.app.exceptions.InvalidCredentialsException;
 import com.vpr.app.exceptions.UserAlreadyExistsException;
