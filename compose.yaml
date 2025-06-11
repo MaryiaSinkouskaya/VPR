@@ -1,24 +1,27 @@
 services:
-  application:
-    container_name: vpr
-    image: vpr
+  vpr-service:
+    container_name: vpr-service
+    image: vpr-service
     build:
       context: ./vpr-service
       dockerfile: Dockerfile
     ports:
       - '8081:8081'
-    hostname: vpr
+    hostname: vpr-service
     depends_on:
       - db
     environment:
-      - JWT_SECRET=${JWT_SECRET}
+      JWT_SECRET: ${JWT_SECRET}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB_VPR}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER_VPR}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD_VPR}
   db:
     container_name: postgresDB
     image: postgres:13.3
     environment:
-      POSTGRES_DB: "VPR"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "1111"
+      POSTGRES_DB: ${POSTGRES_DB_VPR}
+      POSTGRES_USER: ${POSTGRES_USER_VPR}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_VPR}
     volumes:
       - db-data:/var/lib/postgresql/data
       - ./vpr-service/src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
@@ -36,15 +39,6 @@ services:
       KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
-  audit-db:
-    image: postgres:15
-    container_name: audit-db
-    environment:
-      POSTGRES_DB: auditdb
-      POSTGRES_USER: auditor
-      POSTGRES_PASSWORD: auditorpass
-    ports:
-      - "5433:5432"
   audit-service:
     container_name: audit-service
     image: audit-service
@@ -55,11 +49,17 @@ services:
       - "8082:8082"
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9093
-      SPRING_DATASOURCE_URL: jdbc:postgresql://audit-db:5432/auditdb
-      SPRING_DATASOURCE_USERNAME: auditor
-      SPRING_DATASOURCE_PASSWORD: auditorpass
     depends_on:
       - kafka
       - audit-db
+  audit-db:
+    image: postgres:15
+    container_name: audit-db
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB_AUDIT}
+      POSTGRES_USER: ${POSTGRES_USER_AUDIT}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_AUDIT}
+    ports:
+      - "5433:5432"
 volumes:
   db-data:

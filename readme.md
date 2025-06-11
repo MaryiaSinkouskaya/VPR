@@ -8,7 +8,7 @@ Only admin can manage other users and create user with any role. After registrat
 - Maven 3
 - JDK 17
 - Docker
-- add .env file with JWT_SECRET=your_secret_key inside
+- add .env file likewise in env_example.txt
 
 ### How to build:
 
