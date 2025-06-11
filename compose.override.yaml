@@ -1,5 +1,5 @@
 services:
-  application:
+  vpr-service:
     environment:
       JAVA_OPTS: >-
         -Xdebug

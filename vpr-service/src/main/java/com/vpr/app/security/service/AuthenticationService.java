@@ -1,5 +1,7 @@
 package com.vpr.app.security.service;
 
+import com.audit.shared.AuditEvent;
+import com.vpr.app.audit.log.kafka.KafkaAuditProducer;
 import com.vpr.app.exceptions.InvalidCredentialsException;
 import com.vpr.app.exceptions.UserAlreadyExistsException;
 import com.vpr.app.security.dto.request.AuthenticationRequest;
@@ -10,13 +12,16 @@ import com.vpr.app.security.entity.User;
 import com.vpr.app.security.repository.TokenRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
+import java.time.Instant;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class AuthenticationService {
 
   private static final String CHECK_CREDENTIALS =
@@ -27,6 +32,7 @@ public class AuthenticationService {
   private final UserService userService;
   private final JwtService jwtService;
   private final TokenRepository tokenRepository;
+  private final KafkaAuditProducer auditProducer;
 
   @Transactional
   public AuthenticationResponse registerUser(RegistrationRequest request) {
@@ -51,6 +57,16 @@ public class AuthenticationService {
 
     User user = userService.findByEmail(request.getEmail());
     String jwtToken = generateTokenForUser(user);
+
+    auditProducer.send(new AuditEvent(
+        "USER_AUTHENTICATED",
+        "User",
+        user.getId().toString(),
+        user.getEmail(),
+        Instant.now(),
+        null
+    ));
+    log.info("sent message USER_AUTHENTICATED");
     return buildAuthResponse(jwtToken);
   }
 

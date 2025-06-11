@@ -13,6 +13,7 @@ release.properties
 dependency-reduced-pom.xml
 build.log
 **/build/
+**/target/
 
 # Eclipse / IntelliJ IDEA
 *.iml
@@ -45,3 +46,5 @@ application-local.yml
 application-dev.yml
 *.key
 *.pem
+**/audit-service/target/
+/audit-service/target/
