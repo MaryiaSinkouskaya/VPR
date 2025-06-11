@@ -46,3 +46,4 @@ application-local.yml
 application-dev.yml
 *.key
 *.pem
+/audit-service/target/
