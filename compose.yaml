@@ -22,10 +22,6 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
       - ./vpr-service/src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
-  zookeeper:
-    image: bitnami/zookeeper:latest
-    environment:
-      ALLOW_ANONYMOUS_LOGIN: yes
   kafka:
     image: bitnami/kafka:latest
     ports:
@@ -34,14 +30,12 @@ services:
       KAFKA_KRAFT_MODE_ENABLED: "yes"
       KAFKA_CFG_PROCESS_ROLES: "broker,controller"
       KAFKA_CFG_NODE_ID: 1
-      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
-      KAFKA_CFG_LISTENERS: PLAINTEXT://:9093,CONTROLLER://:9094
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 1@kafka:9094
+      KAFKA_CFG_LISTENERS: PLAINTEXT://0.0.0.0:9093,CONTROLLER://0.0.0.0:9094
       KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9093
       KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
-    depends_on:
-      - zookeeper
   audit-db:
     image: postgres:15
     container_name: audit-db
