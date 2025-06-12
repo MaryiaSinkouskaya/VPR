@@ -33,8 +33,7 @@ The VPR Platform is a Spring Boot-based application designed for the distributed
 on congenital malformations. It features multiple microservices, including:
 
 - **Core Application (`vpr-service`)**: Handles domain logic, offers REST APIs for CRUD operations, and implements
-  secure JWT authentication. It features role-based access control with roles such as **ADMIN**, **DOCTOR**, and *
-  *VIEWER**.
+  secure JWT authentication. It features role-based access control with roles such as **ADMIN**, **DOCTOR**, and **VIEWER**.
 - **Audit Microservice (`audit-service`)**: A Kafka-backed service that records system events, such as logins, updates,
   and registrations, in an audit log database.
 
