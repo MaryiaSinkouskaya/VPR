@@ -49,6 +49,9 @@ services:
       - "8082:8082"
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9093
+      SPRING_AUDIT_DATASOURCE_URL: jdbc:postgresql://audit-db:5432/${POSTGRES_DB_AUDIT}
+      SPRING_AUDIT_DATASOURCE_USERNAME: ${POSTGRES_USER_AUDIT}
+      SPRING_AUDIT_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD_AUDIT}
     depends_on:
       - kafka
       - audit-db
