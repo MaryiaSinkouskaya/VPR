@@ -19,12 +19,21 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+/**
+ * Configuration class for Spring Security settings.
+ * Defines security rules, authentication mechanisms, and access control policies for the application.
+ * Configures JWT-based authentication and role-based authorization.
+ */
 @Configuration
 @RequiredArgsConstructor
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
 
+  /**
+   * List of URLs that are publicly accessible without authentication.
+   * Includes authentication endpoints and Swagger documentation URLs.
+   */
   private static final String[] WHITE_LIST_URL = {
       "/api/auth/**",
       "/v2/api-docs",
@@ -38,12 +47,36 @@ public class SecurityConfig {
       "/webjars/**",
       "/swagger-ui.html"
   };
+
+  /**
+   * Base URL template for API endpoints requiring authentication.
+   */
   private static final String URL_TEMPLATE = "/api/**";
+
+  /**
+   * URL template for user-specific endpoints requiring admin role.
+   */
   private static final String URL_TEMPLATE_USER = "/api/user";
+
+  /**
+   * URL template for user management endpoints requiring admin role.
+   */
   private static final String URL_TEMPLATE_USERS = "/api/user/**";
 
   private final JwtFilter jwtFilter;
 
+  /**
+   * Configures the security filter chain for the application.
+   * Sets up:
+   * - CSRF protection (disabled for API)
+   * - URL-based authorization rules
+   * - Session management (stateless)
+   * - JWT filter integration
+   *
+   * @param http the HttpSecurity object to configure
+   * @return the configured SecurityFilterChain
+   * @throws Exception if an error occurs during configuration
+   */
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     http

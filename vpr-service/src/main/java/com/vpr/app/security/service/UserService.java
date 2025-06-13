@@ -13,7 +13,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-
+/**
+ * Service responsible for managing user entities in the system.
+ * Provides CRUD operations for user data and handles user-specific business logic.
+ * Includes role-based access control for administrative operations.
+ */
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -29,7 +33,10 @@ public class UserService {
   private final UserConverter userConverter;
 
   /**
-   * Retrieves all users.
+   * Retrieves all users from the system.
+   * Requires ADMIN role to access.
+   *
+   * @return a list of all users in the system
    */
   @PreAuthorize("hasRole('ADMIN')")
   public List<User> findAll() {
@@ -37,7 +44,12 @@ public class UserService {
   }
 
   /**
-   * Retrieves a user by ID.
+   * Retrieves a user by their ID.
+   * Requires ADMIN role to access.
+   *
+   * @param id the ID of the user to retrieve
+   * @return the user with the specified ID
+   * @throws VprEntityNotFoundException if no user exists with the given ID
    */
   @PreAuthorize("hasRole('ADMIN')")
   public User findById(long id) {
@@ -47,7 +59,11 @@ public class UserService {
   }
 
   /**
-   * Retrieves a user by email.
+   * Retrieves a user by their email address.
+   *
+   * @param email the email address of the user to retrieve
+   * @return the user with the specified email
+   * @throws VprEntityNotFoundException if no user exists with the given email
    */
   public User findByEmail(String email) {
     return userRepository.findByEmail(email)
@@ -56,7 +72,12 @@ public class UserService {
   }
 
   /**
-   * Creates a new user based on RegistrationRequest.
+   * Creates a new user based on the provided registration request.
+   * Requires ADMIN role to access.
+   *
+   * @param registrationRequest the registration request containing user details
+   * @return the newly created user
+   * @throws UserAlreadyExistsException if a user with the same email already exists
    */
   @PreAuthorize("hasRole('ADMIN')")
   public User createUser(RegistrationRequest registrationRequest) {
@@ -65,7 +86,11 @@ public class UserService {
   }
 
   /**
-   * Creates a new user with Viewer role based on RegistrationRequest.
+   * Creates a new user with VIEWER role based on the provided registration request.
+   *
+   * @param registrationRequest the registration request containing user details
+   * @return the newly created user with VIEWER role
+   * @throws UserAlreadyExistsException if a user with the same email already exists
    */
   public User createViewerUser(RegistrationRequest registrationRequest) {
     User user = userConverter.convertRegisterRequestToUser(registrationRequest);
@@ -74,7 +99,11 @@ public class UserService {
   }
 
   /**
-   * Saves a new user.
+   * Saves a new user to the system.
+   *
+   * @param user the user to save
+   * @return the saved user with generated ID
+   * @throws UserAlreadyExistsException if a user with the same email already exists
    */
   public User saveUser(User user) {
     if (userRepository.existsByEmail(user.getEmail())) {
@@ -86,7 +115,12 @@ public class UserService {
   }
 
   /**
-   * Updates an existing user.
+   * Updates an existing user in the system.
+   * Requires ADMIN role to access.
+   *
+   * @param user the user to update
+   * @return the updated user
+   * @throws VprEntityNotFoundException if no user exists with the given ID
    */
   @PreAuthorize("hasRole('ADMIN')")
   public User updateUser(User user) {
@@ -97,7 +131,11 @@ public class UserService {
   }
 
   /**
-   * Deletes a user by ID.
+   * Deletes a user from the system by their ID.
+   * Requires ADMIN role to access.
+   *
+   * @param id the ID of the user to delete
+   * @throws VprEntityNotFoundException if no user exists with the given ID
    */
   @PreAuthorize("hasRole('ADMIN')")
   public void deleteUser(long id) {
@@ -106,6 +144,12 @@ public class UserService {
     log.info("Successfully deleted {} with id {}", ENTITY_NAME, id);
   }
 
+  /**
+   * Validates that a user exists with the given ID.
+   *
+   * @param id the ID to validate
+   * @throws VprEntityNotFoundException if no user exists with the given ID
+   */
   public void validateExistence(long id) {
     if (!userRepository.existsById(id)) {
       log.warn("Attempted to access non-existent {} with id {}", ENTITY_NAME, id);
@@ -114,6 +158,12 @@ public class UserService {
     }
   }
 
+  /**
+   * Checks if a user exists with the given email address.
+   *
+   * @param email the email address to check
+   * @return true if a user exists with the given email, false otherwise
+   */
   public boolean isUserExistsByEmail(String email) {
     return userRepository.existsByEmail(email);
   }

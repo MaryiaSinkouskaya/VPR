@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Implementation of the {@link ProbandService} interface that provides CRUD operations
+ * for managing proband entities in the system.
+ * This service is restricted to users with ADMIN, DOCTOR, or VIEWER roles.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
@@ -21,6 +26,13 @@ public class ProbandServiceImpl implements ProbandService {
     public static final String ENTITY_NAME = Proband.class.getSimpleName();
     private final ProbandRepository probandRepository;
 
+    /**
+     * Retrieves a proband entity by its ID.
+     *
+     * @param id the ID of the proband to find
+     * @return the found proband entity
+     * @throws VprEntityNotFoundException if no proband exists with the given ID
+     */
     @Override
     public Proband findById(long id) {
         return probandRepository.findById(id)
@@ -29,21 +41,44 @@ public class ProbandServiceImpl implements ProbandService {
                                 String.format(INSTANCE_DOES_NOT_EXIST, ENTITY_NAME, id)));
     }
 
+    /**
+     * Retrieves all proband entities from the system.
+     *
+     * @return a list of all proband entities
+     */
     @Override
     public List<Proband> findAll() {
         return probandRepository.findAll();
     }
 
+    /**
+     * Creates a new proband entity in the system.
+     *
+     * @param proband the proband entity to create
+     * @return the created proband entity with generated ID
+     */
     @Override
     public Proband create(Proband proband) {
         return probandRepository.save(proband);
     }
 
+    /**
+     * Updates an existing proband entity in the system.
+     *
+     * @param proband the proband entity to update
+     * @return the updated proband entity
+     */
     @Override
     public Proband update(Proband proband) {
         return probandRepository.save(proband);
     }
 
+    /**
+     * Deletes a proband entity from the system by its ID.
+     *
+     * @param id the ID of the proband to delete
+     * @throws VprEntityNotFoundException if no proband exists with the given ID
+     */
     @Override
     public void delete(long id) {
         validateExistence(id);
@@ -51,6 +86,12 @@ public class ProbandServiceImpl implements ProbandService {
         log.info("Successfully deleted {} entity with id {}", ENTITY_NAME, id);
     }
 
+    /**
+     * Validates the existence of a proband entity with the given ID.
+     *
+     * @param id the ID to validate
+     * @throws VprEntityNotFoundException if no proband exists with the given ID
+     */
     private void validateExistence(long id) {
         if (!probandRepository.existsById(id)) {
             log.warn("Attempted to delete non-existent {} entity with id {}", ENTITY_NAME, id);
