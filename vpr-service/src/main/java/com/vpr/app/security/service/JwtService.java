@@ -2,8 +2,6 @@ package com.vpr.app.security.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.Jwts.SIG;
-import io.jsonwebtoken.impl.DefaultJwtParserBuilder;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,7 +35,7 @@ public class JwtService {
         .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME_MS))
         .id(UUID.randomUUID().toString())
         .claims(Map.of(ROLES, userDetails.getAuthorities()))
-        .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()), SIG.HS256)
+        .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()))
         .compact();
   }
 
@@ -80,8 +78,8 @@ public class JwtService {
    * @return the claims from the token
    */
   private Claims getClaims(String token) {
-    return new DefaultJwtParserBuilder()
-        .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes()))
+    return Jwts.parser()
+        .verifyWith(Keys.hmacShaKeyFor(secretKey.getBytes()))
         .build()
         .parseSignedClaims(token)
         .getPayload();
