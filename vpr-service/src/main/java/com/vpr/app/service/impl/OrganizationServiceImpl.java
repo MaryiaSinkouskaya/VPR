@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Implementation of the {@link OrganizationService} interface that provides CRUD operations
+ * for managing organization entities in the system.
+ * This service is restricted to users with ADMIN, DOCTOR, or VIEWER roles.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
@@ -21,6 +26,13 @@ public class OrganizationServiceImpl implements OrganizationService {
     public static final String ENTITY_NAME = Organization.class.getSimpleName();
     private final OrganizationRepository organizationRepository;
 
+    /**
+     * Retrieves an organization entity by its ID.
+     *
+     * @param id the ID of the organization to find
+     * @return the found organization entity
+     * @throws VprEntityNotFoundException if no organization exists with the given ID
+     */
     @Override
     public Organization findById(long id) {
         return organizationRepository.findById(id)
@@ -29,21 +41,44 @@ public class OrganizationServiceImpl implements OrganizationService {
                                 String.format(INSTANCE_DOES_NOT_EXIST, ENTITY_NAME, id)));
     }
 
+    /**
+     * Retrieves all organization entities from the system.
+     *
+     * @return a list of all organization entities
+     */
     @Override
     public List<Organization> findAll() {
         return organizationRepository.findAll();
     }
 
+    /**
+     * Creates a new organization entity in the system.
+     *
+     * @param organization the organization entity to create
+     * @return the created organization entity with generated ID
+     */
     @Override
     public Organization create(Organization organization) {
         return organizationRepository.save(organization);
     }
 
+    /**
+     * Updates an existing organization entity in the system.
+     *
+     * @param organization the organization entity to update
+     * @return the updated organization entity
+     */
     @Override
     public Organization update(Organization organization) {
         return organizationRepository.save(organization);
     }
 
+    /**
+     * Deletes an organization entity from the system by its ID.
+     *
+     * @param id the ID of the organization to delete
+     * @throws VprEntityNotFoundException if no organization exists with the given ID
+     */
     @Override
     public void delete(long id) {
         validateExistence(id);
@@ -51,6 +86,12 @@ public class OrganizationServiceImpl implements OrganizationService {
         log.info("Successfully deleted {} entity with id {}", ENTITY_NAME, id);
     }
 
+    /**
+     * Validates the existence of an organization entity with the given ID.
+     *
+     * @param id the ID to validate
+     * @throws VprEntityNotFoundException if no organization exists with the given ID
+     */
     private void validateExistence(long id) {
         if (!organizationRepository.existsById(id)) {
             log.warn("Attempted to delete non-existent {} entity with id {}", ENTITY_NAME, id);

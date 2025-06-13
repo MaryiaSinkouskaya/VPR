@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Implementation of the {@link AddressService} interface that provides CRUD operations
+ * for managing address entities in the system.
+ * This service is restricted to users with ADMIN, DOCTOR, or VIEWER roles.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
@@ -21,6 +26,13 @@ public class AddressServiceImpl implements AddressService {
     public static final String ENTITY_NAME = Address.class.getSimpleName();
     private final AddressRepository addressRepository;
 
+    /**
+     * Retrieves an address entity by its ID.
+     *
+     * @param id the ID of the address to find
+     * @return the found address entity
+     * @throws VprEntityNotFoundException if no address exists with the given ID
+     */
     @Override
     public Address findById(long id) {
         return addressRepository.findById(id)//
@@ -29,21 +41,44 @@ public class AddressServiceImpl implements AddressService {
                                 String.format(INSTANCE_DOES_NOT_EXIST, ENTITY_NAME, id)));
     }
 
+    /**
+     * Retrieves all address entities from the system.
+     *
+     * @return a list of all address entities
+     */
     @Override
     public List<Address> findAll() {
         return addressRepository.findAll();
     }
 
+    /**
+     * Creates a new address entity in the system.
+     *
+     * @param address the address entity to create
+     * @return the created address entity with generated ID
+     */
     @Override
     public Address create(Address address) {
         return addressRepository.save(address);
     }
 
+    /**
+     * Updates an existing address entity in the system.
+     *
+     * @param address the address entity to update
+     * @return the updated address entity
+     */
     @Override
     public Address update(Address address) {
         return addressRepository.save(address);
     }
 
+    /**
+     * Deletes an address entity from the system by its ID.
+     *
+     * @param id the ID of the address to delete
+     * @throws VprEntityNotFoundException if no address exists with the given ID
+     */
     @Override
     public void delete(long id) {
         validateExistence(id);
@@ -51,6 +86,12 @@ public class AddressServiceImpl implements AddressService {
         log.info("Successfully deleted {} entity with id {}", ENTITY_NAME, id);
     }
 
+    /**
+     * Validates the existence of an address entity with the given ID.
+     *
+     * @param id the ID to validate
+     * @throws VprEntityNotFoundException if no address exists with the given ID
+     */
     private void validateExistence(long id) {
         if (!addressRepository.existsById(id)) {
             log.warn("Attempted to delete non-existent {} entity with id {}",

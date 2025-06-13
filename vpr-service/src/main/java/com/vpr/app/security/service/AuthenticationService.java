@@ -19,6 +19,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.stereotype.Service;
 import java.time.Instant;
 
+/**
+ * Service responsible for handling user authentication and registration operations.
+ * Provides functionality for user registration, authentication, and JWT token management.
+ */
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -34,6 +38,13 @@ public class AuthenticationService {
   private final TokenRepository tokenRepository;
   private final KafkaAuditProducer auditProducer;
 
+  /**
+   * Registers a new user in the system.
+   *
+   * @param request the registration request containing user details
+   * @return authentication response containing the JWT token
+   * @throws UserAlreadyExistsException if a user with the given email already exists
+   */
   @Transactional
   public AuthenticationResponse registerUser(RegistrationRequest request) {
     if (userService.isUserExistsByEmail(request.getEmail())) {
@@ -45,6 +56,13 @@ public class AuthenticationService {
     return buildAuthResponse(jwtToken);
   }
 
+  /**
+   * Authenticates a user and generates a JWT token.
+   *
+   * @param request the authentication request containing user credentials
+   * @return authentication response containing the JWT token
+   * @throws InvalidCredentialsException if the provided credentials are invalid
+   */
   @Transactional
   public AuthenticationResponse authenticateUser(AuthenticationRequest request) {
     try {
@@ -70,12 +88,24 @@ public class AuthenticationService {
     return buildAuthResponse(jwtToken);
   }
 
+  /**
+   * Generates a JWT token for a user and saves it in the database.
+   *
+   * @param user the user for whom to generate the token
+   * @return the generated JWT token
+   */
   private String generateTokenForUser(User user) {
     String jwtToken = jwtService.generateToken(user);
     saveToken(user, jwtToken);
     return jwtToken;
   }
 
+  /**
+   * Saves a JWT token in the database.
+   *
+   * @param user the user associated with the token
+   * @param jwtToken the JWT token to save
+   */
   private void saveToken(User user, String jwtToken) {
     Token token = Token.builder()
         .user(user)
@@ -86,6 +116,12 @@ public class AuthenticationService {
     tokenRepository.save(token);
   }
 
+  /**
+   * Builds an authentication response containing the JWT token.
+   *
+   * @param jwtToken the JWT token to include in the response
+   * @return the authentication response
+   */
   private AuthenticationResponse buildAuthResponse(String jwtToken) {
     return AuthenticationResponse.builder()
         .accessToken(jwtToken)
