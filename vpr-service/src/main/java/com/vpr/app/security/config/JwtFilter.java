@@ -18,6 +18,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
+import static org.springframework.http.HttpHeaders.AUTHORIZATION;
+
 /**
  * JWT Authentication Filter that processes JWT tokens in incoming requests.
  * Extends OncePerRequestFilter to ensure the filter is executed once per request.
@@ -28,9 +30,11 @@ import java.io.IOException;
 @Slf4j
 public class JwtFilter extends OncePerRequestFilter {
 
+  private static final String BEARER = "Bearer ";
   private final JwtService jwtService;
   private final UserDetailsService userDetailsService;
   private final TokenRepository tokenRepository;
+  private final SecurityProperties securityProperties;
 
   /**
    * Processes each HTTP request to validate JWT tokens and set up authentication.
@@ -52,13 +56,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
     log.info("JwtFilter activated: {}", request.getRequestURI());
 
-    if (request.getServletPath().contains("/api/auth")) {
-      filterChain.doFilter(request, response);
-      return;
-    }
+    String servletPath = request.getServletPath();
+    final String authHeader = request.getHeader(AUTHORIZATION);
 
-    final String authHeader = request.getHeader("Authorization");
-    if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+    if (authHeader == null || !authHeader.startsWith(BEARER) ||
+        securityProperties.getUrls().stream().anyMatch(servletPath::startsWith)) {
       filterChain.doFilter(request, response);
       return;
     }

@@ -31,24 +31,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
   /**
-   * List of URLs that are publicly accessible without authentication.
-   * Includes authentication endpoints and Swagger documentation URLs.
-   */
-  private static final String[] WHITE_LIST_URL = {
-      "/api/auth/**",
-      "/v2/api-docs",
-      "/v3/api-docs",
-      "/v3/api-docs/**",
-      "/swagger-resources",
-      "/swagger-resources/**",
-      "/configuration/ui",
-      "/configuration/security",
-      "/swagger-ui/**",
-      "/webjars/**",
-      "/swagger-ui.html"
-  };
-
-  /**
    * Base URL template for API endpoints requiring authentication.
    */
   private static final String URL_TEMPLATE = "/api/**";
@@ -64,6 +46,7 @@ public class SecurityConfig {
   private static final String URL_TEMPLATE_USERS = "/api/user/**";
 
   private final JwtFilter jwtFilter;
+  private final SecurityProperties securityProperties;
 
   /**
    * Configures the security filter chain for the application.
@@ -82,7 +65,7 @@ public class SecurityConfig {
     http
         .csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(request ->
-            request.requestMatchers(WHITE_LIST_URL)
+            request.requestMatchers(securityProperties.getUrls().toArray(new String[0]))
                 .permitAll()
                 .requestMatchers(GET, URL_TEMPLATE).hasAuthority(READ.name())
                 .requestMatchers(POST, URL_TEMPLATE).hasAuthority(CREATE.name())

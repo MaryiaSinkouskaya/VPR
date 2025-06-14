@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  kafka:
+    bootstrap-servers: kafka:9093
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+server:
+  port: 8081
+
+vpr:
+  openapi:
+    dev-url: http://localhost:${server.port}
+
+security:
+  whitelist:
+    urls:
+      - /api/auth/**
+      - /v2/api-docs
+      - /v3/api-docs
+      - /v3/api-docs/**
+      - /swagger-resources
+      - /swagger-resources/**
+      - /configuration/ui
+      - /configuration/security
+      - /swagger-ui/**
+      - /webjars/**
+      - /swagger-ui.html
