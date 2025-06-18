@@ -1,5 +1,6 @@
 package com.vpr.app.controller;
 
+import static org.springframework.http.HttpStatus.*;
 import static org.springframework.http.HttpStatus.CREATED;
 import com.vpr.app.dto.request.AbnormalityRequestDto;
 import com.vpr.app.dto.request.mappers.AbnormalityConverter;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @Tag(name = "Abnormality", description = "List of probands abnormalities", externalDocs = @ExternalDocumentation(
-    description = "About: what the abnormality is",
+    description = "About: what the abnormality is.",
     url = "https://www.ncbi.nlm.nih.gov/books/NBK557691/"))
 @RequiredArgsConstructor
 @RestController
@@ -43,7 +44,9 @@ public class AbnormalityController {
    */
   @GetMapping
   @Operation(summary = "Get all abnormalities", description = "Retrieves a list of all abnormalities.")
-  @ApiResponse(responseCode = "200", description = "Successfully retrieved the list of abnormalities")
+  @ApiResponse(responseCode = "200", description = "Successfully retrieved the list of abnormalities", content = @io.swagger.v3.oas.annotations.media.Content(
+      mediaType = MediaType.APPLICATION_JSON_VALUE,
+      schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = Abnormality.class)))
   @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
   public ResponseEntity<List<Abnormality>> getAbnormalities() {
     List<Abnormality> abnormalities = abnormalityService.findAll();
@@ -59,12 +62,19 @@ public class AbnormalityController {
    */
   @GetMapping("/{id}")
   @Operation(summary = "Get an abnormality by ID", description = "Retrieves the abnormality with the specified ID.")
-  @ApiResponse(responseCode = "200", description = "Successfully retrieved the abnormality")
-  @ApiResponse(responseCode = "404", description = "Abnormality not found")
+  @ApiResponse(responseCode = "200", description = "Successfully retrieved the abnormality", content = @io.swagger.v3.oas.annotations.media.Content(
+      mediaType = MediaType.APPLICATION_JSON_VALUE,
+      schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = Abnormality.class)))
+  @ApiResponse(responseCode = "404", description = "Abnormality not found", content = @io.swagger.v3.oas.annotations.media.Content(
+      mediaType = MediaType.APPLICATION_JSON_VALUE))
+  @io.swagger.v3.oas.annotations.Parameter(name = "id", description = "ID of the abnormality to retrieve", example = "1")
   @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR') or hasRole('VIEWER')")
   public ResponseEntity<Abnormality> getAbnormalityById(
       @PathVariable(name = "id") long id) {
     Abnormality abnormality = abnormalityService.findById(id);
+    if (abnormality == null) {
+      return ResponseEntity.status(NOT_FOUND).build();
+    }
     return ResponseEntity.ok(abnormality);
   }
 
@@ -77,8 +87,11 @@ public class AbnormalityController {
    */
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
   @Operation(summary = "Create a new abnormality", description = "Creates a new abnormality with the provided details.")
-  @ApiResponse(responseCode = "201", description = "Successfully created the abnormality")
-  @ApiResponse(responseCode = "400", description = "Invalid input data")
+  @ApiResponse(responseCode = "201", description = "Successfully created the abnormality", content = @io.swagger.v3.oas.annotations.media.Content(
+      mediaType = MediaType.APPLICATION_JSON_VALUE,
+      schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = Abnormality.class)))
+  @ApiResponse(responseCode = "400", description = "Invalid input data", content = @io.swagger.v3.oas.annotations.media.Content(
+      mediaType = MediaType.APPLICATION_JSON_VALUE))
   @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
   public ResponseEntity<Abnormality> createAbnormality(
       @Validated(OnCreate.class) @RequestBody AbnormalityRequestDto abnormalityDto) {
@@ -96,14 +109,21 @@ public class AbnormalityController {
    */
   @PatchMapping
   @Operation(summary = "Update an abnormality", description = "Updates an existing abnormality with the provided details.")
-  @ApiResponse(responseCode = "200", description = "Successfully updated the abnormality")
-  @ApiResponse(responseCode = "400", description = "Invalid input data")
-  @ApiResponse(responseCode = "404", description = "Abnormality not found")
+  @ApiResponse(responseCode = "200", description = "Successfully updated the abnormality", content = @io.swagger.v3.oas.annotations.media.Content(
+      mediaType = MediaType.APPLICATION_JSON_VALUE,
+      schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = Abnormality.class)))
+  @ApiResponse(responseCode = "400", description = "Invalid input data", content = @io.swagger.v3.oas.annotations.media.Content(
+      mediaType = MediaType.APPLICATION_JSON_VALUE))
+  @ApiResponse(responseCode = "404", description = "Abnormality not found", content = @io.swagger.v3.oas.annotations.media.Content(
+      mediaType = MediaType.APPLICATION_JSON_VALUE))
   @PreAuthorize("hasRole('ADMIN') or hasRole('DOCTOR')")
   public ResponseEntity<Abnormality> updateAbnormality(
       @Validated(OnUpdate.class) @RequestBody AbnormalityRequestDto abnormalityDto) {
     Abnormality abnormality = abnormalityConverter.toEntity(abnormalityDto);
     Abnormality updatedAbnormality = abnormalityService.update(abnormality);
+    if (updatedAbnormality == null) {
+      return ResponseEntity.status(NOT_FOUND).build();
+    }
     return ResponseEntity.ok(updatedAbnormality);
   }
 

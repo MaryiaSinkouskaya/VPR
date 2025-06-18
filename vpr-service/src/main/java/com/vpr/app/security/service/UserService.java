@@ -88,7 +88,7 @@ public class UserService {
    *
    * @throws UserAlreadyExistsException if a user with the same email already exists
    */
-  @AuditCreate(entity = "User", id = "#result.id")
+  @AuditCreate(entity = "User")
   @PreAuthorize("hasRole('ADMIN')")
   public User createUser(RegistrationRequest registrationRequest) {
     User user = userConverter.convertRegisterRequestToUser(registrationRequest);

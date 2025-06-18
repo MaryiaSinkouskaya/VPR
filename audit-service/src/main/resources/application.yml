@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: ${SPRING_AUDIT_DATASOURCE_URL}
+    username: ${SPRING_AUDIT_DATASOURCE_USERNAME}
+    password: ${SPRING_AUDIT_DATASOURCE_PASSWORD}
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS}
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "*"

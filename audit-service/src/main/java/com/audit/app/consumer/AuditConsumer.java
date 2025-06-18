@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class AuditConsumer {
 
-  @KafkaListener(topics = "audit-log", groupId = "audit-service")
+  @KafkaListener(topicPattern = "audit-.*", groupId = "audit-service")
   public void listen(AuditEvent event) {
     // Save event to DB
-    log.info("AUDIT: " + event);
+    log.info("AUDIT: " + event);//todo fix delay
   }
 }
