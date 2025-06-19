@@ -1,5 +1,8 @@
 package com.vpr.app.service.impl;
 
+import com.vpr.app.audit.log.annotation.AuditCreate;
+import com.vpr.app.audit.log.annotation.AuditDelete;
+import com.vpr.app.audit.log.annotation.AuditUpdate;
 import com.vpr.app.entity.Workplace;
 import com.vpr.app.exceptions.VprEntityNotFoundException;
 import com.vpr.app.repository.WorkplaceRepository;
@@ -58,6 +61,7 @@ public class WorkplaceServiceImpl implements WorkplaceService {
      * @return the created workplace entity with generated ID
      */
     @Override
+    @AuditCreate(entity = "Workplace")
     public Workplace create(Workplace workplace) {
         return workplaceRepository.save(workplace);
     }
@@ -69,6 +73,7 @@ public class WorkplaceServiceImpl implements WorkplaceService {
      * @return the updated workplace entity
      */
     @Override
+    @AuditUpdate(entity = "Workplace")
     public Workplace update(Workplace workplace) {
         return workplaceRepository.save(workplace);
     }
@@ -80,6 +85,7 @@ public class WorkplaceServiceImpl implements WorkplaceService {
      * @throws VprEntityNotFoundException if no workplace exists with the given ID
      */
     @Override
+    @AuditDelete(entity = "Workplace")
     public void delete(long id) {
         validateExistence(id);
         workplaceRepository.deleteById(id);

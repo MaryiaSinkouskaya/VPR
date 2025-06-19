@@ -1,5 +1,8 @@
 package com.vpr.app.service.impl;
 
+import com.vpr.app.audit.log.annotation.AuditCreate;
+import com.vpr.app.audit.log.annotation.AuditDelete;
+import com.vpr.app.audit.log.annotation.AuditUpdate;
 import com.vpr.app.entity.Note;
 import com.vpr.app.exceptions.VprEntityNotFoundException;
 import com.vpr.app.repository.NoteRepository;
@@ -58,6 +61,7 @@ public class NoteServiceImpl implements NoteService {
      * @return the created note entity with generated ID
      */
     @Override
+    @AuditCreate(entity = "Note")
     public Note create(Note note) {
         return noteRepository.save(note);
     }
@@ -69,6 +73,7 @@ public class NoteServiceImpl implements NoteService {
      * @return the updated note entity
      */
     @Override
+    @AuditUpdate(entity = "Note")
     public Note update(Note note) {
         return noteRepository.save(note);
     }
@@ -80,6 +85,7 @@ public class NoteServiceImpl implements NoteService {
      * @throws VprEntityNotFoundException if no note exists with the given ID
      */
     @Override
+    @AuditDelete(entity = "Note")
     public void delete(long id) {
         validateExistence(id);
         noteRepository.deleteById(id);

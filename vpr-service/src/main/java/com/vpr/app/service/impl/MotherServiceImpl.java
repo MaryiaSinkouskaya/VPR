@@ -1,5 +1,8 @@
 package com.vpr.app.service.impl;
 
+import com.vpr.app.audit.log.annotation.AuditCreate;
+import com.vpr.app.audit.log.annotation.AuditDelete;
+import com.vpr.app.audit.log.annotation.AuditUpdate;
 import com.vpr.app.entity.Mother;
 import com.vpr.app.exceptions.VprEntityNotFoundException;
 import com.vpr.app.repository.MotherRepository;
@@ -58,6 +61,7 @@ public class MotherServiceImpl implements MotherService {
      * @return the created mother entity with generated ID
      */
     @Override
+    @AuditCreate(entity = "Mother")
     public Mother create(Mother mother) {
         return motherRepository.save(mother);
     }
@@ -69,6 +73,7 @@ public class MotherServiceImpl implements MotherService {
      * @return the updated mother entity
      */
     @Override
+    @AuditUpdate(entity = "Mother")
     public Mother update(Mother mother) {
         return motherRepository.save(mother);
     }
@@ -80,6 +85,7 @@ public class MotherServiceImpl implements MotherService {
      * @throws VprEntityNotFoundException if no mother exists with the given ID
      */
     @Override
+    @AuditDelete(entity = "Mother")
     public void delete(long id) {
         validateExistence(id);
         motherRepository.deleteById(id);
