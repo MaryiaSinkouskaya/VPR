@@ -1,5 +1,8 @@
 package com.vpr.app.service.impl;
 
+import com.vpr.app.audit.log.annotation.AuditCreate;
+import com.vpr.app.audit.log.annotation.AuditDelete;
+import com.vpr.app.audit.log.annotation.AuditUpdate;
 import com.vpr.app.entity.Abnormality;
 import com.vpr.app.exceptions.VprEntityNotFoundException;
 import com.vpr.app.repository.AbnormalityRepository;
@@ -58,6 +61,7 @@ public class AbnormalityServiceImpl implements AbnormalityService {
      * @return the created abnormality entity with generated ID
      */
     @Override
+    @AuditCreate(entity = "Abnormality")
     public Abnormality create(Abnormality abnormality) {
         return abnormalityRepository.save(abnormality);
     }
@@ -69,6 +73,7 @@ public class AbnormalityServiceImpl implements AbnormalityService {
      * @return the updated abnormality entity
      */
     @Override
+    @AuditUpdate(entity = "Abnormality")
     public Abnormality update(Abnormality abnormality) {
         return abnormalityRepository.save(abnormality);
     }
@@ -80,6 +85,7 @@ public class AbnormalityServiceImpl implements AbnormalityService {
      * @throws VprEntityNotFoundException if no abnormality exists with the given ID
      */
     @Override
+    @AuditDelete(entity = "Abnormality")
     public void delete(long id) {
         validateExistence(id);
         abnormalityRepository.deleteById(id);

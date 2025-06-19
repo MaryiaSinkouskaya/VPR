@@ -1,5 +1,8 @@
 package com.vpr.app.service.impl;
 
+import com.vpr.app.audit.log.annotation.AuditCreate;
+import com.vpr.app.audit.log.annotation.AuditDelete;
+import com.vpr.app.audit.log.annotation.AuditUpdate;
 import com.vpr.app.entity.Organization;
 import com.vpr.app.exceptions.VprEntityNotFoundException;
 import com.vpr.app.repository.OrganizationRepository;
@@ -58,6 +61,7 @@ public class OrganizationServiceImpl implements OrganizationService {
      * @return the created organization entity with generated ID
      */
     @Override
+    @AuditCreate(entity = "Organization")
     public Organization create(Organization organization) {
         return organizationRepository.save(organization);
     }
@@ -69,6 +73,7 @@ public class OrganizationServiceImpl implements OrganizationService {
      * @return the updated organization entity
      */
     @Override
+    @AuditUpdate(entity = "Organization")
     public Organization update(Organization organization) {
         return organizationRepository.save(organization);
     }
@@ -80,6 +85,7 @@ public class OrganizationServiceImpl implements OrganizationService {
      * @throws VprEntityNotFoundException if no organization exists with the given ID
      */
     @Override
+    @AuditDelete(entity = "Organization")
     public void delete(long id) {
         validateExistence(id);
         organizationRepository.deleteById(id);

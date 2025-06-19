@@ -1,5 +1,8 @@
 package com.vpr.app.service.impl;
 
+import com.vpr.app.audit.log.annotation.AuditCreate;
+import com.vpr.app.audit.log.annotation.AuditDelete;
+import com.vpr.app.audit.log.annotation.AuditUpdate;
 import com.vpr.app.entity.Address;
 import com.vpr.app.exceptions.VprEntityNotFoundException;
 import com.vpr.app.repository.AddressRepository;
@@ -58,6 +61,7 @@ public class AddressServiceImpl implements AddressService {
      * @return the created address entity with generated ID
      */
     @Override
+    @AuditCreate(entity = "Address")
     public Address create(Address address) {
         return addressRepository.save(address);
     }
@@ -69,6 +73,7 @@ public class AddressServiceImpl implements AddressService {
      * @return the updated address entity
      */
     @Override
+    @AuditUpdate(entity = "Address")
     public Address update(Address address) {
         return addressRepository.save(address);
     }
@@ -80,6 +85,7 @@ public class AddressServiceImpl implements AddressService {
      * @throws VprEntityNotFoundException if no address exists with the given ID
      */
     @Override
+    @AuditDelete(entity = "Address")
     public void delete(long id) {
         validateExistence(id);
         addressRepository.deleteById(id);

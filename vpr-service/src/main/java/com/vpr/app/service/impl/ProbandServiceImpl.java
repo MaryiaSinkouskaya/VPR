@@ -1,5 +1,8 @@
 package com.vpr.app.service.impl;
 
+import com.vpr.app.audit.log.annotation.AuditCreate;
+import com.vpr.app.audit.log.annotation.AuditDelete;
+import com.vpr.app.audit.log.annotation.AuditUpdate;
 import com.vpr.app.entity.Proband;
 import com.vpr.app.exceptions.VprEntityNotFoundException;
 import com.vpr.app.repository.ProbandRepository;
@@ -58,6 +61,7 @@ public class ProbandServiceImpl implements ProbandService {
      * @return the created proband entity with generated ID
      */
     @Override
+    @AuditCreate(entity = "Proband")
     public Proband create(Proband proband) {
         return probandRepository.save(proband);
     }
@@ -69,6 +73,7 @@ public class ProbandServiceImpl implements ProbandService {
      * @return the updated proband entity
      */
     @Override
+    @AuditUpdate(entity = "Proband")
     public Proband update(Proband proband) {
         return probandRepository.save(proband);
     }
@@ -80,6 +85,7 @@ public class ProbandServiceImpl implements ProbandService {
      * @throws VprEntityNotFoundException if no proband exists with the given ID
      */
     @Override
+    @AuditDelete(entity = "Proband")
     public void delete(long id) {
         validateExistence(id);
         probandRepository.deleteById(id);

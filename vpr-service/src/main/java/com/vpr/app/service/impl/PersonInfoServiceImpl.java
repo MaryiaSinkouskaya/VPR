@@ -1,5 +1,8 @@
 package com.vpr.app.service.impl;
 
+import com.vpr.app.audit.log.annotation.AuditCreate;
+import com.vpr.app.audit.log.annotation.AuditDelete;
+import com.vpr.app.audit.log.annotation.AuditUpdate;
 import com.vpr.app.entity.PersonInfo;
 import com.vpr.app.exceptions.VprEntityNotFoundException;
 import com.vpr.app.repository.PersonInfoRepository;
@@ -58,6 +61,7 @@ public class PersonInfoServiceImpl implements PersonInfoService {
      * @return the created person information entity with generated ID
      */
     @Override
+    @AuditCreate(entity = "PersonInfo")
     public PersonInfo create(PersonInfo personInfo) {
         return personInfoRepository.save(personInfo);
     }
@@ -69,6 +73,7 @@ public class PersonInfoServiceImpl implements PersonInfoService {
      * @return the updated person information entity
      */
     @Override
+    @AuditUpdate(entity = "PersonInfo")
     public PersonInfo update(PersonInfo personInfo) {
         return personInfoRepository.save(personInfo);
     }
@@ -80,6 +85,7 @@ public class PersonInfoServiceImpl implements PersonInfoService {
      * @throws VprEntityNotFoundException if no person information exists with the given ID
      */
     @Override
+    @AuditDelete(entity = "PersonInfo")
     public void delete(long id) {
         validateExistence(id);
         personInfoRepository.deleteById(id);

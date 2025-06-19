@@ -1,5 +1,8 @@
 package com.vpr.app.service.impl;
 
+import com.vpr.app.audit.log.annotation.AuditCreate;
+import com.vpr.app.audit.log.annotation.AuditDelete;
+import com.vpr.app.audit.log.annotation.AuditUpdate;
 import com.vpr.app.entity.Doctor;
 import com.vpr.app.exceptions.VprEntityNotFoundException;
 import com.vpr.app.repository.DoctorRepository;
@@ -58,6 +61,7 @@ public class DoctorServiceImpl implements DoctorService {
      * @return the created doctor entity with generated ID
      */
     @Override
+    @AuditCreate(entity = "Doctor")
     public Doctor create(Doctor doctor) {
         return doctorRepository.save(doctor);
     }
@@ -69,6 +73,7 @@ public class DoctorServiceImpl implements DoctorService {
      * @return the updated doctor entity
      */
     @Override
+    @AuditUpdate(entity = "Doctor")
     public Doctor update(Doctor doctor) {
         return doctorRepository.save(doctor);
     }
@@ -80,6 +85,7 @@ public class DoctorServiceImpl implements DoctorService {
      * @throws VprEntityNotFoundException if no doctor exists with the given ID
      */
     @Override
+    @AuditDelete(entity = "Doctor")
     public void delete(long id) {
         validateExistence(id);
         doctorRepository.deleteById(id);
