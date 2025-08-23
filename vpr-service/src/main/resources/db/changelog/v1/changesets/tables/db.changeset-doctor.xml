@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-doctor-table" author="maryia">
+        <comment>Create doctor table with sequence</comment>
+        
+        <!-- Create sequence for doctor id -->
+        <createSequence 
+            sequenceName="doctor_id_seq" 
+            startValue="10" 
+            incrementBy="1"/>
+        
+        <!-- Create doctor table -->
+        <createTable tableName="doctor">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="speciality" type="VARCHAR(32)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="person_info_id" type="INTEGER"/>
+        </createTable>
+        
+        <!-- Set the sequence to be owned by the doctor.id column -->
+        <sql>ALTER SEQUENCE doctor_id_seq OWNED BY doctor.id;</sql>
+    </changeSet>
+
+</databaseChangeLog>

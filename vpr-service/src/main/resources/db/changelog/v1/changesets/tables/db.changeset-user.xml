@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-user-table" author="maryia">
+        <comment>Create _user table with sequence and unique constraint</comment>
+        
+        <!-- Create sequence for user id -->
+        <createSequence 
+            sequenceName="user_id_seq" 
+            startValue="10" 
+            incrementBy="1"/>
+        
+        <!-- Create _user table -->
+        <createTable tableName="_user">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="TEXT">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="TEXT"/>
+        </createTable>
+        
+        <!-- Set the sequence to be owned by the _user.id column -->
+        <sql>ALTER SEQUENCE user_id_seq OWNED BY _user.id;</sql>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="create-note-table" author="maryia">
+        <comment>Create note table with sequence</comment>
+        
+        <!-- Create sequence for note id -->
+        <createSequence 
+            sequenceName="note_id_seq" 
+            startValue="10" 
+            incrementBy="1"/>
+        
+        <!-- Create note table -->
+        <createTable tableName="note">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="date" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="note" type="TEXT"/>
+        </createTable>
+        
+        <!-- Set the sequence to be owned by the note.id column -->
+        <sql>ALTER SEQUENCE note_id_seq OWNED BY note.id;</sql>
+    </changeSet>
+
+</databaseChangeLog>
