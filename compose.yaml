@@ -1,6 +1,5 @@
 services:
   vpr-service:
-    container_name: vpr-service
     image: vpr-service
     build:
       context: ./vpr-service
@@ -16,7 +15,6 @@ services:
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER_VPR}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD_VPR}
   db:
-    container_name: postgresDB
     image: postgres:13.3
     environment:
       POSTGRES_DB: ${POSTGRES_DB_VPR}
@@ -27,8 +25,6 @@ services:
       - ./vpr-service/src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
   kafka:
     image: bitnami/kafka:latest
-    ports:
-      - "9093:9093"
     environment:
       KAFKA_KRAFT_MODE_ENABLED: "yes"
       KAFKA_CFG_PROCESS_ROLES: "broker,controller"
@@ -40,13 +36,10 @@ services:
       KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
       KAFKA_CFG_AUTO_CREATE_TOPICS_ENABLE: "true"
   audit-service:
-    container_name: audit-service
     image: audit-service
     build:
       context: ./audit-service
       dockerfile: Dockerfile
-    ports:
-      - "8082:8082"
     environment:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9093
       SPRING_AUDIT_DATASOURCE_URL: jdbc:postgresql://audit-db:5432/${POSTGRES_DB_AUDIT}
@@ -57,12 +50,9 @@ services:
       - audit-db
   audit-db:
     image: postgres:15
-    container_name: audit-db
     environment:
       POSTGRES_DB: ${POSTGRES_DB_AUDIT}
       POSTGRES_USER: ${POSTGRES_USER_AUDIT}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_AUDIT}
-    ports:
-      - "5433:5432"
 volumes:
   db-data:
