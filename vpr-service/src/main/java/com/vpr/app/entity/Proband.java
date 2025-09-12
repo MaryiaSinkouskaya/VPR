@@ -99,11 +99,11 @@ public class Proband {
 
     @Schema(description = "Ploidy - the number of chromosomes occurring in the nucleus of a cell", example = "DIPLOID")
     @Column(name = "ploidity")
-    private Ploidity ploid;
+    private String ploid;
 
     @Schema(description = "Labour outcome", example = "LIVE_BIRTH")
     @Column(name = "labor_outcome")
-    private LaborOutcome laborOutcome;
+    private String laborOutcome;
 
     @Schema(description = "Proband's gender", example = "FEMALE")
     @Column(name = "gender")

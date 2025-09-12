@@ -56,11 +56,11 @@ public class ProbandRequestDto {
 
     @NotNull(message = "Ploidity must not be null")
     @Schema(description = "Ploidity details", requiredMode = RequiredMode.REQUIRED)
-    private Ploidity ploid;
+    private String ploid;
 
     @NotNull(message = "Labor outcome must not be null")
     @Schema(description = "Outcome of the labor", requiredMode = RequiredMode.REQUIRED)
-    private LaborOutcome laborOutcome;
+    private String laborOutcome;
 
     @Schema(description = "Additional note about the proband", requiredMode = RequiredMode.NOT_REQUIRED)
     private NoteRequestDto note;
