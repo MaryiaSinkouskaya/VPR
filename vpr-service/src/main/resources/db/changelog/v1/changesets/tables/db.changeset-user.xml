@@ -10,7 +10,7 @@
         <!-- Create sequence for user id -->
         <createSequence 
             sequenceName="user_id_seq" 
-            startValue="10" 
+            startValue="20"
             incrementBy="1"/>
         
         <!-- Create _user table -->

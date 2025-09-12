@@ -10,7 +10,7 @@
         <!-- Create sequence for proband id -->
         <createSequence 
             sequenceName="proband_id_seq" 
-            startValue="10" 
+            startValue="20"
             incrementBy="1"/>
         
         <!-- Create proband table -->

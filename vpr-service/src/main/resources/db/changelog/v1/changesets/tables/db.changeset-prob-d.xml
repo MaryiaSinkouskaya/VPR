@@ -10,7 +10,7 @@
         <!-- Create sequence for prob_d id -->
         <createSequence 
             sequenceName="prob_d_id_seq" 
-            startValue="10" 
+            startValue="20"
             incrementBy="1"/>
         
         <!-- Create prob_d table -->

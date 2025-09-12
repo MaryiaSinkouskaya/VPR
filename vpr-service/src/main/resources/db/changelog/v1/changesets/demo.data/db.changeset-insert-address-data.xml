@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="insert-address-data" author="vpr-system">
+        <comment>Insert address data</comment>
+        
+        <!-- Insert address data -->
+        <insert tableName="address">
+            <column name="id" value="1"/>
+            <column name="street" value="Inrernatsionalnaya"/>
+            <column name="building" value="33"/>
+            <column name="apartment" value="10"/>
+            <column name="town" value="Brest"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="2"/>
+            <column name="street" value="Tsentralnaya"/>
+            <column name="building" value="11"/>
+            <column name="apartment" value="48"/>
+            <column name="town" value="Brest"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="3"/>
+            <column name="street" value="Sovetskaya"/>
+            <column name="building" value="19"/>
+            <column name="apartment" value="1"/>
+            <column name="town" value="Minsk"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="4"/>
+            <column name="street" value="Volhohratskaya"/>
+            <column name="building" value="1"/>
+            <column name="apartment" value="12"/>
+            <column name="town" value="Minsk"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="5"/>
+            <column name="street" value="Kalinina"/>
+            <column name="building" value="2"/>
+            <column name="apartment" value="9"/>
+            <column name="town" value="Mohilev"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="6"/>
+            <column name="street" value="Nekrasova"/>
+            <column name="building" value="34"/>
+            <column name="apartment" value="3"/>
+            <column name="town" value="Mohilev"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="7"/>
+            <column name="street" value="Surhanova"/>
+            <column name="building" value="87"/>
+            <column name="apartment" value="55"/>
+            <column name="town" value="Vitsebsk"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="8"/>
+            <column name="street" value="Raduzhnaya"/>
+            <column name="building" value="32"/>
+            <column name="apartment" value="108"/>
+            <column name="town" value="Smolevichi"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="9"/>
+            <column name="street" value="Kalininovskogo"/>
+            <column name="building" value="12"/>
+            <column name="apartment" value="43"/>
+            <column name="town" value="Minsk"/>
+        </insert>
+        
+        <!-- Additional address data -->
+        <insert tableName="address">
+            <column name="id" value="10"/>
+            <column name="street" value="Lenina"/>
+            <column name="building" value="15"/>
+            <column name="apartment" value="7"/>
+            <column name="town" value="Grodno"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="11"/>
+            <column name="street" value="Sovetskaya"/>
+            <column name="building" value="42"/>
+            <column name="apartment" value="25"/>
+            <column name="town" value="Gomel"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="12"/>
+            <column name="street" value="Pobediteley"/>
+            <column name="building" value="8"/>
+            <column name="apartment" value="14"/>
+            <column name="town" value="Minsk"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="13"/>
+            <column name="street" value="Kirova"/>
+            <column name="building" value="67"/>
+            <column name="apartment" value="89"/>
+            <column name="town" value="Brest"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="14"/>
+            <column name="street" value="Gorkogo"/>
+            <column name="building" value="23"/>
+            <column name="apartment" value="56"/>
+            <column name="town" value="Vitsebsk"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="15"/>
+            <column name="street" value="Pushkina"/>
+            <column name="building" value="91"/>
+            <column name="apartment" value="12"/>
+            <column name="town" value="Mohilev"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="16"/>
+            <column name="street" value="Mira"/>
+            <column name="building" value="25"/>
+            <column name="apartment" value="18"/>
+            <column name="town" value="Grodno"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="17"/>
+            <column name="street" value="Kommunisticheskaya"/>
+            <column name="building" value="78"/>
+            <column name="apartment" value="42"/>
+            <column name="town" value="Gomel"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="18"/>
+            <column name="street" value="Nezavisimosti"/>
+            <column name="building" value="156"/>
+            <column name="apartment" value="67"/>
+            <column name="town" value="Minsk"/>
+        </insert>
+        <insert tableName="address">
+            <column name="id" value="19"/>
+            <column name="street" value="Revolutsionnaya"/>
+            <column name="building" value="33"/>
+            <column name="apartment" value="91"/>
+            <column name="town" value="Brest"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

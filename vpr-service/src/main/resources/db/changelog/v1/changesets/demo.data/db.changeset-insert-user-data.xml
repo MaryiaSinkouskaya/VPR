@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="insert-user-data" author="vpr-system">
+        <comment>Insert _user data</comment>
+        <insert tableName="_user">
+            <column name="id" value="1"/>
+            <column name="email" value="bjksdkjvsd@mail.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="2"/>
+            <column name="email" value="bjksdkjvsd2@mail.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="VIEWER"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="3"/>
+            <column name="email" value="bnkjljek83sd@mail.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="DOCTOR"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="4"/>
+            <column name="email" value="genetics@hospital.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="DOCTOR"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="5"/>
+            <column name="email" value="pediatrics@clinic.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="DOCTOR"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="6"/>
+            <column name="email" value="researcher@institute.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="VIEWER"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="7"/>
+            <column name="email" value="nurse@hospital.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="VIEWER"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="8"/>
+            <column name="email" value="admin@clinic.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="9"/>
+            <column name="email" value="lab@institute.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="VIEWER"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="10"/>
+            <column name="email" value="surgeon@center.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="DOCTOR"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="11"/>
+            <column name="email" value="therapist@rehab.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="DOCTOR"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="12"/>
+            <column name="email" value="radiologist@imaging.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="DOCTOR"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="13"/>
+            <column name="email" value="dentist@clinic.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="DOCTOR"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="14"/>
+            <column name="email" value="psychiatrist@mental.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="DOCTOR"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="15"/>
+            <column name="email" value="oncologist@cancer.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="DOCTOR"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="16"/>
+            <column name="email" value="neurologist@neuro.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="DOCTOR"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="17"/>
+            <column name="email" value="technician@lab.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="VIEWER"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="18"/>
+            <column name="email" value="supervisor@health.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="_user">
+            <column name="id" value="19"/>
+            <column name="email" value="intern@hospital.com"/>
+            <column name="password" value="$2a$10$1jr6BtRN45FjDJoE/KT.kuPncJyP4Oxf/qmAGHsq6Mj2H9JX51taO"/>
+            <column name="role" value="VIEWER"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

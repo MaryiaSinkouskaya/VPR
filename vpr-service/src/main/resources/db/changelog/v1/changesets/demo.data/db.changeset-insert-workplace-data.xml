@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="insert-workplace-data" author="vpr-system">
+        <comment>Insert workplace data</comment>
+        <insert tableName="workplace">
+            <column name="id" value="1"/>
+            <column name="job_type" value="info am"/>
+            <column name="company" value="First"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="2"/>
+            <column name="job_type" value="info dnms"/>
+            <column name="company" value="Second"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="3"/>
+            <column name="job_type" value="info jdm"/>
+            <column name="company" value="Third"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="4"/>
+            <column name="job_type" value="medical"/>
+            <column name="company" value="City Hospital"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="5"/>
+            <column name="job_type" value="education"/>
+            <column name="company" value="University"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="6"/>
+            <column name="job_type" value="research"/>
+            <column name="company" value="Research Institute"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="7"/>
+            <column name="job_type" value="government"/>
+            <column name="company" value="Ministry of Health"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="8"/>
+            <column name="job_type" value="pharmacy"/>
+            <column name="company" value="City Pharmacy"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="9"/>
+            <column name="job_type" value="laboratory"/>
+            <column name="company" value="Diagnostic Lab"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="10"/>
+            <column name="job_type" value="nursing"/>
+            <column name="company" value="Nursing Home"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="11"/>
+            <column name="job_type" value="administration"/>
+            <column name="company" value="Health Department"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="12"/>
+            <column name="job_type" value="emergency"/>
+            <column name="company" value="Emergency Services"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="13"/>
+            <column name="job_type" value="surgery"/>
+            <column name="company" value="Surgical Center"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="14"/>
+            <column name="job_type" value="therapy"/>
+            <column name="company" value="Rehabilitation Center"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="15"/>
+            <column name="job_type" value="radiology"/>
+            <column name="company" value="Imaging Center"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="16"/>
+            <column name="job_type" value="dental"/>
+            <column name="company" value="Dental Clinic"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="17"/>
+            <column name="job_type" value="mental_health"/>
+            <column name="company" value="Mental Health Center"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="18"/>
+            <column name="job_type" value="oncology"/>
+            <column name="company" value="Cancer Center"/>
+        </insert>
+        <insert tableName="workplace">
+            <column name="id" value="19"/>
+            <column name="job_type" value="neurology"/>
+            <column name="company" value="Neurological Institute"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>

@@ -10,7 +10,7 @@
         <!-- Create sequence for mother id -->
         <createSequence 
             sequenceName="mother_id_seq" 
-            startValue="10" 
+            startValue="20"
             incrementBy="1"/>
         
         <!-- Create mother table -->
