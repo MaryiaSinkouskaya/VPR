@@ -2,11 +2,24 @@ package com.vpr.app.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.vpr.app.enums.Gender;
 import com.vpr.app.enums.LaborOutcome;
 import com.vpr.app.enums.Ploidity;
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -99,15 +112,18 @@ public class Proband {
 
     @Schema(description = "Ploidy - the number of chromosomes occurring in the nucleus of a cell", example = "DIPLOID")
     @Column(name = "ploidity")
-    private String ploid;
+    @Enumerated(EnumType.STRING)
+    private Ploidity ploid;
 
     @Schema(description = "Labour outcome", example = "LIVE_BIRTH")
     @Column(name = "labor_outcome")
-    private String laborOutcome;
+    @Enumerated(EnumType.STRING)
+    private LaborOutcome laborOutcome;
 
     @Schema(description = "Proband's gender", example = "FEMALE")
     @Column(name = "gender")
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @Schema(description = "Additional note about proband")
     @ManyToOne(cascade = {

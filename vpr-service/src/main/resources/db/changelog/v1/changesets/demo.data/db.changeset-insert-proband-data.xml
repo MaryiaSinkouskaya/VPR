@@ -22,6 +22,8 @@
             <column name="note_id" value="1"/>
             <column name="birth_date" value="2021-12-07"/>
             <column name="gender" value="FEMALE"/>
+            <column name="ploidity" value="TRISOMY"/>
+            <column name="labor_outcome" value="LIVE_BIRTH"/>
         </insert>
         <insert tableName="proband">
             <column name="id" value="3"/>
@@ -39,6 +41,8 @@
             <column name="note_id" value="2"/>
             <column name="birth_date" value="2024-07-10"/>
             <column name="gender" value="MALE"/>
+            <column name="ploidity" value="TRISOMY"/>
+            <column name="labor_outcome" value="LIVE_BIRTH"/>
         </insert>
         
         <insert tableName="proband">
@@ -77,7 +81,7 @@
             <column name="birth_date" value="2022-07-20"/>
             <column name="gender" value="FEMALE"/>
             <column name="ploidity" value="MONOSOMY"/>
-            <column name="labor_outcome" value="CESAREAN"/>
+            <column name="labor_outcome" value="LIVE_BIRTH"/>
         </insert>
         <insert tableName="proband">
             <column name="id" value="6"/>
@@ -153,7 +157,7 @@
             <column name="birth_date" value="2021-06-15"/>
             <column name="gender" value="MALE"/>
             <column name="ploidity" value="TRISOMY"/>
-            <column name="labor_outcome" value="CESAREAN"/>
+            <column name="labor_outcome" value="LIVE_BIRTH"/>
         </insert>
         <insert tableName="proband">
             <column name="id" value="10"/>
@@ -229,7 +233,7 @@
             <column name="birth_date" value="2022-03-12"/>
             <column name="gender" value="MALE"/>
             <column name="ploidity" value="DELETION"/>
-            <column name="labor_outcome" value="CESAREAN"/>
+            <column name="labor_outcome" value="LIVE_BIRTH"/>
         </insert>
         <insert tableName="proband">
             <column name="id" value="14"/>
@@ -305,7 +309,7 @@
             <column name="birth_date" value="2023-01-15"/>
             <column name="gender" value="MALE"/>
             <column name="ploidity" value="DELETION"/>
-            <column name="labor_outcome" value="CESAREAN"/>
+            <column name="labor_outcome" value="LIVE_BIRTH"/>
         </insert>
         <insert tableName="proband">
             <column name="id" value="18"/>
