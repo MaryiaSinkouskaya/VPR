@@ -6,14 +6,12 @@
 
     <changeSet id="create-doctor-table" author="maryia">
         <comment>Create doctor table with sequence</comment>
-        
-        <!-- Create sequence for doctor id -->
-        <createSequence 
-            sequenceName="doctor_id_seq" 
-            startValue="20"
-            incrementBy="1"/>
-        
-        <!-- Create doctor table -->
+
+        <createSequence
+                sequenceName="doctor_id_seq"
+                startValue="20"
+                incrementBy="1"/>
+
         <createTable tableName="doctor">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -23,9 +21,7 @@
             </column>
             <column name="person_info_id" type="INTEGER"/>
         </createTable>
-        
-        <!-- Set the sequence to be owned by the doctor.id column -->
-        <sql>ALTER SEQUENCE doctor_id_seq OWNED BY doctor.id;</sql>
+
     </changeSet>
 
 </databaseChangeLog>

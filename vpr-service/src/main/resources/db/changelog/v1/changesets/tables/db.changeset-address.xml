@@ -6,14 +6,12 @@
 
     <changeSet id="create-address-table" author="maryia">
         <comment>Create address table with sequence</comment>
-        
-        <!-- Create sequence for address id -->
-        <createSequence 
-            sequenceName="address_id_seq" 
-            startValue="20"
-            incrementBy="1"/>
-        
-        <!-- Create address table -->
+
+        <createSequence
+                sequenceName="address_id_seq"
+                startValue="20"
+                incrementBy="1"/>
+
         <createTable tableName="address">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -31,9 +29,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        
-        <!-- Set the sequence to be owned by the address.id column -->
-        <sql>ALTER SEQUENCE address_id_seq OWNED BY address.id;</sql>
+
     </changeSet>
 
 </databaseChangeLog>

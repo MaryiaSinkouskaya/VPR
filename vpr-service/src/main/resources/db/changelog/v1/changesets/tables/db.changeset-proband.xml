@@ -6,14 +6,12 @@
 
     <changeSet id="create-proband-table" author="maryia">
         <comment>Create proband table with sequence</comment>
-        
-        <!-- Create sequence for proband id -->
-        <createSequence 
-            sequenceName="proband_id_seq" 
-            startValue="20"
-            incrementBy="1"/>
-        
-        <!-- Create proband table -->
+
+        <createSequence
+                sequenceName="proband_id_seq"
+                startValue="20"
+                incrementBy="1"/>
+
         <createTable tableName="proband">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -45,9 +43,7 @@
             <column name="ploidity" type="VARCHAR(16)"/>
             <column name="labor_outcome" type="VARCHAR(16)"/>
         </createTable>
-        
-        <!-- Set the sequence to be owned by the proband.id column -->
-        <sql>ALTER SEQUENCE proband_id_seq OWNED BY proband.id;</sql>
+
     </changeSet>
 
 </databaseChangeLog>

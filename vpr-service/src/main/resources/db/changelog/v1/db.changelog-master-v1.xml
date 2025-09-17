@@ -3,7 +3,7 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    
+
     <include file="/db/changelog/v1/changesets/tables/db.changeset-address.xml"/>
     <include file="/db/changelog/v1/changesets/tables/db.changeset-note.xml"/>
     <include file="/db/changelog/v1/changesets/tables/db.changeset-organization.xml"/>
@@ -17,9 +17,8 @@
 
     <include file="/db/changelog/v1/changesets/tables/db.changeset-user.xml"/>
     <include file="/db/changelog/v1/changesets/tables/db.changeset-token.xml"/>
-    
+
     <include file="/db/changelog/v1/changesets/tables/db.changeset-foreign-keys.xml"/>
-    
-     <!-- Insert data for each table -->
-     <include file="/db/changelog/v1/changesets/demo.data/_db.changeset-insert-demo-data.xml"/>
+
+    <include file="/db/changelog/v1/changesets/demo.data/_db.changeset-insert-demo-data.xml"/>
 </databaseChangeLog>

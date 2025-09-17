@@ -6,14 +6,12 @@
 
     <changeSet id="create-mother-table" author="maryia">
         <comment>Create mother table with sequence</comment>
-        
-        <!-- Create sequence for mother id -->
-        <createSequence 
-            sequenceName="mother_id_seq" 
-            startValue="20"
-            incrementBy="1"/>
-        
-        <!-- Create mother table -->
+
+        <createSequence
+                sequenceName="mother_id_seq"
+                startValue="20"
+                incrementBy="1"/>
+
         <createTable tableName="mother">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -31,9 +29,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        
-        <!-- Set the sequence to be owned by the mother.id column -->
-        <sql>ALTER SEQUENCE mother_id_seq OWNED BY mother.id;</sql>
+
     </changeSet>
 
 </databaseChangeLog>

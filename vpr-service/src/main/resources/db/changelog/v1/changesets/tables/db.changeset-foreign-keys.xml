@@ -6,96 +6,90 @@
 
     <changeSet id="add-all-foreign-keys" author="maryia">
         <comment>Add all foreign key constraints after all tables are created</comment>
-        
-        <!-- person_info foreign keys -->
-        <addForeignKeyConstraint 
-            baseTableName="person_info" 
-            baseColumnNames="address_id" 
-            constraintName="address_id" 
-            referencedTableName="address" 
-            referencedColumnNames="id"/>
-        
-        <addForeignKeyConstraint 
-            baseTableName="person_info" 
-            baseColumnNames="work_id" 
-            constraintName="work_id" 
-            referencedTableName="workplace" 
-            referencedColumnNames="id"/>
-        
-        <!-- doctor foreign keys -->
-        <addForeignKeyConstraint 
-            baseTableName="doctor" 
-            baseColumnNames="person_info_id" 
-            constraintName="person_info_id" 
-            referencedTableName="person_info" 
-            referencedColumnNames="id"/>
-        
-        <!-- mother foreign keys -->
-        <addForeignKeyConstraint 
-            baseTableName="mother" 
-            baseColumnNames="person_info_id" 
-            constraintName="person_info_id" 
-            referencedTableName="person_info" 
-            referencedColumnNames="id"/>
-        
-        <!-- proband foreign keys -->
-        <addForeignKeyConstraint 
-            baseTableName="proband" 
-            baseColumnNames="organization_id" 
-            constraintName="organization_id" 
-            referencedTableName="organization" 
-            referencedColumnNames="id"/>
-        
-        <addForeignKeyConstraint 
-            baseTableName="proband" 
-            baseColumnNames="abnormality_id" 
-            constraintName="abnormality_id" 
-            referencedTableName="abnormality" 
-            referencedColumnNames="id"/>
-        
-        <addForeignKeyConstraint 
-            baseTableName="proband" 
-            baseColumnNames="mother_id" 
-            constraintName="mother_id" 
-            referencedTableName="mother" 
-            referencedColumnNames="id"/>
-        
-        <addForeignKeyConstraint 
-            baseTableName="proband" 
-            baseColumnNames="father_id" 
-            constraintName="father_id" 
-            referencedTableName="person_info" 
-            referencedColumnNames="id"/>
-        
-        <addForeignKeyConstraint 
-            baseTableName="proband" 
-            baseColumnNames="doctor_id" 
-            constraintName="doctor_id" 
-            referencedTableName="doctor" 
-            referencedColumnNames="id"/>
-        
-        <addForeignKeyConstraint 
-            baseTableName="proband" 
-            baseColumnNames="note_id" 
-            constraintName="dcn_id" 
-            referencedTableName="note" 
-            referencedColumnNames="id"/>
-        
-        <!-- prob_d foreign keys -->
-        <addForeignKeyConstraint 
-            baseTableName="prob_d" 
-            baseColumnNames="proband_id" 
-            constraintName="proband_id" 
-            referencedTableName="proband" 
-            referencedColumnNames="id"/>
-        
-        <!-- token foreign keys -->
-        <addForeignKeyConstraint 
-            baseTableName="token" 
-            baseColumnNames="user_id" 
-            constraintName="user_id" 
-            referencedTableName="_user" 
-            referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="person_info"
+                baseColumnNames="address_id"
+                constraintName="address_id"
+                referencedTableName="address"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="person_info"
+                baseColumnNames="work_id"
+                constraintName="work_id"
+                referencedTableName="workplace"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="doctor"
+                baseColumnNames="person_info_id"
+                constraintName="person_info_id"
+                referencedTableName="person_info"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="mother"
+                baseColumnNames="person_info_id"
+                constraintName="person_info_id"
+                referencedTableName="person_info"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="proband"
+                baseColumnNames="organization_id"
+                constraintName="organization_id"
+                referencedTableName="organization"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="proband"
+                baseColumnNames="abnormality_id"
+                constraintName="abnormality_id"
+                referencedTableName="abnormality"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="proband"
+                baseColumnNames="mother_id"
+                constraintName="mother_id"
+                referencedTableName="mother"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="proband"
+                baseColumnNames="father_id"
+                constraintName="father_id"
+                referencedTableName="person_info"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="proband"
+                baseColumnNames="doctor_id"
+                constraintName="doctor_id"
+                referencedTableName="doctor"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="proband"
+                baseColumnNames="note_id"
+                constraintName="dcn_id"
+                referencedTableName="note"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="prob_d"
+                baseColumnNames="proband_id"
+                constraintName="proband_id"
+                referencedTableName="proband"
+                referencedColumnNames="id"/>
+
+        <addForeignKeyConstraint
+                baseTableName="token"
+                baseColumnNames="user_id"
+                constraintName="user_id"
+                referencedTableName="_user"
+                referencedColumnNames="id"/>
     </changeSet>
 
 </databaseChangeLog>

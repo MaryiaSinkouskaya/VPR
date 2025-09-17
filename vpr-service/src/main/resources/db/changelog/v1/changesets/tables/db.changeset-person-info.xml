@@ -6,14 +6,12 @@
 
     <changeSet id="create-person-info-table" author="maryia">
         <comment>Create person_info table with sequence</comment>
-        
-        <!-- Create sequence for person_info id -->
-        <createSequence 
-            sequenceName="person_info_id_seq" 
-            startValue="20"
-            incrementBy="1"/>
-        
-        <!-- Create person_info table -->
+
+        <createSequence
+                sequenceName="person_info_id_seq"
+                startValue="20"
+                incrementBy="1"/>
+
         <createTable tableName="person_info">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -38,9 +36,7 @@
             </column>
             <column name="phone" type="VARCHAR(16)"/>
         </createTable>
-        
-        <!-- Set the sequence to be owned by the person_info.id column -->
-        <sql>ALTER SEQUENCE person_info_id_seq OWNED BY person_info.id;</sql>
+
     </changeSet>
 
 </databaseChangeLog>

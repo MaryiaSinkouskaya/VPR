@@ -6,14 +6,12 @@
 
     <changeSet id="create-abnormality-table" author="maryia">
         <comment>Create abnormality table with sequence</comment>
-        
-        <!-- Create sequence for abnormality id -->
-        <createSequence 
-            sequenceName="abnormality_id_seq" 
-            startValue="20"
-            incrementBy="1"/>
-        
-        <!-- Create abnormality table -->
+
+        <createSequence
+                sequenceName="abnormality_id_seq"
+                startValue="20"
+                incrementBy="1"/>
+
         <createTable tableName="abnormality">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -22,9 +20,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        
-        <!-- Set the sequence to be owned by the abnormality.id column -->
-        <sql>ALTER SEQUENCE abnormality_id_seq OWNED BY abnormality.id;</sql>
+
     </changeSet>
 
 </databaseChangeLog>

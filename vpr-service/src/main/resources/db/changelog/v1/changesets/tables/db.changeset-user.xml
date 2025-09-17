@@ -6,14 +6,12 @@
 
     <changeSet id="create-user-table" author="maryia">
         <comment>Create _user table with sequence and unique constraint</comment>
-        
-        <!-- Create sequence for user id -->
-        <createSequence 
-            sequenceName="user_id_seq" 
-            startValue="20"
-            incrementBy="1"/>
-        
-        <!-- Create _user table -->
+
+        <createSequence
+                sequenceName="user_id_seq"
+                startValue="20"
+                incrementBy="1"/>
+
         <createTable tableName="_user">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -26,9 +24,7 @@
             </column>
             <column name="role" type="TEXT"/>
         </createTable>
-        
-        <!-- Set the sequence to be owned by the _user.id column -->
-        <sql>ALTER SEQUENCE user_id_seq OWNED BY _user.id;</sql>
+
     </changeSet>
 
 </databaseChangeLog>

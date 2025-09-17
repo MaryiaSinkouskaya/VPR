@@ -6,14 +6,12 @@
 
     <changeSet id="create-workplace-table" author="maryia">
         <comment>Create workplace table with sequence</comment>
-        
-        <!-- Create sequence for workplace id -->
-        <createSequence 
-            sequenceName="work_id_seq" 
-            startValue="20"
-            incrementBy="1"/>
-        
-        <!-- Create workplace table -->
+
+        <createSequence
+                sequenceName="work_id_seq"
+                startValue="20"
+                incrementBy="1"/>
+
         <createTable tableName="workplace">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -25,9 +23,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        
-        <!-- Set the sequence to be owned by the workplace.id column -->
-        <sql>ALTER SEQUENCE work_id_seq OWNED BY workplace.id;</sql>
+
     </changeSet>
 
 </databaseChangeLog>

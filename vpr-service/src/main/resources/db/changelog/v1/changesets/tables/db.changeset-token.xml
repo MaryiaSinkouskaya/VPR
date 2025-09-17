@@ -6,14 +6,12 @@
 
     <changeSet id="create-token-table" author="maryia">
         <comment>Create token table with sequence</comment>
-        
-        <!-- Create sequence for token id -->
-        <createSequence 
-            sequenceName="token_id_seq" 
-            startValue="20"
-            incrementBy="1"/>
-        
-        <!-- Create token table -->
+
+        <createSequence
+                sequenceName="token_id_seq"
+                startValue="20"
+                incrementBy="1"/>
+
         <createTable tableName="token">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -27,9 +25,7 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        
-        <!-- Set the sequence to be owned by the token.id column -->
-        <sql>ALTER SEQUENCE token_id_seq OWNED BY token.id;</sql>
+
     </changeSet>
 
 </databaseChangeLog>

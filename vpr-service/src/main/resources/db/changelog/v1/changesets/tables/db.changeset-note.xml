@@ -6,14 +6,12 @@
 
     <changeSet id="create-note-table" author="maryia">
         <comment>Create note table with sequence</comment>
-        
-        <!-- Create sequence for note id -->
-        <createSequence 
-            sequenceName="note_id_seq" 
-            startValue="20"
-            incrementBy="1"/>
-        
-        <!-- Create note table -->
+
+        <createSequence
+                sequenceName="note_id_seq"
+                startValue="20"
+                incrementBy="1"/>
+
         <createTable tableName="note">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
@@ -23,9 +21,7 @@
             </column>
             <column name="note" type="TEXT"/>
         </createTable>
-        
-        <!-- Set the sequence to be owned by the note.id column -->
-        <sql>ALTER SEQUENCE note_id_seq OWNED BY note.id;</sql>
+
     </changeSet>
 
 </databaseChangeLog>
