@@ -21,16 +21,5 @@
     <include file="/db/changelog/v1/changesets/tables/db.changeset-foreign-keys.xml"/>
     
      <!-- Insert data for each table -->
-     <include file="/db/changelog/v1/changesets/demo.data/db.changeset-insert-address-data.xml"/>
-     <include file="/db/changelog/v1/changesets/demo.data/db.changeset-insert-workplace-data.xml"/>
-     <include file="/db/changelog/v1/changesets/demo.data/db.changeset-insert-person-info-data.xml"/>
-     <include file="/db/changelog/v1/changesets/demo.data/db.changeset-insert-organization-data.xml"/>
-     <include file="/db/changelog/v1/changesets/demo.data/db.changeset-insert-mother-data.xml"/>
-     <include file="/db/changelog/v1/changesets/demo.data/db.changeset-insert-abnormality-data.xml"/>
-     <include file="/db/changelog/v1/changesets/demo.data/db.changeset-insert-doctor-data.xml"/>
-     <include file="/db/changelog/v1/changesets/demo.data/db.changeset-insert-note-data.xml"/>
-     <include file="/db/changelog/v1/changesets/demo.data/db.changeset-insert-proband-data.xml"/>
-     <include file="/db/changelog/v1/changesets/demo.data/db.changeset-insert-prob-d-data.xml"/>
-     <include file="/db/changelog/v1/changesets/demo.data/db.changeset-insert-user-data.xml"/>
-     <include file="/db/changelog/v1/changesets/demo.data/db.changeset-insert-token-data.xml"/>
+     <include file="/db/changelog/v1/changesets/demo.data/_db.changeset-insert-demo-data.xml"/>
 </databaseChangeLog>
