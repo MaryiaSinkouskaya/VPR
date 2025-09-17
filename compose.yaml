@@ -20,9 +20,6 @@ services:
       POSTGRES_DB: ${POSTGRES_DB_VPR}
       POSTGRES_USER: ${POSTGRES_USER_VPR}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD_VPR}
-    volumes:
-      - db-data:/var/lib/postgresql/data
-      - ./vpr-service/src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
   kafka:
     image: bitnami/kafka:latest
     environment:

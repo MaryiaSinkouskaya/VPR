@@ -2,10 +2,18 @@ package com.vpr.app.dto.request;
 
 import com.vpr.app.dto.request.validation.markers.OnCreate;
 import com.vpr.app.dto.request.validation.markers.OnUpdate;
+import com.vpr.app.enums.Gender;
 import com.vpr.app.enums.LaborOutcome;
 import com.vpr.app.enums.Ploidity;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -52,14 +60,17 @@ public class ProbandRequestDto {
 
     @NotBlank(message = "Gender must not be blank")
     @Schema(description = "Gender of the proband", example = "Male", requiredMode = RequiredMode.REQUIRED)
-    private String gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @NotNull(message = "Ploidity must not be null")
     @Schema(description = "Ploidity details", requiredMode = RequiredMode.REQUIRED)
+    @Enumerated(EnumType.STRING)
     private Ploidity ploid;
 
     @NotNull(message = "Labor outcome must not be null")
     @Schema(description = "Outcome of the labor", requiredMode = RequiredMode.REQUIRED)
+    @Enumerated(EnumType.STRING)
     private LaborOutcome laborOutcome;
 
     @Schema(description = "Additional note about the proband", requiredMode = RequiredMode.NOT_REQUIRED)

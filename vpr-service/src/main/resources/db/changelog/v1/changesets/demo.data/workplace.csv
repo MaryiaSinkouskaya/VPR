@@ -1,0 +1,20 @@
+id,job_type,company
+1,info am,First
+2,info dnms,Second
+3,info jdm,Third
+4,medical,City Hospital
+5,education,University
+6,research,Research Institute
+7,government,Ministry of Health
+8,pharmacy,City Pharmacy
+9,laboratory,Diagnostic Lab
+10,nursing,Nursing Home
+11,administration,Health Department
+12,emergency,Emergency Services
+13,surgery,Surgical Center
+14,therapy,Rehabilitation Center
+15,radiology,Imaging Center
+16,dental,Dental Clinic
+17,mental_health,Mental Health Center
+18,oncology,Cancer Center
+19,neurology,Neurological Institute

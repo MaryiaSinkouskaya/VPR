@@ -3,6 +3,8 @@ spring:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
   kafka:
     bootstrap-servers: kafka:9093
     producer:

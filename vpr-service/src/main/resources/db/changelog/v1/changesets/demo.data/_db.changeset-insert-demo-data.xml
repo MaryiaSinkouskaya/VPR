@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="insert-address-data" author="admin">
+        <comment>Insert address data via CSV</comment>
+        <loadData relativeToChangelogFile="true" file="address.csv" tableName="address"/>
+    </changeSet>
+    <changeSet id="insert-workplace-data" author="admin">
+        <comment>Insert workplace data via CSV</comment>
+        <loadData relativeToChangelogFile="true" file="workplace.csv" tableName="workplace"/>
+    </changeSet>
+    <changeSet id="insert-person-info-data" author="admin">
+        <comment>Insert person_info data via CSV</comment>
+        <loadData relativeToChangelogFile="true" file="person_info.csv" tableName="person_info"/>
+    </changeSet>
+    <changeSet id="insert-organization-data" author="admin">
+        <comment>Insert organization data via CSV</comment>
+        <loadData relativeToChangelogFile="true" file="organization.csv" tableName="organization"/>
+    </changeSet>
+    <changeSet id="insert-mother-data" author="admin">
+        <comment>Insert mother data via CSV</comment>
+        <loadData relativeToChangelogFile="true" file="mother.csv" tableName="mother"/>
+    </changeSet>
+    <changeSet id="insert-abnormality-data" author="admin">
+        <comment>Insert abnormality data via CSV</comment>
+        <loadData relativeToChangelogFile="true" file="abnormality.csv" tableName="abnormality"/>
+    </changeSet>
+    <changeSet id="insert-doctor-data" author="admin">
+        <comment>Insert doctor data via CSV</comment>
+        <loadData relativeToChangelogFile="true" file="doctor.csv" tableName="doctor"/>
+    </changeSet>
+    <changeSet id="insert-note-data" author="admin">
+        <comment>Insert note data via CSV</comment>
+        <loadData relativeToChangelogFile="true" file="note.csv" tableName="note"/>
+    </changeSet>
+    <changeSet id="insert-proband-data" author="admin">
+        <comment>Insert proband data via CSV</comment>
+        <loadData relativeToChangelogFile="true" file="proband.csv" tableName="proband"/>
+    </changeSet>
+    <changeSet id="insert-prob-d-data" author="admin">
+        <comment>Insert prob_d data via CSV</comment>
+        <loadData relativeToChangelogFile="true" file="prob_d.csv" tableName="prob_d"/>
+    </changeSet>
+    <changeSet id="insert-user-data" author="admin">
+        <comment>Insert user data via CSV</comment>
+        <loadData relativeToChangelogFile="true" file="user.csv" tableName="_user"/>
+    </changeSet>
+    <changeSet id="insert-token-data" author="admin">
+        <comment>Insert token data via CSV</comment>
+        <loadData relativeToChangelogFile="true" file="token.csv" tableName="token"/>
+    </changeSet>
+
+</databaseChangeLog>
