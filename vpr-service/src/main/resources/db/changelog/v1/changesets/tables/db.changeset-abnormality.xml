@@ -10,7 +10,7 @@
         <!-- Create sequence for abnormality id -->
         <createSequence 
             sequenceName="abnormality_id_seq" 
-            startValue="50" 
+            startValue="20"
             incrementBy="1"/>
         
         <!-- Create abnormality table -->

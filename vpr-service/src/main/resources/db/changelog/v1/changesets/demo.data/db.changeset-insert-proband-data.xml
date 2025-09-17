@@ -7,6 +7,25 @@
     <changeSet id="insert-proband-data" author="vpr-system">
         <comment>Insert proband data</comment>
         <insert tableName="proband">
+            <column name="id" value="1"/>
+            <column name="karyotype" value="undefined"/>
+            <column name="pregnancy_duration_in_weeks" value="39"/>
+            <column name="weight" value="2.9"/>
+            <column name="head" value="35"/>
+            <column name="pregnancy_number" value="2"/>
+            <column name="is_aborted" value="false"/>
+            <column name="organization_id" value="2"/>
+            <column name="abnormality_id" value="11"/>
+            <column name="mother_id" value="15"/>
+            <column name="father_id" value="4"/>
+            <column name="doctor_id" value="17"/>
+            <column name="note_id" value="19"/>
+            <column name="birth_date" value="2022-06-19"/>
+            <column name="gender" value="MALE"/>
+            <column name="ploidity" value="TRISOMY"/>
+            <column name="labor_outcome" value="LIVE_BIRTH"/>
+        </insert>
+        <insert tableName="proband">
             <column name="id" value="2"/>
             <column name="karyotype" value="undefined"/>
             <column name="pregnancy_duration_in_weeks" value="40"/>
