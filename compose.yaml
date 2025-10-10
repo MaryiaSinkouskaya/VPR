@@ -8,14 +8,14 @@ services:
       - '8081:8081'
     hostname: vpr-service
     depends_on:
-      - db
+      - vpr-db
     environment:
       JWT_SECRET: ${JWT_SECRET}
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB_VPR}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://vpr-db:5432/${POSTGRES_DB_VPR}
       SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER_VPR}
       SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD_VPR}
-  db:
-    image: postgres:13.3
+  vpr-db:
+    image: postgres:15
     environment:
       POSTGRES_DB: ${POSTGRES_DB_VPR}
       POSTGRES_USER: ${POSTGRES_USER_VPR}
@@ -44,7 +44,7 @@ services:
       SPRING_AUDIT_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD_AUDIT}
     depends_on:
       - kafka
-      - audit-db
+      - vpr-db
   audit-db:
     image: postgres:15
     environment:
